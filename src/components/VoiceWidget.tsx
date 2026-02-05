@@ -22,7 +22,7 @@ export default function VoiceWidget() {
   return (
     <div className="fixed bottom-6 right-24 z-50">
       {/* @ts-expect-error - Custom element from ElevenLabs */}
-      <elevenlabs-convai agent-id="agent_3401kf214arkefmbpmmkv01mjq9s" />
+      <elevenlabs-convai agent-id="agent_4501kgqzyj13fjav2d5yw54fs4m5" />
     </div>
   );
 }
