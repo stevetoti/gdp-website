@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans text-gray-900 antialiased;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  .btn-primary {
+    @apply bg-vibrant-orange text-white px-8 py-3 rounded-lg font-semibold 
+           hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl
+           transform hover:-translate-y-0.5;
+  }
+  .btn-secondary {
+    @apply bg-deep-blue text-white px-8 py-3 rounded-lg font-semibold 
+           hover:bg-dark-navy transition-all duration-300 shadow-lg hover:shadow-xl
+           transform hover:-translate-y-0.5;
+  }
+  .btn-outline {
+    @apply border-2 border-white text-white px-8 py-3 rounded-lg font-semibold 
+           hover:bg-white hover:text-deep-blue transition-all duration-300;
+  }
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-deep-blue mb-4;
+  }
+  .section-subtitle {
+    @apply text-lg text-gray-600 max-w-3xl mx-auto;
+  }
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  }
+  .gradient-overlay {
+    @apply absolute inset-0 bg-gradient-to-r from-deep-blue/90 to-dark-navy/70;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #233C6F;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1A2D52;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
