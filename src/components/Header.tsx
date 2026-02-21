@@ -134,13 +134,23 @@ export default function Header() {
               ))}
             </div>
 
-            {/* CTA Button */}
-            <div className="hidden lg:block">
+            {/* CTA Buttons */}
+            <div className="hidden lg:flex items-center gap-3">
               <Link 
                 href="/contact"
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  scrolled 
+                    ? 'text-gray-700 hover:text-vibrant-orange' 
+                    : 'text-white hover:text-vibrant-orange'
+                }`}
+              >
+                Contact
+              </Link>
+              <Link 
+                href="/get-started"
                 className="btn-primary inline-flex items-center group"
               >
-                Get Started
+                Get Started Free
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
@@ -218,13 +228,20 @@ export default function Header() {
                   </div>
                 ))}
                 
-                <div className="mt-8 pt-6 border-t">
+                <div className="mt-8 pt-6 border-t space-y-3">
                   <Link 
-                    href="/contact"
+                    href="/get-started"
                     className="btn-primary w-full text-center block"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    Get Started
+                    Get Started Free
+                  </Link>
+                  <Link 
+                    href="/contact"
+                    className="btn-outline-dark w-full text-center block"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Contact Us
                   </Link>
                 </div>
                 

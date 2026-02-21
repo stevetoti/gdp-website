@@ -186,9 +186,9 @@ export default function HomePage() {
               
               <FadeInUp delay={0.3}>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Link href="/contact" className="btn-primary text-center shine group">
+                  <Link href="/get-started" className="btn-primary text-center shine group">
                     <span className="flex items-center justify-center">
-                      Discover More
+                      Start Your Project
                       <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </span>
                   </Link>
@@ -603,14 +603,14 @@ export default function HomePage() {
           
           <FadeInUp delay={0.3}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="btn-primary text-center shine group">
+              <Link href="/get-started" className="btn-primary text-center shine group">
                 <span className="flex items-center justify-center">
-                  Free Consultation
+                  Start Your Project Free
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Link>
-              <Link href="/services" className="btn-outline text-center">
-                View Our Services
+              <Link href="/contact" className="btn-outline text-center">
+                Contact Us
               </Link>
             </div>
           </FadeInUp>
