@@ -1,140 +1,248 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Menu, X, ChevronDown, Phone, Mail, ArrowRight } from 'lucide-react'
 
 const navigation = [
   { name: 'Home', href: '/' },
-  { name: 'Services', href: '/services' },
-  { name: 'Industries', href: '/industries' },
-  { name: 'Solutions', href: '/solutions' },
   { name: 'About', href: '/about' },
-  { name: 'Careers', href: '/careers' },
+  { 
+    name: 'Services', 
+    href: '/services',
+    children: [
+      { name: 'Website Design', href: '/services#website-design' },
+      { name: 'Video Production', href: '/services#video-production' },
+      { name: 'Email Marketing', href: '/services#email-marketing' },
+      { name: 'SEO Strategies', href: '/services#seo' },
+      { name: 'PPC Advertising', href: '/services#ppc' },
+      { name: 'Social Media', href: '/services#social-media' },
+    ]
+  },
+  { name: 'Industries', href: '/industries' },
   { name: 'Blog', href: '/blog' },
   { name: 'Contact', href: '/contact' },
 ]
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [regionOpen, setRegionOpen] = useState(false)
-  const [selectedRegion, setSelectedRegion] = useState<'US' | 'ID'>('US')
+  const [scrolled, setScrolled] = useState(false)
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
-      <nav className="container-custom flex items-center justify-between h-20">
-        {/* Logo */}
-        <Link href="/" className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-deep-blue rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-lg">G</span>
+    <>
+      {/* Top bar */}
+      <div className="hidden lg:block bg-deep-blue text-white py-2">
+        <div className="container-custom flex items-center justify-between text-sm">
+          <div className="flex items-center gap-6">
+            <a href="tel:+1234567890" className="flex items-center gap-2 hover:text-vibrant-orange transition-colors">
+              <Phone className="w-4 h-4" />
+              <span>+1 (234) 567-890</span>
+            </a>
+            <a href="mailto:hello@globaldigitalprime.com" className="flex items-center gap-2 hover:text-vibrant-orange transition-colors">
+              <Mail className="w-4 h-4" />
+              <span>hello@globaldigitalprime.com</span>
+            </a>
           </div>
-          <div className="flex flex-col">
-            <span className="text-deep-blue font-bold text-xl leading-tight">Global Digital Prime</span>
-            <span className="text-vibrant-orange text-xs font-medium tracking-wider uppercase">Enterprise Solutions</span>
+          <div className="flex items-center gap-4">
+            <span>24/7 Customer Support</span>
           </div>
-        </Link>
-
-        {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center space-x-1">
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-vibrant-orange transition-colors rounded-lg hover:bg-gray-50"
-            >
-              {item.name}
-            </Link>
-          ))}
         </div>
+      </div>
 
-        {/* Right side: Region + CTA */}
-        <div className="hidden lg:flex items-center space-x-4">
-          {/* Region Selector */}
-          <div className="relative">
+      {/* Main header */}
+      <header 
+        className={`fixed top-0 lg:top-10 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled 
+            ? 'bg-white/95 backdrop-blur-xl shadow-lg lg:top-0' 
+            : 'bg-transparent'
+        }`}
+      >
+        <nav className="container-custom">
+          <div className="flex items-center justify-between h-20">
+            {/* Logo */}
+            <Link href="/" className="flex items-center">
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: 'spring', stiffness: 400 }}
+              >
+                <Image
+                  src="/images/logo.svg"
+                  alt="Global Digital Prime"
+                  width={180}
+                  height={50}
+                  className="h-12 w-auto"
+                  priority
+                />
+              </motion.div>
+            </Link>
+
+            {/* Desktop navigation */}
+            <div className="hidden lg:flex items-center gap-1">
+              {navigation.map((item) => (
+                <div 
+                  key={item.name}
+                  className="relative"
+                  onMouseEnter={() => item.children && setActiveDropdown(item.name)}
+                  onMouseLeave={() => setActiveDropdown(null)}
+                >
+                  <Link
+                    href={item.href}
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-1 ${
+                      scrolled 
+                        ? 'text-gray-700 hover:text-vibrant-orange hover:bg-soft-gray' 
+                        : 'text-white hover:text-vibrant-orange hover:bg-white/10'
+                    }`}
+                  >
+                    {item.name}
+                    {item.children && <ChevronDown className="w-4 h-4" />}
+                  </Link>
+                  
+                  {/* Dropdown menu */}
+                  <AnimatePresence>
+                    {item.children && activeDropdown === item.name && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden"
+                      >
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.name}
+                            href={child.href}
+                            className="block px-4 py-3 text-gray-700 hover:bg-soft-gray hover:text-vibrant-orange transition-colors"
+                          >
+                            {child.name}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA Button */}
+            <div className="hidden lg:block">
+              <Link 
+                href="/contact"
+                className="btn-primary inline-flex items-center group"
+              >
+                Get Started
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+
+            {/* Mobile menu button */}
             <button
-              onClick={() => setRegionOpen(!regionOpen)}
-              className="flex items-center space-x-2 px-3 py-2 text-sm text-gray-600 hover:text-deep-blue border border-gray-200 rounded-lg hover:border-deep-blue transition-colors"
+              type="button"
+              className="lg:hidden p-2 rounded-lg text-gray-700"
+              onClick={() => setMobileMenuOpen(true)}
             >
-              <span>{selectedRegion === 'US' ? '🇺🇸' : '🇮🇩'}</span>
-              <span>{selectedRegion === 'US' ? 'United States' : 'Indonesia'}</span>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
+              <Menu className={`w-6 h-6 ${scrolled ? 'text-deep-blue' : 'text-white'}`} />
             </button>
-            {regionOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 py-1 z-50">
+          </div>
+        </nav>
+      </header>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
+              onClick={() => setMobileMenuOpen(false)}
+            />
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25 }}
+              className="fixed right-0 top-0 bottom-0 w-80 bg-white z-50 shadow-2xl"
+            >
+              <div className="flex items-center justify-between p-6 border-b">
+                <Image
+                  src="/images/logo.svg"
+                  alt="Global Digital Prime"
+                  width={150}
+                  height={40}
+                  className="h-10 w-auto"
+                />
                 <button
-                  onClick={() => { setSelectedRegion('US'); setRegionOpen(false) }}
-                  className="flex items-center space-x-3 w-full px-4 py-2 text-sm hover:bg-gray-50"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-2 rounded-lg hover:bg-soft-gray transition-colors"
                 >
-                  <span>🇺🇸</span><span>United States</span>
-                </button>
-                <button
-                  onClick={() => { setSelectedRegion('ID'); setRegionOpen(false) }}
-                  className="flex items-center space-x-3 w-full px-4 py-2 text-sm hover:bg-gray-50"
-                >
-                  <span>🇮🇩</span><span>Indonesia</span>
+                  <X className="w-6 h-6 text-deep-blue" />
                 </button>
               </div>
-            )}
-          </div>
-          <Link href="/contact" className="btn-primary text-sm">
-            Get Started
-          </Link>
-        </div>
-
-        {/* Mobile menu button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-2 text-gray-700"
-        >
-          {mobileMenuOpen ? (
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          ) : (
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          )}
-        </button>
-      </nav>
-
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100 shadow-lg">
-          <div className="container-custom py-4 space-y-1">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-4 py-3 text-gray-700 hover:text-vibrant-orange hover:bg-gray-50 rounded-lg font-medium"
-              >
-                {item.name}
-              </Link>
-            ))}
-            <div className="flex items-center space-x-3 px-4 pt-4 border-t border-gray-100 mt-2">
-              <button
-                onClick={() => setSelectedRegion('US')}
-                className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm ${selectedRegion === 'US' ? 'bg-deep-blue text-white' : 'bg-gray-100'}`}
-              >
-                <span>🇺🇸</span><span>US</span>
-              </button>
-              <button
-                onClick={() => setSelectedRegion('ID')}
-                className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm ${selectedRegion === 'ID' ? 'bg-deep-blue text-white' : 'bg-gray-100'}`}
-              >
-                <span>🇮🇩</span><span>ID</span>
-              </button>
-            </div>
-            <div className="px-4 pt-2">
-              <Link href="/contact" className="btn-primary block text-center text-sm" onClick={() => setMobileMenuOpen(false)}>
-                Get Started
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
-    </header>
+              
+              <div className="p-6">
+                {navigation.map((item) => (
+                  <div key={item.name} className="mb-2">
+                    <Link
+                      href={item.href}
+                      className="block py-3 text-lg font-medium text-deep-blue hover:text-vibrant-orange transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                    {item.children && (
+                      <div className="ml-4 mt-1 space-y-1">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.name}
+                            href={child.href}
+                            className="block py-2 text-gray-600 hover:text-vibrant-orange transition-colors"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {child.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+                
+                <div className="mt-8 pt-6 border-t">
+                  <Link 
+                    href="/contact"
+                    className="btn-primary w-full text-center block"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Get Started
+                  </Link>
+                </div>
+                
+                <div className="mt-8 space-y-4 text-sm text-gray-600">
+                  <a href="tel:+1234567890" className="flex items-center gap-2 hover:text-vibrant-orange">
+                    <Phone className="w-4 h-4" />
+                    +1 (234) 567-890
+                  </a>
+                  <a href="mailto:hello@globaldigitalprime.com" className="flex items-center gap-2 hover:text-vibrant-orange">
+                    <Mail className="w-4 h-4" />
+                    hello@globaldigitalprime.com
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   )
 }

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" fill="none">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#233C6F"/>
+      <stop offset="100%" stop-color="#1A2D52"/>
+    </linearGradient>
+  </defs>
+  <!-- GDP Icon -->
+  <circle cx="25" cy="25" r="20" fill="url(#gradient)"/>
+  <path d="M18 25c0-4 3-7 7-7s7 3 7 7-3 7-7 7" stroke="#EF5E33" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="25" cy="25" r="3" fill="#EF5E33"/>
+  <!-- Text -->
+  <text x="55" y="22" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#233C6F">Global Digital</text>
+  <text x="55" y="38" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#EF5E33">Prime</text>
+</svg>

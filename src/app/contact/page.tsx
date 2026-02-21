@@ -1,237 +1,331 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
+import { 
+  FadeInUp, 
+  SlideInLeft, 
+  SlideInRight,
+  GradientBlob 
+} from '@/components/animations'
+import { motion } from 'framer-motion'
+import { 
+  MapPin, 
+  Phone, 
+  Mail, 
+  Clock,
+  Send,
+  CheckCircle,
+  MessageSquare,
+  Calendar
+} from 'lucide-react'
 
-const offices = [
+const contactInfo = [
   {
-    city: 'New York',
-    country: 'United States',
-    flag: '🇺🇸',
-    address: 'Financial District, New York, NY 10005',
-    phone: '+1 (212) 555-0180',
-    email: 'us@globaldigitalprime.com',
+    icon: MapPin,
+    title: 'Visit Us',
+    details: ['New York, USA', 'Jakarta, Indonesia'],
   },
   {
-    city: 'Jakarta',
-    country: 'Indonesia',
-    flag: '🇮🇩',
-    address: 'SCBD, Sudirman, Jakarta Selatan 12190',
-    phone: '+62 21 555 0180',
-    email: 'id@globaldigitalprime.com',
+    icon: Phone,
+    title: 'Call Us',
+    details: ['+1 (234) 567-890', '+62 21 1234 5678'],
+  },
+  {
+    icon: Mail,
+    title: 'Email Us',
+    details: ['hello@globaldigitalprime.com', 'support@globaldigitalprime.com'],
+  },
+  {
+    icon: Clock,
+    title: 'Working Hours',
+    details: ['Mon - Fri: 9:00 AM - 6:00 PM', 'Weekend: By Appointment'],
   },
 ]
 
+const services = [
+  'Website Design',
+  'Video Production',
+  'Email Marketing',
+  'SEO Strategies',
+  'PPC Advertising',
+  'Social Media Marketing',
+  'Other',
+]
+
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
+  const [formState, setFormState] = useState({
     name: '',
     email: '',
-    company: '',
     phone: '',
+    company: '',
     service: '',
-    budget: '',
     message: '',
   })
-  const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setSubmitted(true)
+    setIsSubmitting(true)
+    
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1500))
+    
+    setIsSubmitting(false)
+    setIsSubmitted(true)
   }
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative py-20 bg-deep-blue text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, #EF5E33 1px, transparent 1px)', backgroundSize: '60px 60px' }}></div>
-        </div>
-        <div className="relative container-custom text-center">
-          <span className="text-vibrant-orange font-semibold text-sm uppercase tracking-wider">Contact Us</span>
-          <h1 className="text-4xl md:text-5xl font-bold mt-4 mb-6">
-            Let&apos;s Start a Conversation
-          </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Ready to transform your business? Get in touch with our team and let&apos;s discuss how we can help.
-          </p>
+      {/* Hero Section */}
+      <section className="relative py-20 lg:py-32 overflow-hidden gradient-hero">
+        <GradientBlob className="w-[600px] h-[600px] bg-vibrant-orange/20 -top-40 -right-40" />
+        
+        <div className="container-custom relative">
+          <FadeInUp>
+            <div className="max-w-3xl">
+              <span className="inline-block px-4 py-2 glass rounded-full text-white/90 text-sm mb-6">
+                Contact Us
+              </span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+                Let&apos;s Start a
+                <span className="block gradient-text text-glow mt-2">Conversation</span>
+              </h1>
+              <p className="text-xl text-gray-300 leading-relaxed">
+                Ready to grow your business? Get in touch with our team and let&apos;s discuss 
+                how we can help you achieve your digital marketing goals.
+              </p>
+            </div>
+          </FadeInUp>
         </div>
       </section>
 
-      {/* Contact Form + Info */}
-      <section className="py-20 bg-white">
+      {/* Contact Info Cards */}
+      <section className="py-16 bg-white relative -mt-10 z-10">
         <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-            {/* Form */}
-            <div className="lg:col-span-2">
-              {submitted ? (
-                <div className="bg-green-50 border border-green-200 rounded-2xl p-12 text-center">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {contactInfo.map((item, index) => (
+              <FadeInUp key={item.title} delay={index * 0.1}>
+                <motion.div
+                  className="bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-shadow border border-gray-100"
+                  whileHover={{ y: -5 }}
+                >
+                  <div className="w-14 h-14 bg-gradient-to-br from-vibrant-orange to-orange-400 rounded-2xl flex items-center justify-center text-white mb-4">
+                    <item.icon className="w-7 h-7" />
+                  </div>
+                  <h3 className="text-lg font-bold text-deep-blue mb-2">{item.title}</h3>
+                  {item.details.map((detail, i) => (
+                    <p key={i} className="text-gray-600">{detail}</p>
+                  ))}
+                </motion.div>
+              </FadeInUp>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Form Section */}
+      <section className="py-20 bg-soft-gray">
+        <div className="container-custom">
+          <div className="grid lg:grid-cols-2 gap-16">
+            <SlideInLeft>
+              <span className="text-vibrant-orange font-semibold text-sm uppercase tracking-wider">Get In Touch</span>
+              <h2 className="section-title mt-2 mb-6">
+                Free Consultation Available
+              </h2>
+              <p className="text-gray-600 text-lg leading-relaxed mb-8">
+                Fill out the form and our team will get back to you within 24 hours. 
+                We&apos;re excited to learn about your business and discuss how we can help you grow.
+              </p>
+              
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-vibrant-orange shadow-sm">
+                    <MessageSquare className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-deep-blue mb-1">24/7 Support</h4>
+                    <p className="text-gray-600">We&apos;re always here to help with your questions.</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-vibrant-orange shadow-sm">
+                    <Calendar className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-deep-blue mb-1">Free Strategy Session</h4>
+                    <p className="text-gray-600">Get a complimentary 30-minute consultation.</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-vibrant-orange shadow-sm">
+                    <CheckCircle className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-deep-blue mb-1">No Obligations</h4>
+                    <p className="text-gray-600">Explore your options with no commitment required.</p>
+                  </div>
+                </div>
+              </div>
+            </SlideInLeft>
+            
+            <SlideInRight>
+              {isSubmitted ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="bg-white rounded-2xl p-12 shadow-xl text-center"
+                >
+                  <div className="w-20 h-20 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center">
+                    <CheckCircle className="w-10 h-10 text-green-600" />
                   </div>
                   <h3 className="text-2xl font-bold text-deep-blue mb-4">Message Sent!</h3>
-                  <p className="text-gray-600 text-lg">
+                  <p className="text-gray-600 mb-6">
                     Thank you for reaching out. Our team will get back to you within 24 hours.
                   </p>
-                </div>
+                  <button
+                    onClick={() => {
+                      setIsSubmitted(false)
+                      setFormState({
+                        name: '',
+                        email: '',
+                        phone: '',
+                        company: '',
+                        service: '',
+                        message: '',
+                      })
+                    }}
+                    className="btn-secondary"
+                  >
+                    Send Another Message
+                  </button>
+                </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <h2 className="text-2xl font-bold text-deep-blue mb-6">Tell Us About Your Project</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 shadow-xl">
+                  <div className="grid md:grid-cols-2 gap-6 mb-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Full Name *
+                      </label>
                       <input
                         type="text"
                         required
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-deep-blue focus:border-transparent outline-none transition-all"
-                        placeholder="John Smith"
+                        value={formState.name}
+                        onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-vibrant-orange transition-colors"
+                        placeholder="John Doe"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Email Address *
+                      </label>
                       <input
                         type="email"
                         required
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-deep-blue focus:border-transparent outline-none transition-all"
-                        placeholder="john@company.com"
+                        value={formState.email}
+                        onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-vibrant-orange transition-colors"
+                        placeholder="john@example.com"
                       />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Company</label>
-                      <input
-                        type="text"
-                        value={formData.company}
-                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-deep-blue focus:border-transparent outline-none transition-all"
-                        placeholder="Acme Corp"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                      <input
-                        type="tel"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-deep-blue focus:border-transparent outline-none transition-all"
-                        placeholder="+1 (555) 000-0000"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Service Interest</label>
-                      <select
-                        value={formData.service}
-                        onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-deep-blue focus:border-transparent outline-none transition-all"
-                      >
-                        <option value="">Select a service</option>
-                        <option value="enterprise-software">Enterprise Software</option>
-                        <option value="ai-ml">AI &amp; Machine Learning</option>
-                        <option value="cloud">Cloud Infrastructure</option>
-                        <option value="digital-transformation">Digital Transformation</option>
-                        <option value="cybersecurity">Cybersecurity</option>
-                        <option value="data-analytics">Data Analytics</option>
-                        <option value="other">Other</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Estimated Budget</label>
-                      <select
-                        value={formData.budget}
-                        onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-deep-blue focus:border-transparent outline-none transition-all"
-                      >
-                        <option value="">Select range</option>
-                        <option value="25k-50k">$25,000 - $50,000</option>
-                        <option value="50k-100k">$50,000 - $100,000</option>
-                        <option value="100k-250k">$100,000 - $250,000</option>
-                        <option value="250k-500k">$250,000 - $500,000</option>
-                        <option value="500k+">$500,000+</option>
-                      </select>
                     </div>
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Project Details *</label>
+                  
+                  <div className="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Phone Number
+                      </label>
+                      <input
+                        type="tel"
+                        value={formState.phone}
+                        onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-vibrant-orange transition-colors"
+                        placeholder="+1 234 567 890"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Company Name
+                      </label>
+                      <input
+                        type="text"
+                        value={formState.company}
+                        onChange={(e) => setFormState({ ...formState, company: e.target.value })}
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-vibrant-orange transition-colors"
+                        placeholder="Your Company"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="mb-6">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Service Interested In *
+                    </label>
+                    <select
+                      required
+                      value={formState.service}
+                      onChange={(e) => setFormState({ ...formState, service: e.target.value })}
+                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-vibrant-orange transition-colors"
+                    >
+                      <option value="">Select a service</option>
+                      {services.map((service) => (
+                        <option key={service} value={service}>{service}</option>
+                      ))}
+                    </select>
+                  </div>
+                  
+                  <div className="mb-6">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Your Message *
+                    </label>
                     <textarea
                       required
                       rows={5}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-deep-blue focus:border-transparent outline-none transition-all resize-none"
-                      placeholder="Describe your project, goals, and timeline..."
+                      value={formState.message}
+                      onChange={(e) => setFormState({ ...formState, message: e.target.value })}
+                      className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-vibrant-orange transition-colors resize-none"
+                      placeholder="Tell us about your project..."
                     />
                   </div>
-                  <button type="submit" className="btn-primary w-full md:w-auto">
-                    Send Message
-                  </button>
+                  
+                  <motion.button
+                    type="submit"
+                    disabled={isSubmitting}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full btn-primary flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <svg className="animate-spin w-5 h-5" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                        </svg>
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        Send Message
+                        <Send className="w-5 h-5" />
+                      </>
+                    )}
+                  </motion.button>
                 </form>
               )}
-            </div>
+            </SlideInRight>
+          </div>
+        </div>
+      </section>
 
-            {/* Contact Info */}
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-xl font-bold text-deep-blue mb-4">General Inquiries</h3>
-                <div className="space-y-3">
-                  <a href="mailto:hello@globaldigitalprime.com" className="flex items-center space-x-3 text-gray-600 hover:text-vibrant-orange transition-colors">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    <span>hello@globaldigitalprime.com</span>
-                  </a>
-                </div>
-              </div>
-
-              {offices.map((office) => (
-                <div key={office.city} className="bg-soft-gray rounded-2xl p-6">
-                  <div className="flex items-center space-x-3 mb-4">
-                    <span className="text-2xl">{office.flag}</span>
-                    <div>
-                      <h4 className="font-bold text-deep-blue">{office.city}</h4>
-                      <p className="text-sm text-gray-500">{office.country}</p>
-                    </div>
-                  </div>
-                  <div className="space-y-2 text-sm text-gray-600">
-                    <p className="flex items-start space-x-2">
-                      <svg className="w-4 h-4 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                      <span>{office.address}</span>
-                    </p>
-                    <p className="flex items-center space-x-2">
-                      <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                      </svg>
-                      <span>{office.phone}</span>
-                    </p>
-                    <p className="flex items-center space-x-2">
-                      <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                      <span>{office.email}</span>
-                    </p>
-                  </div>
-                </div>
-              ))}
-
-              <div className="bg-deep-blue text-white rounded-2xl p-6">
-                <h4 className="font-bold mb-2">Prefer a Call?</h4>
-                <p className="text-sm text-gray-300 mb-4">
-                  Schedule a free 30-minute consultation with one of our solution architects.
-                </p>
-                <Link href="/contact#" className="inline-flex items-center space-x-2 text-vibrant-orange hover:text-orange-400 font-medium text-sm transition-colors">
-                  <span>Book a Call</span>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </Link>
-              </div>
-            </div>
+      {/* Map Section (Placeholder) */}
+      <section className="h-96 bg-gray-200 relative">
+        <div className="absolute inset-0 flex items-center justify-center bg-deep-blue/10">
+          <div className="text-center">
+            <MapPin className="w-12 h-12 text-deep-blue mx-auto mb-4" />
+            <p className="text-deep-blue font-medium">Map integration coming soon</p>
           </div>
         </div>
       </section>

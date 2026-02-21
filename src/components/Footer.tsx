@@ -1,160 +1,138 @@
+'use client'
+
 import Link from 'next/link'
+import Image from 'next/image'
+import { motion } from 'framer-motion'
+import { 
+  MapPin, 
+  Phone, 
+  Mail, 
+  Facebook, 
+  Twitter, 
+  Linkedin, 
+  Instagram,
+  ArrowRight,
+  Send
+} from 'lucide-react'
 
 const footerLinks = {
   services: [
-    { name: 'Enterprise Software', href: '/services#enterprise-software' },
-    { name: 'AI & Machine Learning', href: '/services#ai-ml' },
-    { name: 'Cloud Infrastructure', href: '/services#cloud' },
-    { name: 'Digital Transformation', href: '/services#digital-transformation' },
-    { name: 'Cybersecurity', href: '/services#cybersecurity' },
-    { name: 'Data Analytics', href: '/services#data-analytics' },
+    { name: 'Website Design', href: '/services#website-design' },
+    { name: 'Video Production', href: '/services#video-production' },
+    { name: 'Email Marketing', href: '/services#email-marketing' },
+    { name: 'SEO Strategies', href: '/services#seo' },
+    { name: 'PPC Advertising', href: '/services#ppc' },
+    { name: 'Social Media', href: '/services#social-media' },
   ],
   company: [
     { name: 'About Us', href: '/about' },
+    { name: 'Our Team', href: '/about#team' },
     { name: 'Careers', href: '/careers' },
     { name: 'Blog', href: '/blog' },
     { name: 'Contact', href: '/contact' },
+  ],
+  industries: [
+    { name: 'E-Commerce', href: '/industries#ecommerce' },
+    { name: 'Healthcare', href: '/industries#healthcare' },
+    { name: 'Real Estate', href: '/industries#real-estate' },
+    { name: 'Education', href: '/industries#education' },
+    { name: 'Technology', href: '/industries#technology' },
+  ],
+  legal: [
     { name: 'Privacy Policy', href: '/privacy' },
     { name: 'Terms of Service', href: '/terms' },
   ],
-  solutions: [
-    { name: 'Custom Software', href: '/solutions#custom-software' },
-    { name: 'SaaS Platforms', href: '/solutions#saas' },
-    { name: 'Mobile Apps', href: '/solutions#mobile' },
-    { name: 'API Development', href: '/solutions#api' },
-    { name: 'Business Intelligence', href: '/solutions#bi' },
-  ],
-  industries: [
-    { name: 'Finance & Banking', href: '/industries#finance' },
-    { name: 'Healthcare', href: '/industries#healthcare' },
-    { name: 'Government', href: '/industries#government' },
-    { name: 'E-Commerce', href: '/industries#ecommerce' },
-    { name: 'Manufacturing', href: '/industries#manufacturing' },
-    { name: 'Education', href: '/industries#education' },
-  ],
 }
 
-const globalNetwork = [
-  {
-    flag: '🇻🇺',
-    name: 'Pacific Wave Digital',
-    location: 'Vanuatu',
-    tagline: 'Digital Innovation for the Pacific',
-    url: 'https://pacificwavedigital.com',
-  },
-  {
-    flag: '🌐',
-    name: 'Global Digital Prime',
-    location: 'USA & Indonesia',
-    tagline: 'Enterprise Digital Solutions Worldwide',
-    url: 'https://globaldigitalprime.com',
-  },
-  {
-    flag: '🇬🇭',
-    name: 'Rapid Entrepreneurs',
-    location: 'Ghana',
-    tagline: 'Empowering African Business Growth',
-    url: 'https://rapidentrepreneurs.com',
-  },
-  {
-    flag: '🇬🇭',
-    name: 'Akwaaba AI',
-    location: 'Ghana',
-    tagline: 'AI-Powered Business Communication for Africa',
-    url: 'https://akwaabaai.com',
-  },
+const socialLinks = [
+  { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/globaldigitalprime' },
+  { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/globaldigitalprime' },
+  { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/company/globaldigitalprime' },
+  { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/globaldigitalprime' },
 ]
 
 export default function Footer() {
   return (
-    <footer className="bg-dark-navy text-white">
-      {/* Global Network Section */}
+    <footer className="bg-deep-blue text-white">
+      {/* Newsletter Section */}
       <div className="border-b border-white/10">
-        <div className="container-custom py-12">
-          <h3 className="text-2xl font-bold text-center mb-8">Our Global Network</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {globalNetwork.map((company) => (
-              <a
-                key={company.name}
-                href={company.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white/5 rounded-xl p-5 hover:bg-white/10 transition-all duration-300 group"
+        <div className="container-custom py-16">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <h3 className="text-2xl md:text-3xl font-bold mb-2">
+                Subscribe to Our Newsletter
+              </h3>
+              <p className="text-gray-400">
+                Get the latest insights on digital marketing delivered straight to your inbox.
+              </p>
+            </div>
+            <form className="flex gap-3">
+              <div className="flex-1 relative">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="w-full pl-12 pr-4 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-vibrant-orange transition-colors"
+                />
+              </div>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="btn-primary flex items-center gap-2"
               >
-                <div className="text-3xl mb-3">{company.flag}</div>
-                <h4 className="font-semibold text-lg group-hover:text-vibrant-orange transition-colors">
-                  {company.name}
-                </h4>
-                <p className="text-sm text-gray-400 mt-1">{company.location}</p>
-                <p className="text-sm text-gray-300 mt-2 italic">&ldquo;{company.tagline}&rdquo;</p>
-              </a>
-            ))}
+                Subscribe
+                <Send className="w-4 h-4" />
+              </motion.button>
+            </form>
           </div>
         </div>
       </div>
 
       {/* Main Footer */}
       <div className="container-custom py-16">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-12">
           {/* Brand Column */}
-          <div className="col-span-2 md:col-span-3 lg:col-span-1">
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 bg-vibrant-orange rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">G</span>
-              </div>
-              <span className="font-bold text-xl">GDP</span>
-            </div>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Enterprise digital solutions spanning the United States and Indonesia. Transforming businesses through innovative technology.
+          <div className="col-span-2 lg:col-span-2">
+            <Link href="/" className="inline-block mb-6">
+              <Image
+                src="/images/logo-white.svg"
+                alt="Global Digital Prime"
+                width={180}
+                height={50}
+                className="h-12 w-auto"
+              />
+            </Link>
+            <p className="text-gray-400 leading-relaxed mb-6">
+              We are dedicated to helping businesses unlock their full potential in the digital world. 
+              Business Growth Is What We Do.
             </p>
-            <div className="flex space-x-4">
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-vibrant-orange transition-colors">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-vibrant-orange transition-colors">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
-              </a>
-              <a href="https://github.com/stevetoti" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-vibrant-orange transition-colors">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-              </a>
+            <div className="flex gap-3">
+              {socialLinks.map((social) => (
+                <motion.a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ y: -3 }}
+                  className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-vibrant-orange transition-colors"
+                >
+                  <social.icon className="w-5 h-5" />
+                </motion.a>
+              ))}
             </div>
           </div>
 
           {/* Services */}
           <div>
-            <h4 className="font-semibold text-sm uppercase tracking-wider text-vibrant-orange mb-4">Services</h4>
-            <ul className="space-y-2">
+            <h4 className="font-bold text-lg mb-4">Services</h4>
+            <ul className="space-y-3">
               {footerLinks.services.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Solutions */}
-          <div>
-            <h4 className="font-semibold text-sm uppercase tracking-wider text-vibrant-orange mb-4">Solutions</h4>
-            <ul className="space-y-2">
-              {footerLinks.solutions.map((link) => (
-                <li key={link.name}>
-                  <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Industries */}
-          <div>
-            <h4 className="font-semibold text-sm uppercase tracking-wider text-vibrant-orange mb-4">Industries</h4>
-            <ul className="space-y-2">
-              {footerLinks.industries.map((link) => (
-                <li key={link.name}>
-                  <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
+                  <Link 
+                    href={link.href}
+                    className="text-gray-400 hover:text-vibrant-orange transition-colors inline-flex items-center group"
+                  >
+                    <ArrowRight className="w-3 h-3 mr-2 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all" />
                     {link.name}
                   </Link>
                 </li>
@@ -164,15 +142,66 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="font-semibold text-sm uppercase tracking-wider text-vibrant-orange mb-4">Company</h4>
-            <ul className="space-y-2">
+            <h4 className="font-bold text-lg mb-4">Company</h4>
+            <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
+                  <Link 
+                    href={link.href}
+                    className="text-gray-400 hover:text-vibrant-orange transition-colors inline-flex items-center group"
+                  >
+                    <ArrowRight className="w-3 h-3 mr-2 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all" />
                     {link.name}
                   </Link>
                 </li>
               ))}
+            </ul>
+          </div>
+
+          {/* Industries */}
+          <div>
+            <h4 className="font-bold text-lg mb-4">Industries</h4>
+            <ul className="space-y-3">
+              {footerLinks.industries.map((link) => (
+                <li key={link.name}>
+                  <Link 
+                    href={link.href}
+                    className="text-gray-400 hover:text-vibrant-orange transition-colors inline-flex items-center group"
+                  >
+                    <ArrowRight className="w-3 h-3 mr-2 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 className="font-bold text-lg mb-4">Contact Us</h4>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3 text-gray-400">
+                <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5 text-vibrant-orange" />
+                <span>New York, USA</span>
+              </li>
+              <li>
+                <a 
+                  href="tel:+1234567890" 
+                  className="flex items-center gap-3 text-gray-400 hover:text-vibrant-orange transition-colors"
+                >
+                  <Phone className="w-5 h-5 flex-shrink-0 text-vibrant-orange" />
+                  <span>+1 (234) 567-890</span>
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="mailto:hello@globaldigitalprime.com" 
+                  className="flex items-center gap-3 text-gray-400 hover:text-vibrant-orange transition-colors"
+                >
+                  <Mail className="w-5 h-5 flex-shrink-0 text-vibrant-orange" />
+                  <span>hello@globaldigitalprime.com</span>
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -180,15 +209,22 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-white/10">
-        <div className="container-custom py-6 flex flex-col md:flex-row items-center justify-between text-sm text-gray-500">
-          <p>&copy; {new Date().getFullYear()} Global Digital Prime. All rights reserved.</p>
-          <div className="flex items-center space-x-6 mt-4 md:mt-0">
-            <span className="flex items-center space-x-2">
-              <span>🇺🇸</span><span>New York, USA</span>
-            </span>
-            <span className="flex items-center space-x-2">
-              <span>🇮🇩</span><span>Jakarta, Indonesia</span>
-            </span>
+        <div className="container-custom py-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-gray-400 text-sm text-center md:text-left">
+              © {new Date().getFullYear()} Global Digital Prime Inc. All rights reserved.
+            </p>
+            <div className="flex gap-6 text-sm">
+              {footerLinks.legal.map((link) => (
+                <Link 
+                  key={link.name}
+                  href={link.href}
+                  className="text-gray-400 hover:text-vibrant-orange transition-colors"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>

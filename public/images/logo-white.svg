@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" fill="none">
+  <!-- GDP Icon -->
+  <circle cx="25" cy="25" r="20" fill="#EF5E33"/>
+  <path d="M18 25c0-4 3-7 7-7s7 3 7 7-3 7-7 7" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="25" cy="25" r="3" fill="white"/>
+  <!-- Text -->
+  <text x="55" y="22" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="white">Global Digital</text>
+  <text x="55" y="38" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#EF5E33">Prime</text>
+</svg>
