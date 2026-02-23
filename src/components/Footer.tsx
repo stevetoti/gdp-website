@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { 
   MapPin, 
@@ -41,15 +42,121 @@ const footerLinks = {
   ],
 }
 
+const globalNetwork = [
+  { 
+    flag: '🇻🇺', 
+    name: 'Pacific Wave Digital', 
+    location: 'Vanuatu', 
+    url: 'https://pacificwavedigital.com', 
+    tagline: 'Digital Innovation for the Pacific', 
+    logo: '/images/logos/pwd-logo.jpg' 
+  },
+  { 
+    flag: '🇺🇸', 
+    name: 'Global Digital Prime', 
+    location: 'USA', 
+    url: 'https://globaldigitalprime.com', 
+    tagline: 'Enterprise Digital Solutions', 
+    logo: '/images/logos/gdp-logo.jpg' 
+  },
+  { 
+    flag: '🇬🇭', 
+    name: 'Rapid Entrepreneurs', 
+    location: 'Ghana', 
+    url: 'https://rapidentrepreneurs.com', 
+    tagline: 'Empowering African Business', 
+    logo: '/images/logos/rapid-logo.jpg' 
+  },
+  { 
+    flag: '🇮🇩', 
+    name: 'Global Digital Prime', 
+    location: 'Indonesia', 
+    url: 'https://globaldigitalprime.com', 
+    tagline: 'Southeast Asia Operations', 
+    logo: '/images/logos/gdp-logo.jpg' 
+  },
+]
+
 const socialLinks = [
   { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/company/globaldigitalprime' },
   { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/globaldigitalprime' },
   { name: 'GitHub', icon: Github, href: 'https://github.com/globaldigitalprime' },
 ]
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+}
+
 export default function Footer() {
   return (
     <footer className="bg-[#0a1628] text-white">
+      {/* Global Network Section */}
+      <div className="border-b border-white/10">
+        <div className="container-custom py-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h3 className="text-2xl md:text-3xl font-bold mb-3">Our Global Network</h3>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              A connected ecosystem of digital innovation companies spanning the Pacific, Americas, Southeast Asia, and Africa.
+            </p>
+          </motion.div>
+          
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
+            {globalNetwork.map((company) => (
+              <motion.a
+                key={`${company.name}-${company.location}`}
+                variants={itemVariants}
+                href={company.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group bg-white/5 backdrop-blur-sm rounded-xl p-6 hover:bg-white/10 transition-all duration-300 border border-white/5 hover:border-vibrant-orange/30"
+                whileHover={{ y: -5, scale: 1.02 }}
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                  >
+                    <Image
+                      src={company.logo}
+                      alt={company.name}
+                      width={40}
+                      height={40}
+                      className="rounded-lg"
+                    />
+                  </motion.div>
+                  <span className="text-2xl">{company.flag}</span>
+                </div>
+                <h4 className="font-bold text-lg mb-1 group-hover:text-vibrant-orange transition-colors">
+                  {company.name}
+                </h4>
+                <p className="text-gray-400 text-sm mb-2">{company.location}</p>
+                <p className="text-gray-500 text-xs italic">{company.tagline}</p>
+              </motion.a>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+
       {/* Newsletter Section */}
       <div className="border-b border-white/10">
         <div className="container-custom py-16">
@@ -90,9 +197,13 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="col-span-2 lg:col-span-2">
             <Link href="/" className="inline-flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-vibrant-orange to-orange-500 flex items-center justify-center">
-                <span className="text-white font-bold text-xl">G</span>
-              </div>
+              <Image
+                src="/images/logos/gdp-logo.jpg"
+                alt="Global Digital Prime"
+                width={44}
+                height={44}
+                className="rounded-lg"
+              />
               <div>
                 <span className="font-bold text-xl text-white">Global Digital</span>
                 <span className="font-bold text-xl text-vibrant-orange"> Prime</span>
@@ -174,36 +285,38 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-bold text-lg mb-5">Contact</h4>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-gray-400 text-sm">
-                <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5 text-vibrant-orange" />
-                <span>New York, NY<br />United States</span>
-              </li>
-              <li>
-                <a 
-                  href="mailto:hello@globaldigitalprime.com" 
-                  className="flex items-center gap-3 text-gray-400 hover:text-vibrant-orange transition-colors text-sm"
-                >
-                  <Mail className="w-5 h-5 flex-shrink-0 text-vibrant-orange" />
-                  <span>hello@globaldigitalprime.com</span>
-                </a>
-              </li>
-            </ul>
+            <h4 className="font-bold text-lg mb-5">Offices</h4>
+            <div className="space-y-4">
+              {/* USA Office */}
+              <div className="flex items-start gap-3 text-gray-400 text-sm">
+                <span className="text-xl">🇺🇸</span>
+                <div>
+                  <p className="font-semibold text-white">New York</p>
+                  <a href="mailto:usa@globaldigitalprime.com" className="hover:text-vibrant-orange transition-colors text-xs">
+                    usa@globaldigitalprime.com
+                  </a>
+                </div>
+              </div>
+              {/* Indonesia Office */}
+              <div className="flex items-start gap-3 text-gray-400 text-sm">
+                <span className="text-xl">🇮🇩</span>
+                <div>
+                  <p className="font-semibold text-white">Jakarta</p>
+                  <a href="mailto:indonesia@globaldigitalprime.com" className="hover:text-vibrant-orange transition-colors text-xs">
+                    indonesia@globaldigitalprime.com
+                  </a>
+                </div>
+              </div>
+            </div>
             
-            {/* Sister company badge */}
-            <div className="mt-6 p-4 bg-white/5 rounded-xl border border-white/10">
-              <p className="text-xs text-gray-500 mb-2">Part of the</p>
+            <div className="mt-4 pt-4 border-t border-white/10">
               <a 
-                href="https://pacificwavedigital.com" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-white hover:text-vibrant-orange transition-colors group"
+                href="mailto:hello@globaldigitalprime.com" 
+                className="flex items-center gap-2 text-gray-400 hover:text-vibrant-orange transition-colors text-sm"
               >
-                <span className="font-semibold">Pacific Wave Digital</span>
-                <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                <Mail className="w-4 h-4 text-vibrant-orange" />
+                <span>hello@globaldigitalprime.com</span>
               </a>
-              <p className="text-xs text-gray-500 mt-1">Network</p>
             </div>
           </div>
         </div>
@@ -216,7 +329,7 @@ export default function Footer() {
             <p className="text-gray-500 text-sm text-center md:text-left">
               © {new Date().getFullYear()} Global Digital Prime Inc. All rights reserved.
             </p>
-            <div className="flex gap-6 text-sm">
+            <div className="flex items-center gap-6 text-sm">
               {footerLinks.legal.map((link) => (
                 <Link 
                   key={link.name}
@@ -226,6 +339,10 @@ export default function Footer() {
                   {link.name}
                 </Link>
               ))}
+              <span className="text-gray-600">|</span>
+              <span className="text-gray-500 flex items-center gap-1">
+                Part of <span className="text-vibrant-orange">Pacific Wave Digital</span> Network
+              </span>
             </div>
           </div>
         </div>

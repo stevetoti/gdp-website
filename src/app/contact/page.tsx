@@ -26,17 +26,17 @@ const contactMethods = [
     href: 'mailto:hello@globaldigitalprime.com'
   },
   {
-    icon: MapPin,
-    title: 'Visit Us',
-    description: 'Come say hello at our HQ.',
-    value: 'New York, NY, United States',
-    href: '#'
+    icon: Globe,
+    title: 'Global Presence',
+    description: 'Offices in USA and Indonesia.',
+    value: 'New York • Jakarta',
+    href: '#offices'
   },
   {
     icon: Clock,
     title: 'Business Hours',
     description: 'We\'re here when you need us.',
-    value: 'Mon-Fri, 9am - 6pm EST',
+    value: '24/7 Global Coverage',
     href: '#'
   },
 ]
@@ -45,16 +45,28 @@ const offices = [
   {
     city: 'New York',
     country: 'United States',
-    address: 'Financial District, NYC',
+    flag: '🇺🇸',
+    address: 'Financial District',
+    addressLine2: 'New York, NY 10004',
+    phone: '+1 (555) 123-4567',
+    email: 'usa@globaldigitalprime.com',
     timezone: 'EST (UTC-5)',
-    flag: '🇺🇸'
+    hours: 'Mon-Fri, 9am - 6pm EST',
+    image: '/images/usa-office.jpg',
+    highlight: 'Headquarters'
   },
   {
     city: 'Jakarta',
     country: 'Indonesia',
-    address: 'Sudirman, Jakarta',
+    flag: '🇮🇩',
+    address: 'Sudirman Central Business District',
+    addressLine2: 'Jakarta 12190, Indonesia',
+    phone: '+62 21 555 1234',
+    email: 'indonesia@globaldigitalprime.com',
     timezone: 'WIB (UTC+7)',
-    flag: '🇮🇩'
+    hours: 'Mon-Fri, 9am - 6pm WIB',
+    image: '/images/jakarta-office.jpg',
+    highlight: 'APAC Hub'
   },
 ]
 
@@ -76,6 +88,7 @@ export default function ContactPage() {
     company: '',
     service: '',
     budget: '',
+    preferredOffice: '',
     message: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -124,8 +137,8 @@ export default function ContactPage() {
                 <span className="gradient-text"> Amazing Together</span>
               </h1>
               <p className="text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
-                Have a project in mind? We&apos;d love to hear about it. 
-                Get in touch and let&apos;s discuss how we can help transform your business.
+                Have a project in mind? With offices in the USA and Indonesia, we&apos;re ready to serve you 
+                across time zones. Get in touch and let&apos;s discuss how we can transform your business.
               </p>
             </div>
           </FadeInUp>
@@ -161,13 +174,129 @@ export default function ContactPage() {
         </div>
       </section>
 
+      {/* Office Locations - Prominent Section */}
+      <section id="offices" className="py-24 bg-soft-gray">
+        <div className="container-custom">
+          <FadeInUp>
+            <div className="text-center mb-16">
+              <span className="inline-flex items-center px-4 py-2 rounded-full bg-vibrant-orange/10 text-vibrant-orange text-sm font-medium mb-4">
+                <Building2 className="w-4 h-4 mr-2" />
+                Our Offices
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-deep-blue mb-4">
+                Two Offices, One Mission
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Global Digital Prime operates from both the United States and Indonesia, 
+                providing seamless service across the Americas and Asia-Pacific regions.
+              </p>
+            </div>
+          </FadeInUp>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            {offices.map((office, index) => (
+              <motion.div
+                key={office.city}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+                className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+              >
+                {/* Office Header */}
+                <div className="bg-gradient-to-r from-deep-blue to-dark-navy p-6 text-white">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <span className="text-5xl">{office.flag}</span>
+                      <div>
+                        <span className="bg-vibrant-orange/20 text-vibrant-orange px-3 py-1 rounded-full text-xs font-semibold">
+                          {office.highlight}
+                        </span>
+                        <h3 className="text-2xl font-bold mt-2">{office.city}</h3>
+                        <p className="text-gray-300">{office.country}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Office Details */}
+                <div className="p-8 space-y-6">
+                  {/* Address */}
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-vibrant-orange/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-6 h-6 text-vibrant-orange" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-deep-blue mb-1">Address</h4>
+                      <p className="text-gray-600">{office.address}</p>
+                      <p className="text-gray-600">{office.addressLine2}</p>
+                    </div>
+                  </div>
+
+                  {/* Phone */}
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-vibrant-orange/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <Phone className="w-6 h-6 text-vibrant-orange" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-deep-blue mb-1">Phone</h4>
+                      <a href={`tel:${office.phone.replace(/\D/g, '')}`} className="text-gray-600 hover:text-vibrant-orange transition-colors">
+                        {office.phone}
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Email */}
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-vibrant-orange/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <Mail className="w-6 h-6 text-vibrant-orange" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-deep-blue mb-1">Email</h4>
+                      <a href={`mailto:${office.email}`} className="text-gray-600 hover:text-vibrant-orange transition-colors">
+                        {office.email}
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Hours */}
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-vibrant-orange/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <Clock className="w-6 h-6 text-vibrant-orange" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-deep-blue mb-1">Business Hours</h4>
+                      <p className="text-gray-600">{office.hours}</p>
+                      <p className="text-sm text-vibrant-orange mt-1">{office.timezone}</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Global Coverage Note */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-12 text-center"
+          >
+            <div className="inline-flex items-center gap-2 bg-deep-blue text-white px-6 py-3 rounded-full">
+              <Globe className="w-5 h-5" />
+              <span>Combined 24-hour coverage across EST and WIB time zones</span>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Contact Form & Info */}
-      <section className="py-24 bg-soft-gray">
+      <section className="py-24 bg-white">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Form */}
             <SlideInLeft>
-              <div className="bg-white rounded-3xl p-8 md:p-10 shadow-sm">
+              <div className="bg-soft-gray rounded-3xl p-8 md:p-10">
                 <h2 className="text-3xl font-bold text-deep-blue mb-2">Start a Project</h2>
                 <p className="text-gray-600 mb-8">Fill out the form and we&apos;ll get back to you within 24 hours.</p>
                 
@@ -202,7 +331,7 @@ export default function ContactPage() {
                           required
                           value={formData.firstName}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-vibrant-orange focus:ring-2 focus:ring-vibrant-orange/20 outline-none transition-all"
+                          className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-vibrant-orange focus:ring-2 focus:ring-vibrant-orange/20 outline-none transition-all bg-white"
                           placeholder="John"
                         />
                       </div>
@@ -214,7 +343,7 @@ export default function ContactPage() {
                           required
                           value={formData.lastName}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-vibrant-orange focus:ring-2 focus:ring-vibrant-orange/20 outline-none transition-all"
+                          className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-vibrant-orange focus:ring-2 focus:ring-vibrant-orange/20 outline-none transition-all bg-white"
                           placeholder="Doe"
                         />
                       </div>
@@ -228,7 +357,7 @@ export default function ContactPage() {
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-vibrant-orange focus:ring-2 focus:ring-vibrant-orange/20 outline-none transition-all"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-vibrant-orange focus:ring-2 focus:ring-vibrant-orange/20 outline-none transition-all bg-white"
                         placeholder="john@company.com"
                       />
                     </div>
@@ -240,7 +369,7 @@ export default function ContactPage() {
                         name="company"
                         value={formData.company}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-vibrant-orange focus:ring-2 focus:ring-vibrant-orange/20 outline-none transition-all"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-vibrant-orange focus:ring-2 focus:ring-vibrant-orange/20 outline-none transition-all bg-white"
                         placeholder="Your Company"
                       />
                     </div>
@@ -277,6 +406,20 @@ export default function ContactPage() {
                         </select>
                       </div>
                     </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Preferred Office</label>
+                      <select
+                        name="preferredOffice"
+                        value={formData.preferredOffice}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-vibrant-orange focus:ring-2 focus:ring-vibrant-orange/20 outline-none transition-all bg-white"
+                      >
+                        <option value="">No preference</option>
+                        <option value="usa">🇺🇸 New York, USA</option>
+                        <option value="indonesia">🇮🇩 Jakarta, Indonesia</option>
+                      </select>
+                    </div>
                     
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Tell us about your project *</label>
@@ -286,7 +429,7 @@ export default function ContactPage() {
                         rows={5}
                         value={formData.message}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-vibrant-orange focus:ring-2 focus:ring-vibrant-orange/20 outline-none transition-all resize-none"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-vibrant-orange focus:ring-2 focus:ring-vibrant-orange/20 outline-none transition-all resize-none bg-white"
                         placeholder="Describe your project, goals, timeline, and any specific requirements..."
                       />
                     </div>
@@ -318,23 +461,28 @@ export default function ContactPage() {
             {/* Info */}
             <SlideInRight>
               <div className="lg:pl-8">
-                <h2 className="text-3xl font-bold text-deep-blue mb-6">Global Presence</h2>
+                <h2 className="text-3xl font-bold text-deep-blue mb-6">Why Choose GDP?</h2>
                 <p className="text-gray-600 text-lg mb-10 leading-relaxed">
-                  With offices across multiple continents, we&apos;re positioned to serve clients 
-                  wherever they are, providing local expertise with global capabilities.
+                  With offices in both the United States and Indonesia, we provide true global coverage 
+                  with local expertise. Our teams work across time zones to ensure your projects move 
+                  forward around the clock.
                 </p>
                 
-                <div className="space-y-6 mb-10">
-                  {offices.map((office) => (
-                    <div key={office.city} className="bg-white rounded-2xl p-6 shadow-sm">
-                      <div className="flex items-start gap-4">
-                        <span className="text-4xl">{office.flag}</span>
-                        <div>
-                          <h3 className="text-xl font-bold text-deep-blue">{office.city}</h3>
-                          <p className="text-gray-500">{office.country}</p>
-                          <p className="text-gray-600 mt-2">{office.address}</p>
-                          <p className="text-sm text-vibrant-orange mt-1">{office.timezone}</p>
-                        </div>
+                {/* Benefits */}
+                <div className="space-y-4 mb-10">
+                  {[
+                    { title: 'Global Reach, Local Expertise', desc: 'Teams in USA and Indonesia understand regional markets' },
+                    { title: '24-Hour Development Cycle', desc: 'Work continues across time zones for faster delivery' },
+                    { title: 'Cost-Effective Solutions', desc: 'Leverage optimal resource allocation across regions' },
+                    { title: 'Seamless Communication', desc: 'English-fluent teams in both locations' },
+                  ].map((benefit, i) => (
+                    <div key={i} className="flex items-start gap-4">
+                      <div className="w-8 h-8 rounded-full bg-vibrant-orange/10 flex items-center justify-center flex-shrink-0 mt-1">
+                        <CheckCircle2 className="w-5 h-5 text-vibrant-orange" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-deep-blue">{benefit.title}</h4>
+                        <p className="text-gray-600 text-sm">{benefit.desc}</p>
                       </div>
                     </div>
                   ))}
@@ -353,17 +501,17 @@ export default function ContactPage() {
                       </p>
                     </div>
                     <div>
+                      <h4 className="font-semibold mb-1">Which office will handle my project?</h4>
+                      <p className="text-gray-300 text-sm">
+                        Projects are assigned based on your preference, time zone, and 
+                        the expertise required. Many projects involve both teams.
+                      </p>
+                    </div>
+                    <div>
                       <h4 className="font-semibold mb-1">Do you offer ongoing support?</h4>
                       <p className="text-gray-300 text-sm">
                         Yes! We offer flexible support packages including 24/7 monitoring, 
                         maintenance, and continuous improvement.
-                      </p>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1">Can you work with our existing team?</h4>
-                      <p className="text-gray-300 text-sm">
-                        Absolutely. We can augment your team, work collaboratively, 
-                        or handle projects end-to-end.
                       </p>
                     </div>
                   </div>
@@ -375,7 +523,7 @@ export default function ContactPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-soft-gray">
         <div className="container-custom text-center">
           <FadeInUp>
             <h2 className="text-3xl md:text-4xl font-bold text-deep-blue mb-4">

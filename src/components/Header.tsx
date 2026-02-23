@@ -57,10 +57,14 @@ export default function Header() {
                 transition={{ type: 'spring', stiffness: 400 }}
                 className="flex items-center gap-3"
               >
-                {/* Logo icon */}
-                <div className={`w-10 h-10 rounded-xl bg-gradient-to-br from-vibrant-orange to-orange-500 flex items-center justify-center ${scrolled ? '' : 'shadow-lg shadow-vibrant-orange/30'}`}>
-                  <span className="text-white font-bold text-xl">G</span>
-                </div>
+                {/* Logo icon - actual logo image */}
+                <Image
+                  src="/images/logos/gdp-logo.jpg"
+                  alt="Global Digital Prime"
+                  width={44}
+                  height={44}
+                  className="rounded-lg"
+                />
                 <div className={`hidden sm:block ${scrolled ? 'text-deep-blue' : 'text-white'}`}>
                   <span className="font-bold text-xl">Global Digital</span>
                   <span className="font-bold text-xl text-vibrant-orange"> Prime</span>
@@ -165,9 +169,13 @@ export default function Header() {
             >
               <div className="flex items-center justify-between p-6 border-b border-gray-100">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-vibrant-orange to-orange-500 flex items-center justify-center">
-                    <span className="text-white font-bold">G</span>
-                  </div>
+                  <Image
+                    src="/images/logos/gdp-logo.jpg"
+                    alt="Global Digital Prime"
+                    width={32}
+                    height={32}
+                    className="rounded-lg"
+                  />
                   <span className="font-bold text-deep-blue">GDP</span>
                 </div>
                 <button
