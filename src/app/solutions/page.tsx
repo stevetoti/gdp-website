@@ -18,6 +18,7 @@ const solutions = [
       'Scalable architecture from day one',
       'Ongoing support and maintenance',
     ],
+    image: '/images/solutions/custom-software.jpg',
     icon: (
       <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -34,6 +35,7 @@ const solutions = [
       'Usage analytics and dashboards',
       'Auto-scaling infrastructure',
     ],
+    image: '/images/solutions/saas-platform.jpg',
     icon: (
       <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
@@ -50,6 +52,7 @@ const solutions = [
       'Offline-first capabilities',
       'App store optimization and launch',
     ],
+    image: '/images/solutions/mobile-app.jpg',
     icon: (
       <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
@@ -66,6 +69,7 @@ const solutions = [
       'API gateway and management',
       'Comprehensive documentation',
     ],
+    image: '/images/solutions/api-integration.jpg',
     icon: (
       <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -82,6 +86,7 @@ const solutions = [
       'Predictive modeling and forecasting',
       'Data warehouse architecture',
     ],
+    image: '/images/solutions/business-intelligence.jpg',
     icon: (
       <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -140,12 +145,12 @@ export default function SolutionsPage() {
       {/* Solutions Grid */}
       <section className="py-20 bg-white">
         <div className="container-custom">
-          <div className="space-y-16">
+          <div className="space-y-24">
             {solutions.map((solution, index) => (
               <div
                 key={solution.id}
                 id={solution.id}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? '' : ''}`}
+                className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
               >
                 <div className={index % 2 === 1 ? 'lg:order-2' : ''}>
                   <div className="w-16 h-16 bg-light-blue rounded-2xl flex items-center justify-center text-deep-blue mb-6">
@@ -167,9 +172,19 @@ export default function SolutionsPage() {
                     Get Started
                   </Link>
                 </div>
-                <div className={`bg-gradient-to-br from-light-blue to-soft-gray rounded-2xl p-12 flex items-center justify-center ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
-                  <div className="text-deep-blue opacity-20">
-                    <div className="w-48 h-48 flex items-center justify-center">
+                <div className={`relative overflow-hidden rounded-2xl shadow-xl ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
+                  <div className="aspect-[4/3] relative">
+                    <Image
+                      src={solution.image}
+                      alt={solution.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-deep-blue/30 to-transparent"></div>
+                    {/* Icon badge */}
+                    <div className="absolute bottom-4 right-4 w-14 h-14 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center text-vibrant-orange shadow-lg">
                       {solution.icon}
                     </div>
                   </div>

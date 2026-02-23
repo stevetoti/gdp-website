@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import Link from 'next/link'
 
 interface Message {
   id: number
@@ -29,7 +30,8 @@ function getResponse(input: string): string {
 }
 
 export default function ChatWidget() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isChatOpen, setIsChatOpen] = useState(false)
+  const [showTooltips, setShowTooltips] = useState(false)
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 0,
@@ -68,40 +70,78 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* Chat Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-vibrant-orange text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center hover:scale-110"
-        aria-label="Open chat"
+      {/* Floating Action Buttons */}
+      <div 
+        className="fixed bottom-6 right-6 z-50 flex flex-col-reverse gap-3 items-end"
+        onMouseEnter={() => setShowTooltips(true)}
+        onMouseLeave={() => setShowTooltips(false)}
       >
-        {isOpen ? (
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        ) : (
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-          </svg>
-        )}
-      </button>
+        {/* Chat Button - Orange */}
+        <div className="relative flex items-center">
+          {showTooltips && !isChatOpen && (
+            <span className="absolute right-16 whitespace-nowrap bg-gray-900 text-white text-sm px-3 py-2 rounded-lg shadow-lg animate-fade-in">
+              Chat with us
+              <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 border-8 border-transparent border-l-gray-900"></span>
+            </span>
+          )}
+          <button
+            onClick={() => setIsChatOpen(!isChatOpen)}
+            className={`w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-xl ${
+              isChatOpen 
+                ? 'bg-gray-600 rotate-0' 
+                : 'bg-vibrant-orange hover:bg-orange-500'
+            }`}
+            aria-label={isChatOpen ? "Close chat" : "Open chat"}
+          >
+            {isChatOpen ? (
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+            )}
+          </button>
+        </div>
+
+        {/* Phone Button - Blue */}
+        <div className="relative flex items-center">
+          {showTooltips && !isChatOpen && (
+            <span className="absolute right-16 whitespace-nowrap bg-gray-900 text-white text-sm px-3 py-2 rounded-lg shadow-lg animate-fade-in">
+              Call us now
+              <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 border-8 border-transparent border-l-gray-900"></span>
+            </span>
+          )}
+          <Link
+            href="tel:+16787000000"
+            className="w-14 h-14 bg-deep-blue hover:bg-blue-700 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-xl"
+            aria-label="Call us"
+          >
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+          </Link>
+        </div>
+      </div>
 
       {/* Chat Window */}
-      {isOpen && (
+      {isChatOpen && (
         <div 
-          className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-48px)] bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden"
+          className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-48px)] bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden animate-slide-up"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
           <div className="bg-deep-blue text-white p-4 flex items-center space-x-3">
             <div className="w-10 h-10 bg-vibrant-orange rounded-full flex items-center justify-center">
-              <span className="font-bold">G</span>
+              <span className="font-bold text-sm">GDP</span>
             </div>
-            <div>
+            <div className="flex-1">
               <h4 className="font-semibold text-sm">Global Digital Prime</h4>
               <p className="text-xs text-gray-300">Enterprise Support</p>
             </div>
-            <div className="ml-auto flex items-center space-x-1">
-              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+            <div className="flex items-center space-x-1">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
               <span className="text-xs text-gray-300">Online</span>
             </div>
           </div>
@@ -125,6 +165,36 @@ export default function ChatWidget() {
               </div>
             ))}
             <div ref={messagesEndRef} />
+          </div>
+
+          {/* Quick Actions */}
+          <div className="px-3 py-2 border-t border-gray-100 bg-white">
+            <div className="flex gap-2 overflow-x-auto pb-2">
+              <button 
+                onClick={() => setInput('Tell me about your services')}
+                className="flex-shrink-0 text-xs px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-gray-700 transition-colors"
+              >
+                Services
+              </button>
+              <button 
+                onClick={() => setInput('What are your pricing options?')}
+                className="flex-shrink-0 text-xs px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-gray-700 transition-colors"
+              >
+                Pricing
+              </button>
+              <button 
+                onClick={() => setInput('Where are you located?')}
+                className="flex-shrink-0 text-xs px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-gray-700 transition-colors"
+              >
+                Locations
+              </button>
+              <button 
+                onClick={() => setInput('Do you have job openings?')}
+                className="flex-shrink-0 text-xs px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-gray-700 transition-colors"
+              >
+                Careers
+              </button>
+            </div>
           </div>
 
           {/* Input */}
@@ -151,6 +221,23 @@ export default function ChatWidget() {
           </div>
         </div>
       )}
+
+      <style jsx>{`
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateX(10px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slide-up {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+          animation: fade-in 0.2s ease-out;
+        }
+        .animate-slide-up {
+          animation: slide-up 0.3s ease-out;
+        }
+      `}</style>
     </>
   )
 }
