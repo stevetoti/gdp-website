@@ -29,7 +29,7 @@ const contactMethods = [
     icon: Globe,
     title: 'Global Presence',
     description: 'Offices in USA and Indonesia.',
-    value: 'New York • Jakarta',
+    value: 'Dover, US • Bali, Indonesia',
     href: '#offices'
   },
   {
@@ -43,12 +43,12 @@ const contactMethods = [
 
 const offices = [
   {
-    city: 'New York',
+    city: 'Dover',
     country: 'United States',
     flag: '🇺🇸',
-    address: 'Financial District',
-    addressLine2: 'New York, NY 10004',
-    phone: '+1 (555) 123-4567',
+    address: '1111B S Governors Ave STE 99244',
+    addressLine2: 'Dover, DE 19904, US',
+    phone: '+1 952-521-1581',
     email: 'usa@globaldigitalprime.com',
     timezone: 'EST (UTC-5)',
     hours: 'Mon-Fri, 9am - 6pm EST',
@@ -56,15 +56,15 @@ const offices = [
     highlight: 'Headquarters'
   },
   {
-    city: 'Jakarta',
+    city: 'Bali',
     country: 'Indonesia',
     flag: '🇮🇩',
-    address: 'Sudirman Central Business District',
-    addressLine2: 'Jakarta 12190, Indonesia',
-    phone: '+62 21 555 1234',
+    address: 'Dewi Sri No. 20, Legian, Kuta',
+    addressLine2: 'Bali, Indonesia 80361',
+    phone: '+62 895-0883-6095',
     email: 'indonesia@globaldigitalprime.com',
-    timezone: 'WIB (UTC+7)',
-    hours: 'Mon-Fri, 9am - 6pm WIB',
+    timezone: 'WITA (UTC+8)',
+    hours: 'Mon-Fri, 9am - 6pm WITA',
     image: '/images/jakarta-office.jpg',
     highlight: 'APAC Hub'
   },
@@ -416,8 +416,8 @@ export default function ContactPage() {
                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-vibrant-orange focus:ring-2 focus:ring-vibrant-orange/20 outline-none transition-all bg-white"
                       >
                         <option value="">No preference</option>
-                        <option value="usa">🇺🇸 New York, USA</option>
-                        <option value="indonesia">🇮🇩 Jakarta, Indonesia</option>
+                        <option value="usa">🇺🇸 Dover, Delaware, USA</option>
+                        <option value="indonesia">🇮🇩 Bali, Indonesia</option>
                       </select>
                     </div>
                     
