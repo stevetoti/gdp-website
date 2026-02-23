@@ -291,9 +291,9 @@ export default function Footer() {
               <div className="flex items-start gap-3 text-gray-400 text-sm">
                 <span className="text-xl">🇺🇸</span>
                 <div>
-                  <p className="font-semibold text-white">New York</p>
-                  <a href="mailto:usa@globaldigitalprime.com" className="hover:text-vibrant-orange transition-colors text-xs">
-                    usa@globaldigitalprime.com
+                  <p className="font-semibold text-white">Dover, Delaware</p>
+                  <a href="mailto:info@globaldigitalprime.com" className="hover:text-vibrant-orange transition-colors text-xs">
+                    info@globaldigitalprime.com
                   </a>
                 </div>
               </div>
@@ -301,9 +301,9 @@ export default function Footer() {
               <div className="flex items-start gap-3 text-gray-400 text-sm">
                 <span className="text-xl">🇮🇩</span>
                 <div>
-                  <p className="font-semibold text-white">Jakarta</p>
-                  <a href="mailto:indonesia@globaldigitalprime.com" className="hover:text-vibrant-orange transition-colors text-xs">
-                    indonesia@globaldigitalprime.com
+                  <p className="font-semibold text-white">Bali, Indonesia</p>
+                  <a href="mailto:info@globaldigitalprime.com" className="hover:text-vibrant-orange transition-colors text-xs">
+                    info@globaldigitalprime.com
                   </a>
                 </div>
               </div>
@@ -311,11 +311,11 @@ export default function Footer() {
             
             <div className="mt-4 pt-4 border-t border-white/10">
               <a 
-                href="mailto:hello@globaldigitalprime.com" 
+                href="mailto:info@globaldigitalprime.com" 
                 className="flex items-center gap-2 text-gray-400 hover:text-vibrant-orange transition-colors text-sm"
               >
                 <Mail className="w-4 h-4 text-vibrant-orange" />
-                <span>hello@globaldigitalprime.com</span>
+                <span>info@globaldigitalprime.com</span>
               </a>
             </div>
           </div>

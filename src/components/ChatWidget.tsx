@@ -11,9 +11,9 @@ interface Message {
 
 const faqResponses: Record<string, string> = {
   'services': 'We offer Enterprise Software Development, AI & Machine Learning, Cloud Infrastructure, Digital Transformation, Cybersecurity, and Data Analytics. Visit our Services page for details.',
-  'pricing': 'Our pricing is tailored to each project. Contact us at hello@globaldigitalprime.com or fill out our contact form for a custom quote.',
-  'contact': 'You can reach us at hello@globaldigitalprime.com, or visit our Contact page. We have offices in New York, USA and Jakarta, Indonesia.',
-  'locations': 'We operate from two main offices: New York, United States and Jakarta, Indonesia. We serve clients globally across all time zones.',
+  'pricing': 'Our pricing is tailored to each project. Contact us at info@globaldigitalprime.com or fill out our contact form for a custom quote.',
+  'contact': 'You can reach us at info@globaldigitalprime.com, or visit our Contact page. We have offices in Dover, Delaware USA and Bali, Indonesia.',
+  'locations': 'We operate from two main offices: Dover, Delaware USA and Bali, Indonesia. We serve clients globally across all time zones.',
   'careers': 'We are always looking for talented professionals! Check our Careers page for current openings or send your resume to careers@globaldigitalprime.com.',
   'industries': 'We serve Finance & Banking, Healthcare, Government, E-Commerce, Manufacturing, and Education sectors. Visit our Industries page to learn more.',
   'hello': 'Hello! Welcome to Global Digital Prime. How can I help you today?',
@@ -25,7 +25,7 @@ function getResponse(input: string): string {
   for (const [key, value] of Object.entries(faqResponses)) {
     if (lower.includes(key)) return value
   }
-  return 'Thank you for your message! For detailed inquiries, please reach out to us at hello@globaldigitalprime.com or fill out our contact form. A team member will get back to you within 24 hours.'
+  return 'Thank you for your message! For detailed inquiries, please reach out to us at info@globaldigitalprime.com or fill out our contact form. A team member will get back to you within 24 hours.'
 }
 
 export default function ChatWidget() {
