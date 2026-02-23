@@ -1,154 +1,180 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
-import { 
-  FadeInUp, 
-  SlideInLeft, 
-  SlideInRight, 
-  StaggerContainer, 
-  StaggerItem,
-  GradientBlob 
-} from '@/components/animations'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { 
-  Target, 
-  Eye, 
-  Heart, 
-  Award, 
-  Users, 
-  TrendingUp,
-  CheckCircle,
+  FadeInUp, 
+  StaggerContainer, 
+  StaggerItem,
+  SlideInLeft,
+  SlideInRight
+} from '@/components/animations'
+import { 
   ArrowRight,
+  Target,
+  Eye,
+  Heart,
+  Award,
+  Users,
+  Globe,
+  TrendingUp,
   Linkedin,
-  Twitter
+  Twitter,
+  CheckCircle2,
+  Building2,
+  Rocket
 } from 'lucide-react'
 
 const stats = [
-  { number: '2000+', label: 'Companies Served' },
-  { number: '12+', label: 'Years Experience' },
-  { number: '98%', label: 'Client Satisfaction' },
-  { number: '50+', label: 'Team Members' },
+  { number: '150+', label: 'Enterprise Clients', icon: Building2 },
+  { number: '500+', label: 'Projects Delivered', icon: Rocket },
+  { number: '50+', label: 'Team Members', icon: Users },
+  { number: '12+', label: 'Countries Served', icon: Globe },
 ]
 
 const values = [
   {
     icon: Target,
-    title: 'Results-Driven',
-    description: 'We focus on measurable outcomes that directly impact your bottom line.',
+    title: 'Excellence',
+    description: 'We pursue excellence in every line of code, every design decision, and every client interaction.'
   },
   {
     icon: Heart,
-    title: 'Client-First',
-    description: 'Your success is our success. We treat your business as our own.',
+    title: 'Integrity',
+    description: 'We build trust through transparency, honest communication, and delivering on our promises.'
   },
   {
-    icon: Eye,
-    title: 'Transparency',
-    description: 'Clear communication and honest reporting at every step.',
+    icon: Users,
+    title: 'Collaboration',
+    description: 'We work as partners with our clients, treating their success as our own.'
   },
   {
     icon: TrendingUp,
     title: 'Innovation',
-    description: 'We stay ahead of trends to keep your business competitive.',
+    description: 'We constantly explore new technologies and approaches to deliver cutting-edge solutions.'
   },
 ]
 
 const team = [
   {
-    name: 'Silvia Garden',
-    role: 'Creative Director',
-    image: '/images/team/member1.jpg',
+    name: 'Stephen Totimeh',
+    role: 'Founder & CEO',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
+    bio: 'Visionary leader with 15+ years in digital transformation and enterprise software.',
     linkedin: '#',
-    twitter: '#',
+    twitter: '#'
   },
   {
-    name: 'Monalisha Shen',
-    role: 'IT Executive',
-    image: '/images/team/member2.jpg',
+    name: 'Sarah Chen',
+    role: 'Chief Technology Officer',
+    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face',
+    bio: 'Former Google engineer specializing in AI/ML and distributed systems.',
     linkedin: '#',
-    twitter: '#',
+    twitter: '#'
   },
   {
-    name: 'Bubli Khanam',
-    role: 'Lead Developer',
-    image: '/images/team/member3.jpg',
+    name: 'Michael Rodriguez',
+    role: 'VP of Engineering',
+    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face',
+    bio: 'Full-stack architect with experience building scalable platforms at Fortune 500 companies.',
     linkedin: '#',
-    twitter: '#',
+    twitter: '#'
   },
   {
-    name: 'James Wilson',
-    role: 'Marketing Director',
-    image: '/images/team/member4.jpg',
+    name: 'Emily Watson',
+    role: 'Head of Product',
+    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
+    bio: 'Product strategist who has launched 20+ successful enterprise products.',
     linkedin: '#',
-    twitter: '#',
+    twitter: '#'
   },
 ]
 
 const milestones = [
-  { year: '2012', title: 'Company Founded', description: 'Started with a vision to transform digital marketing.' },
-  { year: '2015', title: '500 Clients', description: 'Reached our first major milestone of serving 500 businesses.' },
-  { year: '2018', title: 'Global Expansion', description: 'Expanded operations with international offices.' },
-  { year: '2022', title: '2000+ Clients', description: 'Serving over 2000 businesses worldwide.' },
+  { year: '2015', title: 'Company Founded', description: 'Started with a vision to transform businesses through technology.' },
+  { year: '2017', title: 'First Enterprise Client', description: 'Signed our first Fortune 500 client, proving our enterprise capabilities.' },
+  { year: '2019', title: 'AI Division Launch', description: 'Expanded into AI and machine learning solutions.' },
+  { year: '2021', title: '100th Client', description: 'Reached the milestone of 100 satisfied enterprise clients.' },
+  { year: '2023', title: 'Global Expansion', description: 'Opened offices across 3 continents to serve clients worldwide.' },
+  { year: '2024', title: 'Pacific Wave Partnership', description: 'Joined forces with Pacific Wave Digital to expand our reach.' },
 ]
 
 export default function AboutPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 overflow-hidden gradient-hero">
-        <GradientBlob className="w-[600px] h-[600px] bg-vibrant-orange/20 -top-40 -right-40" />
+      <section className="relative py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-deep-blue via-dark-navy to-[#0a1628]">
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
+          <motion.div 
+            className="absolute top-20 left-20 w-[500px] h-[500px] bg-vibrant-orange/20 rounded-full blur-[120px]"
+            animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+            transition={{ duration: 8, repeat: Infinity }}
+          />
+        </div>
         
         <div className="container-custom relative">
           <FadeInUp>
-            <div className="max-w-3xl">
-              <span className="inline-block px-4 py-2 glass rounded-full text-white/90 text-sm mb-6">
+            <div className="max-w-4xl mx-auto text-center">
+              <span className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 text-vibrant-orange text-sm font-medium mb-6">
+                <Building2 className="w-4 h-4 mr-2" />
                 About Us
               </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-                Built Strong Online Presence for
-                <span className="block gradient-text text-glow mt-2">Over 2000+ Companies</span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                Building the Future of
+                <span className="gradient-text"> Digital Enterprise</span>
               </h1>
-              <p className="text-xl text-gray-300 leading-relaxed">
-                We are dedicated to helping businesses unlock their full potential in the digital world. 
-                Our expert team works hand-in-hand with you to craft custom strategies that drive growth.
+              <p className="text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
+                We&apos;re a team of passionate engineers, designers, and strategists dedicated to 
+                helping organizations thrive in the digital age.
               </p>
             </div>
           </FadeInUp>
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="py-16 bg-white relative -mt-10 z-10">
+      {/* Stats Section */}
+      <section className="py-16 bg-white relative z-10 -mt-16">
         <div className="container-custom">
-          <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {stats.map((stat) => (
-                <FadeInUp key={stat.label}>
-                  <div className="text-center">
-                    <div className="text-4xl md:text-5xl font-bold text-deep-blue mb-2">{stat.number}</div>
-                    <div className="text-gray-600 font-medium">{stat.label}</div>
-                  </div>
-                </FadeInUp>
-              ))}
-            </div>
-          </div>
+          <motion.div 
+            className="bg-white rounded-3xl shadow-2xl p-8 md:p-12"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <StaggerContainer staggerDelay={0.1}>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                {stats.map((stat) => (
+                  <StaggerItem key={stat.label}>
+                    <div className="text-center">
+                      <div className="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-vibrant-orange/10 to-orange-100 rounded-2xl flex items-center justify-center">
+                        <stat.icon className="w-7 h-7 text-vibrant-orange" />
+                      </div>
+                      <div className="text-4xl font-bold text-deep-blue mb-1">{stat.number}</div>
+                      <div className="text-gray-600">{stat.label}</div>
+                    </div>
+                  </StaggerItem>
+                ))}
+              </div>
+            </StaggerContainer>
+          </motion.div>
         </div>
       </section>
 
       {/* Story Section */}
-      <section className="py-20 bg-white">
+      <section className="py-24 bg-white">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <SlideInLeft>
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-vibrant-orange/20 to-deep-blue/20 rounded-3xl blur-2xl"></div>
+                <div className="absolute -inset-4 bg-gradient-to-br from-vibrant-orange/20 to-blue-500/20 rounded-3xl blur-2xl" />
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                   <Image
-                    src="/images/about-office.jpg"
-                    alt="Global Digital Prime office"
-                    width={600}
-                    height={450}
+                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop"
+                    alt="Team collaboration at Global Digital Prime"
+                    width={800}
+                    height={600}
                     className="w-full h-auto"
                   />
                 </div>
@@ -157,51 +183,93 @@ export default function AboutPage() {
             
             <SlideInRight>
               <span className="text-vibrant-orange font-semibold text-sm uppercase tracking-wider">Our Story</span>
-              <h2 className="section-title mt-2">
-                Transforming Businesses Through Digital Excellence
+              <h2 className="text-3xl md:text-4xl font-bold text-deep-blue mt-2 mb-6">
+                From Startup to Global Partner
               </h2>
-              <p className="text-gray-600 text-lg leading-relaxed mb-6">
-                Founded with a passion for digital innovation, Global Digital Prime has grown from a small team 
-                of marketing enthusiasts to a full-service digital agency serving clients worldwide.
-              </p>
-              <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                Our mission is simple: help businesses thrive in the digital age. We combine creativity with 
-                data-driven strategies to deliver results that matter. Every campaign we run, every website 
-                we build, and every strategy we develop is focused on one thing – your growth.
-              </p>
+              <div className="space-y-4 text-gray-600 text-lg leading-relaxed">
+                <p>
+                  Global Digital Prime was founded with a simple belief: that every organization 
+                  deserves access to world-class technology solutions, regardless of size.
+                </p>
+                <p>
+                  What started as a small team of passionate engineers has grown into a global 
+                  technology partner serving enterprises across industries and continents.
+                </p>
+                <p>
+                  Today, we continue to push the boundaries of what&apos;s possible, combining deep 
+                  technical expertise with a genuine commitment to our clients&apos; success.
+                </p>
+              </div>
               
-              <div className="grid grid-cols-2 gap-6">
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-6 h-6 text-vibrant-orange" />
-                  <span className="font-medium">Data-Driven Approach</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-6 h-6 text-vibrant-orange" />
-                  <span className="font-medium">Expert Team</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-6 h-6 text-vibrant-orange" />
-                  <span className="font-medium">Proven Results</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-6 h-6 text-vibrant-orange" />
-                  <span className="font-medium">24/7 Support</span>
-                </div>
+              <div className="mt-8 p-6 bg-soft-gray rounded-2xl">
+                <p className="text-gray-500 text-sm mb-2">Part of the</p>
+                <a href="https://pacificwavedigital.com" target="_blank" rel="noopener noreferrer" className="font-bold text-deep-blue hover:text-vibrant-orange transition-colors">
+                  Pacific Wave Digital Network
+                </a>
+                <p className="text-gray-500 text-sm mt-2">
+                  A connected ecosystem of digital innovation companies spanning the Pacific, Americas, and beyond.
+                </p>
               </div>
             </SlideInRight>
           </div>
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="py-20 bg-soft-gray">
+      {/* Mission & Vision */}
+      <section className="py-24 bg-soft-gray">
         <div className="container-custom">
           <FadeInUp>
             <div className="text-center mb-16">
-              <span className="text-vibrant-orange font-semibold text-sm uppercase tracking-wider">Our Values</span>
-              <h2 className="section-title mt-2">What Drives Us</h2>
-              <p className="section-subtitle">
-                Our core values guide everything we do and how we work with our clients.
+              <h2 className="text-4xl md:text-5xl font-bold text-deep-blue mb-6">
+                Our Mission & Vision
+              </h2>
+            </div>
+          </FadeInUp>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            <FadeInUp delay={0.1}>
+              <div className="bg-white rounded-3xl p-10 shadow-sm h-full">
+                <div className="w-16 h-16 bg-gradient-to-br from-vibrant-orange to-orange-400 rounded-2xl flex items-center justify-center mb-6">
+                  <Target className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-deep-blue mb-4">Our Mission</h3>
+                <p className="text-gray-600 text-lg leading-relaxed">
+                  To empower organizations with innovative technology solutions that drive growth, 
+                  efficiency, and competitive advantage in the digital economy.
+                </p>
+              </div>
+            </FadeInUp>
+            
+            <FadeInUp delay={0.2}>
+              <div className="bg-white rounded-3xl p-10 shadow-sm h-full">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mb-6">
+                  <Eye className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-deep-blue mb-4">Our Vision</h3>
+                <p className="text-gray-600 text-lg leading-relaxed">
+                  To be the trusted digital transformation partner for enterprises worldwide, 
+                  known for our technical excellence, innovation, and unwavering commitment to client success.
+                </p>
+              </div>
+            </FadeInUp>
+          </div>
+        </div>
+      </section>
+
+      {/* Values Section */}
+      <section className="py-24 bg-white">
+        <div className="container-custom">
+          <FadeInUp>
+            <div className="text-center mb-16">
+              <span className="inline-flex items-center px-4 py-2 rounded-full bg-vibrant-orange/10 text-vibrant-orange text-sm font-medium mb-6">
+                <Heart className="w-4 h-4 mr-2" />
+                Our Values
+              </span>
+              <h2 className="text-4xl md:text-5xl font-bold text-deep-blue mb-6">
+                What Drives Us
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Our core values guide every decision we make and every solution we build.
               </p>
             </div>
           </FadeInUp>
@@ -211,11 +279,11 @@ export default function AboutPage() {
               {values.map((value) => (
                 <StaggerItem key={value.title}>
                   <motion.div
-                    className="bg-white rounded-2xl p-8 text-center h-full hover:shadow-xl transition-all"
+                    className="text-center p-8 rounded-2xl hover:bg-soft-gray transition-all h-full"
                     whileHover={{ y: -5 }}
                   >
-                    <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-vibrant-orange to-orange-400 rounded-2xl flex items-center justify-center text-white">
-                      <value.icon className="w-8 h-8" />
+                    <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-deep-blue to-dark-navy rounded-2xl flex items-center justify-center">
+                      <value.icon className="w-8 h-8 text-white" />
                     </div>
                     <h3 className="text-xl font-bold text-deep-blue mb-3">{value.title}</h3>
                     <p className="text-gray-600">{value.description}</p>
@@ -228,30 +296,40 @@ export default function AboutPage() {
       </section>
 
       {/* Timeline Section */}
-      <section className="py-20 bg-white">
-        <div className="container-custom">
+      <section className="py-24 bg-deep-blue relative overflow-hidden">
+        <motion.div 
+          className="absolute top-20 right-20 w-[400px] h-[400px] bg-vibrant-orange/10 rounded-full blur-[100px]"
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ duration: 8, repeat: Infinity }}
+        />
+        
+        <div className="container-custom relative">
           <FadeInUp>
             <div className="text-center mb-16">
-              <span className="text-vibrant-orange font-semibold text-sm uppercase tracking-wider">Our Journey</span>
-              <h2 className="section-title mt-2">Milestones That Matter</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                Our Journey
+              </h2>
+              <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+                Key milestones that have shaped who we are today.
+              </p>
             </div>
           </FadeInUp>
           
-          <div className="max-w-4xl mx-auto">
+          <div className="relative">
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-white/10" />
+            
             {milestones.map((milestone, index) => (
               <FadeInUp key={milestone.year} delay={index * 0.1}>
-                <div className="flex gap-8 mb-12 last:mb-0">
-                  <div className="flex-shrink-0 w-24 text-right">
-                    <span className="text-2xl font-bold text-vibrant-orange">{milestone.year}</span>
+                <div className={`relative flex items-center mb-12 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
+                  <div className={`w-1/2 ${index % 2 === 0 ? 'pr-12 text-right' : 'pl-12 text-left'}`}>
+                    <div className="text-vibrant-orange font-bold text-xl mb-2">{milestone.year}</div>
+                    <h3 className="text-xl font-bold text-white mb-2">{milestone.title}</h3>
+                    <p className="text-gray-400">{milestone.description}</p>
                   </div>
-                  <div className="relative pb-12 last:pb-0">
-                    <div className="absolute left-0 top-2 w-4 h-4 bg-vibrant-orange rounded-full"></div>
-                    <div className="absolute left-[7px] top-6 bottom-0 w-0.5 bg-gray-200"></div>
-                    <div className="ml-10">
-                      <h3 className="text-xl font-bold text-deep-blue mb-2">{milestone.title}</h3>
-                      <p className="text-gray-600">{milestone.description}</p>
-                    </div>
-                  </div>
+                  
+                  <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-vibrant-orange rounded-full border-4 border-deep-blue z-10" />
+                  
+                  <div className="w-1/2" />
                 </div>
               </FadeInUp>
             ))}
@@ -260,14 +338,19 @@ export default function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section id="team" className="py-20 bg-soft-gray">
+      <section id="team" className="py-24 bg-soft-gray">
         <div className="container-custom">
           <FadeInUp>
             <div className="text-center mb-16">
-              <span className="text-vibrant-orange font-semibold text-sm uppercase tracking-wider">Our Team</span>
-              <h2 className="section-title mt-2">Meet the Experts</h2>
-              <p className="section-subtitle">
-                A talented team of strategists, creatives, and technologists dedicated to your success.
+              <span className="inline-flex items-center px-4 py-2 rounded-full bg-vibrant-orange/10 text-vibrant-orange text-sm font-medium mb-6">
+                <Users className="w-4 h-4 mr-2" />
+                Leadership Team
+              </span>
+              <h2 className="text-4xl md:text-5xl font-bold text-deep-blue mb-6">
+                Meet Our Leaders
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Experienced professionals dedicated to driving innovation and client success.
               </p>
             </div>
           </FadeInUp>
@@ -277,30 +360,29 @@ export default function AboutPage() {
               {team.map((member) => (
                 <StaggerItem key={member.name}>
                   <motion.div
-                    className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all group"
+                    className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all"
                     whileHover={{ y: -5 }}
                   >
-                    <div className="relative overflow-hidden aspect-square">
+                    <div className="aspect-square relative overflow-hidden">
                       <Image
                         src={member.image}
                         alt={member.name}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-deep-blue/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-6">
-                        <div className="flex gap-3">
-                          <a href={member.linkedin} className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-vibrant-orange transition-colors">
-                            <Linkedin className="w-5 h-5" />
-                          </a>
-                          <a href={member.twitter} className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-vibrant-orange transition-colors">
-                            <Twitter className="w-5 h-5" />
-                          </a>
-                        </div>
-                      </div>
                     </div>
-                    <div className="p-6 text-center">
+                    <div className="p-6">
                       <h3 className="text-xl font-bold text-deep-blue">{member.name}</h3>
-                      <p className="text-gray-600">{member.role}</p>
+                      <p className="text-vibrant-orange font-medium text-sm mb-3">{member.role}</p>
+                      <p className="text-gray-600 text-sm mb-4">{member.bio}</p>
+                      <div className="flex gap-3">
+                        <a href={member.linkedin} className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-vibrant-orange hover:text-white transition-colors">
+                          <Linkedin className="w-4 h-4" />
+                        </a>
+                        <a href={member.twitter} className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-vibrant-orange hover:text-white transition-colors">
+                          <Twitter className="w-4 h-4" />
+                        </a>
+                      </div>
                     </div>
                   </motion.div>
                 </StaggerItem>
@@ -311,21 +393,30 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 gradient-hero relative overflow-hidden">
-        <GradientBlob className="w-[500px] h-[500px] bg-vibrant-orange/30 top-0 right-0" />
+      <section className="py-24 bg-gradient-to-br from-deep-blue via-dark-navy to-[#0a1628] relative overflow-hidden">
+        <motion.div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-vibrant-orange/20 rounded-full blur-[150px]"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
+          transition={{ duration: 8, repeat: Infinity }}
+        />
         
         <div className="container-custom relative text-center">
           <FadeInUp>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
-              Ready to Work With Us?
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Ready to Work Together?
             </h2>
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Let&apos;s discuss how we can help take your business to the next level.
+            <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+              Let&apos;s discuss how we can help transform your business with technology.
             </p>
-            <Link href="/contact" className="btn-primary inline-flex items-center group">
-              Get in Touch
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/get-started" className="btn-primary inline-flex items-center justify-center group">
+                Start Your Project
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link href="/careers" className="btn-outline inline-flex items-center justify-center">
+                Join Our Team
+              </Link>
+            </div>
           </FadeInUp>
         </div>
       </section>

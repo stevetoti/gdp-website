@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ChevronDown, Phone, Mail, ArrowRight } from 'lucide-react'
+import { Menu, X, ChevronDown, ArrowRight, Code2, Brain, Cloud, Smartphone, Rocket, Cog } from 'lucide-react'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -13,16 +13,15 @@ const navigation = [
     name: 'Services', 
     href: '/services',
     children: [
-      { name: 'Website Design', href: '/services#website-design' },
-      { name: 'Video Production', href: '/services#video-production' },
-      { name: 'Email Marketing', href: '/services#email-marketing' },
-      { name: 'SEO Strategies', href: '/services#seo' },
-      { name: 'PPC Advertising', href: '/services#ppc' },
-      { name: 'Social Media', href: '/services#social-media' },
+      { name: 'Custom Software Development', href: '/services#custom-software', icon: Code2 },
+      { name: 'AI & Machine Learning', href: '/services#ai-ml', icon: Brain },
+      { name: 'Cloud Architecture', href: '/services#cloud', icon: Cloud },
+      { name: 'Mobile App Development', href: '/services#mobile', icon: Smartphone },
+      { name: 'Digital Transformation', href: '/services#digital-transformation', icon: Rocket },
+      { name: 'Enterprise Integration', href: '/services#integration', icon: Cog },
     ]
   },
-  { name: 'Industries', href: '/industries' },
-  { name: 'Blog', href: '/blog' },
+  { name: 'Solutions', href: '/solutions' },
   { name: 'Contact', href: '/contact' },
 ]
 
@@ -41,30 +40,11 @@ export default function Header() {
 
   return (
     <>
-      {/* Top bar */}
-      <div className="hidden lg:block bg-deep-blue text-white py-2">
-        <div className="container-custom flex items-center justify-between text-sm">
-          <div className="flex items-center gap-6">
-            <a href="tel:+1234567890" className="flex items-center gap-2 hover:text-vibrant-orange transition-colors">
-              <Phone className="w-4 h-4" />
-              <span>+1 (234) 567-890</span>
-            </a>
-            <a href="mailto:hello@globaldigitalprime.com" className="flex items-center gap-2 hover:text-vibrant-orange transition-colors">
-              <Mail className="w-4 h-4" />
-              <span>hello@globaldigitalprime.com</span>
-            </a>
-          </div>
-          <div className="flex items-center gap-4">
-            <span>24/7 Customer Support</span>
-          </div>
-        </div>
-      </div>
-
       {/* Main header */}
       <header 
-        className={`fixed top-0 lg:top-10 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled 
-            ? 'bg-white/95 backdrop-blur-xl shadow-lg lg:top-0' 
+            ? 'bg-white/90 backdrop-blur-xl shadow-lg shadow-black/5' 
             : 'bg-transparent'
         }`}
       >
@@ -75,15 +55,16 @@ export default function Header() {
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: 'spring', stiffness: 400 }}
+                className="flex items-center gap-3"
               >
-                <Image
-                  src="/images/logo.svg"
-                  alt="Global Digital Prime"
-                  width={180}
-                  height={50}
-                  className="h-12 w-auto"
-                  priority
-                />
+                {/* Logo icon */}
+                <div className={`w-10 h-10 rounded-xl bg-gradient-to-br from-vibrant-orange to-orange-500 flex items-center justify-center ${scrolled ? '' : 'shadow-lg shadow-vibrant-orange/30'}`}>
+                  <span className="text-white font-bold text-xl">G</span>
+                </div>
+                <div className={`hidden sm:block ${scrolled ? 'text-deep-blue' : 'text-white'}`}>
+                  <span className="font-bold text-xl">Global Digital</span>
+                  <span className="font-bold text-xl text-vibrant-orange"> Prime</span>
+                </div>
               </motion.div>
             </Link>
 
@@ -98,33 +79,38 @@ export default function Header() {
                 >
                   <Link
                     href={item.href}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-1 ${
+                    className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center gap-1 ${
                       scrolled 
-                        ? 'text-gray-700 hover:text-vibrant-orange hover:bg-soft-gray' 
-                        : 'text-white hover:text-vibrant-orange hover:bg-white/10'
+                        ? 'text-gray-700 hover:text-vibrant-orange hover:bg-orange-50' 
+                        : 'text-white/90 hover:text-white hover:bg-white/10'
                     }`}
                   >
                     {item.name}
-                    {item.children && <ChevronDown className="w-4 h-4" />}
+                    {item.children && (
+                      <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === item.name ? 'rotate-180' : ''}`} />
+                    )}
                   </Link>
                   
-                  {/* Dropdown menu */}
+                  {/* Mega dropdown menu */}
                   <AnimatePresence>
                     {item.children && activeDropdown === item.name && (
                       <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden"
+                        className="absolute top-full left-0 mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden p-2"
                       >
                         {item.children.map((child) => (
                           <Link
                             key={child.name}
                             href={child.href}
-                            className="block px-4 py-3 text-gray-700 hover:bg-soft-gray hover:text-vibrant-orange transition-colors"
+                            className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-orange-50 hover:text-vibrant-orange rounded-xl transition-all group"
                           >
-                            {child.name}
+                            <div className="w-10 h-10 rounded-lg bg-gray-100 group-hover:bg-vibrant-orange/10 flex items-center justify-center transition-colors">
+                              <child.icon className="w-5 h-5 text-gray-500 group-hover:text-vibrant-orange transition-colors" />
+                            </div>
+                            <span className="font-medium">{child.name}</span>
                           </Link>
                         ))}
                       </motion.div>
@@ -135,30 +121,22 @@ export default function Header() {
             </div>
 
             {/* CTA Buttons */}
-            <div className="hidden lg:flex items-center gap-3">
-              <Link 
-                href="/contact"
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  scrolled 
-                    ? 'text-gray-700 hover:text-vibrant-orange' 
-                    : 'text-white hover:text-vibrant-orange'
-                }`}
-              >
-                Contact
-              </Link>
+            <div className="hidden lg:flex items-center gap-4">
               <Link 
                 href="/get-started"
-                className="btn-primary inline-flex items-center group"
+                className="group relative overflow-hidden bg-vibrant-orange text-white px-6 py-2.5 rounded-lg font-semibold transition-all hover:shadow-lg hover:shadow-vibrant-orange/30"
               >
-                Get Started Free
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <span className="relative z-10 flex items-center">
+                  Get Started
+                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </span>
               </Link>
             </div>
 
             {/* Mobile menu button */}
             <button
               type="button"
-              className="lg:hidden p-2 rounded-lg text-gray-700"
+              className="lg:hidden p-2 rounded-lg"
               onClick={() => setMobileMenuOpen(true)}
             >
               <Menu className={`w-6 h-6 ${scrolled ? 'text-deep-blue' : 'text-white'}`} />
@@ -175,7 +153,7 @@ export default function Header() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
               onClick={() => setMobileMenuOpen(false)}
             />
             <motion.div
@@ -185,17 +163,16 @@ export default function Header() {
               transition={{ type: 'spring', damping: 25 }}
               className="fixed right-0 top-0 bottom-0 w-80 bg-white z-50 shadow-2xl"
             >
-              <div className="flex items-center justify-between p-6 border-b">
-                <Image
-                  src="/images/logo.svg"
-                  alt="Global Digital Prime"
-                  width={150}
-                  height={40}
-                  className="h-10 w-auto"
-                />
+              <div className="flex items-center justify-between p-6 border-b border-gray-100">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-vibrant-orange to-orange-500 flex items-center justify-center">
+                    <span className="text-white font-bold">G</span>
+                  </div>
+                  <span className="font-bold text-deep-blue">GDP</span>
+                </div>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 rounded-lg hover:bg-soft-gray transition-colors"
+                  className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
                 >
                   <X className="w-6 h-6 text-deep-blue" />
                 </button>
@@ -212,15 +189,16 @@ export default function Header() {
                       {item.name}
                     </Link>
                     {item.children && (
-                      <div className="ml-4 mt-1 space-y-1">
+                      <div className="ml-4 mt-1 space-y-1 border-l-2 border-gray-100 pl-4">
                         {item.children.map((child) => (
                           <Link
                             key={child.name}
                             href={child.href}
-                            className="block py-2 text-gray-600 hover:text-vibrant-orange transition-colors"
+                            className="flex items-center gap-2 py-2 text-gray-600 hover:text-vibrant-orange transition-colors"
                             onClick={() => setMobileMenuOpen(false)}
                           >
-                            {child.name}
+                            <child.icon className="w-4 h-4" />
+                            <span className="text-sm">{child.name}</span>
                           </Link>
                         ))}
                       </div>
@@ -228,13 +206,13 @@ export default function Header() {
                   </div>
                 ))}
                 
-                <div className="mt-8 pt-6 border-t space-y-3">
+                <div className="mt-8 pt-6 border-t border-gray-100 space-y-3">
                   <Link 
                     href="/get-started"
                     className="btn-primary w-full text-center block"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    Get Started Free
+                    Get Started
                   </Link>
                   <Link 
                     href="/contact"
@@ -243,17 +221,6 @@ export default function Header() {
                   >
                     Contact Us
                   </Link>
-                </div>
-                
-                <div className="mt-8 space-y-4 text-sm text-gray-600">
-                  <a href="tel:+1234567890" className="flex items-center gap-2 hover:text-vibrant-orange">
-                    <Phone className="w-4 h-4" />
-                    +1 (234) 567-890
-                  </a>
-                  <a href="mailto:hello@globaldigitalprime.com" className="flex items-center gap-2 hover:text-vibrant-orange">
-                    <Mail className="w-4 h-4" />
-                    hello@globaldigitalprime.com
-                  </a>
                 </div>
               </div>
             </motion.div>
