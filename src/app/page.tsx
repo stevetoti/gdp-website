@@ -89,7 +89,7 @@ const differentiators = [
   {
     icon: Landmark,
     title: 'US-Registered Entity',
-    description: 'Incorporated in Delaware, USA — contract with a company built on the world\u2019s most trusted legal and corporate framework.',
+    description: 'Incorporated in Delaware, USA — contract with a company built on the world’s most trusted legal and corporate framework.',
     color: 'from-blue-500 to-cyan-500'
   },
   {
@@ -101,7 +101,7 @@ const differentiators = [
   {
     icon: Cpu,
     title: 'AI-First Engineering',
-    description: 'AI isn\u2019t a bolt-on for us. Every solution we design considers automation, intelligence, and data leverage from day one.',
+    description: 'AI isn’t a bolt-on for us. Every solution we design considers automation, intelligence, and data leverage from day one.',
     color: 'from-purple-500 to-pink-500'
   },
   {
@@ -134,7 +134,7 @@ const offices = [
     country: 'Indonesia',
     city: 'Bali, Indonesia',
     role: 'Asia-Pacific Operations & Delivery',
-    description: 'Our registered Indonesian entity anchors engineering delivery in Asia-Pacific — deep talent, efficient delivery, and a base in one of the world\u2019s fastest-growing digital economies.',
+    description: 'Our registered Indonesian entity anchors engineering delivery in Asia-Pacific — deep talent, efficient delivery, and a base in one of the world’s fastest-growing digital economies.',
     points: ['Core engineering & delivery hub', 'Cost-efficient senior talent', 'Asia-Pacific market reach'],
     accent: 'from-vibrant-orange to-orange-400'
   },
@@ -734,7 +734,7 @@ export default function HomePage() {
           
           <FadeInUp delay={0.4}>
             <p className="text-gray-400 mt-8 text-sm">
-              No commitment required \u2022 Free consultation \u2022 Response within 24 hours
+              No commitment required • Free consultation • Response within 24 hours
             </p>
           </FadeInUp>
         </div>
