@@ -46,17 +46,19 @@ const globalNetwork = [
   { 
     flag: '🇻🇺', 
     name: 'Pacific Wave Digital', 
-    location: 'Vanuatu', 
+    location: 'Vanuatu (HQ)', 
     url: 'https://pacificwavedigital.com', 
     tagline: 'Digital Innovation for the Pacific', 
+    regions: 'Covers: Vanuatu · Pacific Islands · Oceania',
     logo: '/images/logos/pwd-logo.jpg' 
   },
   { 
     flag: '🇺🇸', 
     name: 'Global Digital Prime', 
-    location: 'USA', 
+    location: 'Delaware, USA', 
     url: 'https://globaldigitalprime.com', 
     tagline: 'Enterprise Digital Solutions', 
+    regions: 'Covers: United States · Americas · Global Enterprise',
     logo: '/images/logos/gdp-logo.jpg' 
   },
   { 
@@ -65,6 +67,7 @@ const globalNetwork = [
     location: 'Ghana', 
     url: 'https://rapidentrepreneurs.com', 
     tagline: 'Empowering African Business', 
+    regions: 'Covers: Ghana · West Africa · African Markets',
     logo: '/images/logos/rapid-logo.jpg' 
   },
   { 
@@ -73,6 +76,7 @@ const globalNetwork = [
     location: 'Indonesia', 
     url: 'https://globaldigitalprime.com', 
     tagline: 'Southeast Asia Operations', 
+    regions: 'Covers: Indonesia · Southeast Asia · Asia-Pacific',
     logo: '/images/logos/gdp-logo.jpg' 
   },
 ]
@@ -150,7 +154,8 @@ export default function Footer() {
                   {company.name}
                 </h4>
                 <p className="text-gray-400 text-sm mb-2">{company.location}</p>
-                <p className="text-gray-500 text-xs italic">{company.tagline}</p>
+                <p className="text-gray-500 text-xs italic mb-2">{company.tagline}</p>
+                <p className="text-vibrant-orange/80 text-[11px] font-medium">{company.regions}</p>
               </motion.a>
             ))}
           </motion.div>
