@@ -121,7 +121,7 @@ const footprintStats = [
 
 const offices = [
   {
-    flag: '\ud83c\uddfa\ud83c\uddf8',
+    flag: '🇺🇸',
     country: 'United States',
     city: 'Dover, Delaware',
     role: 'Legal & Corporate Base',
@@ -130,7 +130,7 @@ const offices = [
     accent: 'from-blue-500 to-cyan-500'
   },
   {
-    flag: '\ud83c\uddee\ud83c\udde9',
+    flag: '🇮🇩',
     country: 'Indonesia',
     city: 'Bali, Indonesia',
     role: 'Asia-Pacific Operations & Delivery',
@@ -249,7 +249,7 @@ export default function HomePage() {
               <FadeInUp delay={0.2}>
                 <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-xl">
                   Custom software development, AI &amp; machine learning solutions, cloud 
-                  architecture, and mobile apps \u2014 engineered end-to-end by one accountable 
+                  architecture, and mobile apps — engineered end-to-end by one accountable 
                   global team, delivered 24/7 across US and Asia-Pacific time zones.
                 </p>
               </FadeInUp>
@@ -261,7 +261,7 @@ export default function HomePage() {
                     whileHover={{ scale: 1.03, y: -2 }}
                     className="inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-gradient-to-r from-blue-500/15 to-cyan-500/10 border border-blue-400/30 backdrop-blur-sm"
                   >
-                    <span className="text-xl leading-none">\ud83c\uddfa\ud83c\uddf8</span>
+                    <span className="text-xl leading-none">🇺🇸</span>
                     <ShieldCheck className="w-4 h-4 text-blue-300" />
                     <span className="text-sm font-semibold text-white">Registered in Delaware, USA</span>
                   </motion.div>
@@ -269,7 +269,7 @@ export default function HomePage() {
                     whileHover={{ scale: 1.03, y: -2 }}
                     className="inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-gradient-to-r from-vibrant-orange/15 to-orange-500/10 border border-vibrant-orange/30 backdrop-blur-sm"
                   >
-                    <span className="text-xl leading-none">\ud83c\uddee\ud83c\udde9</span>
+                    <span className="text-xl leading-none">🇮🇩</span>
                     <Globe2 className="w-4 h-4 text-orange-300" />
                     <span className="text-sm font-semibold text-white">Registered in Indonesia</span>
                   </motion.div>
@@ -384,7 +384,7 @@ export default function HomePage() {
                           <ShieldCheck className="w-5 h-5 text-blue-600" />
                         </div>
                         <div>
-                          <p className="text-sm font-semibold text-gray-900">Delaware, USA \ud83c\uddfa\ud83c\uddf8</p>
+                          <p className="text-sm font-semibold text-gray-900">Delaware, USA 🇺🇸</p>
                           <p className="text-xs text-gray-500">Registered entity</p>
                         </div>
                       </div>
@@ -401,7 +401,7 @@ export default function HomePage() {
                           <Globe2 className="w-5 h-5 text-vibrant-orange" />
                         </div>
                         <div>
-                          <p className="text-sm font-semibold text-gray-900">Indonesia \ud83c\uddee\ud83c\udde9</p>
+                          <p className="text-sm font-semibold text-gray-900">Indonesia 🇮🇩</p>
                           <p className="text-xs text-gray-500">Asia-Pacific delivery</p>
                         </div>
                       </div>
@@ -473,7 +473,7 @@ export default function HomePage() {
                 <span className="gradient-text"> Delivered End-to-End</span>
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                From first architecture diagram to production and beyond \u2014 one accountable team 
+                From first architecture diagram to production and beyond — one accountable team 
                 for custom software, AI systems, cloud infrastructure, and everything that connects them.
               </p>
             </div>
@@ -560,7 +560,7 @@ export default function HomePage() {
                 <span className="block text-vibrant-orange">The Power of Asia-Pacific.</span>
               </h2>
               <p className="text-xl text-gray-300 leading-relaxed">
-                Our dual-registered structure isn&apos;t a footnote \u2014 it&apos;s the reason clients 
+                Our dual-registered structure isn&apos;t a footnote — it&apos;s the reason clients 
                 choose us. Here&apos;s what it means for your project.
               </p>
             </div>
@@ -716,7 +716,7 @@ export default function HomePage() {
           <FadeInUp delay={0.2}>
             <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
               Talk to a team that contracts under US law and delivers with Asia-Pacific 
-              agility. Free consultation \u2014 we&apos;ll map your fastest path to shipping.
+              agility. Free consultation — we&apos;ll map your fastest path to shipping.
             </p>
           </FadeInUp>
           
