@@ -209,10 +209,19 @@ export default function Footer() {
                 <span className="font-bold text-xl text-vibrant-orange"> Prime</span>
               </div>
             </Link>
-            <p className="text-gray-400 leading-relaxed mb-6">
-              Enterprise-grade software solutions, AI innovation, and digital transformation 
-              for organizations ready to lead their industries.
+            <p className="text-gray-400 leading-relaxed mb-4">
+              A global software & AI engineering company registered in Delaware, USA and 
+              Indonesia — combining US corporate trust with Asia-Pacific delivery to help 
+              organizations lead their industries.
             </p>
+            <div className="flex flex-wrap gap-2 mb-6">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-gray-300">
+                🇺🇸 Registered in Delaware, USA
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-gray-300">
+                🇮🇩 Registered in Indonesia
+              </span>
+            </div>
             <div className="flex gap-3">
               {socialLinks.map((social) => (
                 <motion.a

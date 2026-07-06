@@ -27,10 +27,10 @@ import {
 } from 'lucide-react'
 
 const stats = [
-  { number: '150+', label: 'Enterprise Clients', icon: Building2 },
-  { number: '500+', label: 'Projects Delivered', icon: Rocket },
-  { number: '50+', label: 'Team Members', icon: Users },
-  { number: '12+', label: 'Countries Served', icon: Globe },
+  { number: '2', label: 'Countries of Registration', icon: Building2 },
+  { number: '100+', label: 'Projects Delivered', icon: Rocket },
+  { number: '10+', label: 'Industries Served', icon: Users },
+  { number: '24/7', label: 'Time Zone Coverage', icon: Globe },
 ]
 
 const values = [
@@ -93,11 +93,11 @@ const team = [
 
 const milestones = [
   { year: '2015', title: 'Company Founded', description: 'Started with a vision to transform businesses through technology.' },
-  { year: '2017', title: 'First Enterprise Client', description: 'Signed our first Fortune 500 client, proving our enterprise capabilities.' },
+  { year: '2017', title: 'First Enterprise Client', description: 'Delivered our first large-scale enterprise engagement, proving our capabilities.' },
   { year: '2019', title: 'AI Division Launch', description: 'Expanded into AI and machine learning solutions.' },
-  { year: '2021', title: '100th Client', description: 'Reached the milestone of 100 satisfied enterprise clients.' },
-  { year: '2023', title: 'Global Expansion', description: 'Opened offices across 3 continents to serve clients worldwide.' },
-  { year: '2024', title: 'Pacific Wave Partnership', description: 'Joined forces with Pacific Wave Digital to expand our reach.' },
+  { year: '2021', title: 'US Incorporation', description: 'Incorporated in Delaware, USA — establishing our legal and corporate base.' },
+  { year: '2023', title: 'Indonesia Registration', description: 'Registered in Indonesia, anchoring our Asia-Pacific operations and delivery hub.' },
+  { year: '2024', title: 'Pacific Wave Partnership', description: 'Joined forces with Pacific Wave Digital to expand our global reach.' },
 ]
 
 export default function AboutPage() {
@@ -192,13 +192,29 @@ export default function AboutPage() {
                   deserves access to world-class technology solutions, regardless of size.
                 </p>
                 <p>
-                  What started as a small team of passionate engineers has grown into a global 
-                  technology partner serving enterprises across industries and continents.
+                  Today, Global Digital Prime Inc. is a dual-registered global company — 
+                  incorporated in Delaware, USA as our legal and corporate base, and registered 
+                  in Indonesia as our Asia-Pacific operations and delivery hub. This structure 
+                  gives our clients the confidence of US contracts and governance, paired with 
+                  the talent, agility, and cost-efficiency of Asia-Pacific engineering.
                 </p>
                 <p>
-                  Today, we continue to push the boundaries of what&apos;s possible, combining deep 
-                  technical expertise with a genuine commitment to our clients&apos; success.
+                  What started as a small team of passionate engineers has grown into a global 
+                  technology partner, and we continue to push the boundaries of what&apos;s possible — 
+                  combining deep technical expertise with a genuine commitment to our clients&apos; success.
                 </p>
+              </div>
+
+              {/* Dual registration badges */}
+              <div className="mt-8 flex flex-wrap gap-3">
+                <span className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-blue-50 border border-blue-200 text-sm font-semibold text-deep-blue">
+                  <span className="text-lg leading-none">🇺🇸</span>
+                  Registered in Delaware, USA
+                </span>
+                <span className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-orange-50 border border-orange-200 text-sm font-semibold text-deep-blue">
+                  <span className="text-lg leading-none">🇮🇩</span>
+                  Registered in Indonesia
+                </span>
               </div>
               
               <div className="mt-8 p-6 bg-soft-gray rounded-2xl">
