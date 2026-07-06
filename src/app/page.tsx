@@ -225,16 +225,16 @@ export default function HomePage() {
                   className="inline-flex items-center px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm text-white/90 text-sm mb-8"
                 >
                   <Sparkles className="w-4 h-4 mr-2 text-vibrant-orange" />
-                  A Global Software & AI Company \u2014 US + Asia
+                  Custom Software · AI Solutions · Cloud &amp; Mobile Development
                 </motion.div>
               </FadeInUp>
               
               <FadeInUp delay={0.1}>
                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] mb-8">
-                  Engineering
+                  We Build
                   <span className="block mt-3">
                     <span className="relative">
-                      <span className="gradient-text">Global Digital</span>
+                      <span className="gradient-text">Software &amp; AI</span>
                       <motion.span 
                         className="absolute -inset-1 bg-gradient-to-r from-vibrant-orange/20 to-purple-500/20 blur-2xl"
                         animate={{ opacity: [0.5, 0.8, 0.5] }}
@@ -242,15 +242,15 @@ export default function HomePage() {
                       />
                     </span>
                   </span>
-                  <span className="block mt-3 text-white">Excellence</span>
+                  <span className="block mt-3 text-white">That Grows Your Business</span>
                 </h1>
               </FadeInUp>
               
               <FadeInUp delay={0.2}>
                 <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-xl">
-                  Global Digital Prime is a software and AI engineering company registered in 
-                  Delaware, USA and Indonesia \u2014 combining American corporate trust with 
-                  Asia-Pacific delivery power to build technology that moves businesses forward.
+                  Custom software development, AI &amp; machine learning solutions, cloud 
+                  architecture, and mobile apps \u2014 engineered end-to-end by one accountable 
+                  global team, delivered 24/7 across US and Asia-Pacific time zones.
                 </p>
               </FadeInUp>
 

@@ -7,11 +7,11 @@ import ChatWidget from '@/components/ChatWidget'
 export const metadata: Metadata = {
   metadataBase: new URL('https://globaldigitalprime.com'),
   title: {
-    default: 'Global Digital Prime | Enterprise Digital Solutions Worldwide',
+    default: 'Global Digital Prime | Custom Software, AI & Cloud Development Company',
     template: '%s | Global Digital Prime',
   },
-  description: 'Enterprise-grade digital transformation, AI solutions, and software development serving the United States and Indonesia. Transforming businesses through innovative technology.',
-  keywords: ['enterprise software', 'digital transformation', 'AI solutions', 'cloud infrastructure', 'cybersecurity', 'data analytics', 'USA', 'Indonesia', 'software development'],
+  description: 'Custom software development, AI & machine learning solutions, cloud architecture, and mobile apps — engineered end-to-end. US-registered (Delaware) with Asia-Pacific delivery for 24/7 global coverage.',
+  keywords: ['custom software development', 'AI solutions company', 'machine learning development', 'cloud architecture services', 'mobile app development', 'digital transformation', 'enterprise software', 'AI development company USA', 'software development Indonesia', 'offshore software development'],
   authors: [{ name: 'Global Digital Prime' }],
   creator: 'Global Digital Prime',
   publisher: 'Global Digital Prime',
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://globaldigitalprime.com',
     siteName: 'Global Digital Prime',
-    title: 'Global Digital Prime | Enterprise Digital Solutions Worldwide',
-    description: 'Enterprise-grade digital transformation, AI solutions, and software development serving the United States and Indonesia.',
+    title: 'Global Digital Prime | Custom Software, AI & Cloud Development Company',
+    description: 'Custom software development, AI & machine learning solutions, cloud architecture, and mobile apps — engineered end-to-end with 24/7 US + Asia-Pacific delivery.',
     images: [
       {
         url: '/images/og-image.jpg',
@@ -33,8 +33,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Global Digital Prime | Enterprise Digital Solutions Worldwide',
-    description: 'Enterprise-grade digital transformation, AI solutions, and software development.',
+    title: 'Global Digital Prime | Custom Software, AI & Cloud Development Company',
+    description: 'Custom software development, AI & machine learning, cloud architecture, and mobile apps — 24/7 US + Asia-Pacific delivery.',
     images: ['/images/og-image.jpg'],
   },
   robots: {
