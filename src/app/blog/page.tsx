@@ -1,73 +1,19 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import { getPublishedPosts, formatPostDate } from '@/lib/blog'
+
+export const revalidate = 300
 
 export const metadata: Metadata = {
   title: 'Blog',
   description: 'Insights, trends, and thought leadership on enterprise technology, digital transformation, AI, cloud computing, and cybersecurity from Global Digital Prime.',
 }
 
-const featuredPost = {
-  title: 'The Future of Enterprise AI: 5 Trends Shaping 2025 and Beyond',
-  excerpt: 'Artificial intelligence is no longer a futuristic concept — it\'s a present-day business imperative. We explore the five key AI trends that enterprise leaders need to watch and prepare for.',
-  date: 'January 15, 2025',
-  readTime: '8 min read',
-  category: 'AI & Machine Learning',
-  image: '/images/ai-technology.jpg',
-}
+export default async function BlogPage() {
+  const posts = await getPublishedPosts()
+  const [featuredPost, ...restPosts] = posts
 
-const posts = [
-  {
-    title: 'Migrating to the Cloud: A Step-by-Step Enterprise Guide',
-    excerpt: 'Moving enterprise workloads to the cloud requires careful planning. Here\'s our proven framework for a seamless migration.',
-    date: 'January 8, 2025',
-    readTime: '6 min read',
-    category: 'Cloud',
-    image: '/images/data-center.jpg',
-  },
-  {
-    title: 'Zero Trust Architecture: Securing the Modern Enterprise',
-    excerpt: 'Traditional perimeter security is dead. Learn how Zero Trust Architecture provides comprehensive protection for distributed enterprises.',
-    date: 'December 28, 2024',
-    readTime: '7 min read',
-    category: 'Cybersecurity',
-    image: '/images/cybersecurity.jpg',
-  },
-  {
-    title: 'Digital Transformation in Indonesian Healthcare',
-    excerpt: 'How Indonesia\'s healthcare sector is leveraging technology to improve patient outcomes and operational efficiency.',
-    date: 'December 20, 2024',
-    readTime: '5 min read',
-    category: 'Healthcare',
-    image: '/images/healthcare.jpg',
-  },
-  {
-    title: 'Building Scalable E-Commerce Platforms for Southeast Asia',
-    excerpt: 'Lessons learned from building marketplace platforms that handle millions of transactions in the world\'s fastest-growing digital economy.',
-    date: 'December 12, 2024',
-    readTime: '6 min read',
-    category: 'E-Commerce',
-    image: '/images/ecommerce.jpg',
-  },
-  {
-    title: 'The ROI of Digital Transformation: Measuring What Matters',
-    excerpt: 'Quantifying the returns on digital transformation investments — metrics, frameworks, and real-world case studies.',
-    date: 'December 5, 2024',
-    readTime: '7 min read',
-    category: 'Strategy',
-    image: '/images/digital-transformation.jpg',
-  },
-  {
-    title: 'Data Analytics for Manufacturing: From Reactive to Predictive',
-    excerpt: 'How manufacturers are using data analytics and IoT to predict equipment failures, optimize production, and reduce waste.',
-    date: 'November 28, 2024',
-    readTime: '5 min read',
-    category: 'Manufacturing',
-    image: '/images/manufacturing.jpg',
-  },
-]
-
-export default function BlogPage() {
   return (
     <>
       {/* Hero */}
@@ -86,90 +32,131 @@ export default function BlogPage() {
         </div>
       </section>
 
-      {/* Featured Post */}
-      <section className="py-20 bg-white">
-        <div className="container-custom">
-          <div className="bg-soft-gray rounded-3xl overflow-hidden card-hover">
-            <div className="grid grid-cols-1 lg:grid-cols-2">
-              <div className="relative h-64 lg:h-auto">
-                <Image
-                  src={featuredPost.image}
-                  alt={featuredPost.title}
-                  fill
-                  className="object-cover"
-                />
+      {posts.length === 0 ? (
+        /* Empty state */
+        <section className="py-24 bg-white">
+          <div className="container-custom text-center">
+            <div className="max-w-xl mx-auto">
+              <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-vibrant-orange/10 flex items-center justify-center">
+                <svg className="w-8 h-8 text-vibrant-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                </svg>
               </div>
-              <div className="p-8 lg:p-12 flex flex-col justify-center">
-                <div className="flex items-center space-x-3 mb-4">
-                  <span className="px-3 py-1 bg-vibrant-orange/10 text-vibrant-orange text-xs font-semibold rounded-full">
-                    Featured
-                  </span>
-                  <span className="px-3 py-1 bg-light-blue text-deep-blue text-xs font-medium rounded-full">
-                    {featuredPost.category}
-                  </span>
-                </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-deep-blue mb-4">
-                  {featuredPost.title}
-                </h2>
-                <p className="text-gray-600 leading-relaxed mb-6">
-                  {featuredPost.excerpt}
-                </p>
-                <div className="flex items-center space-x-4 text-sm text-gray-500 mb-6">
-                  <span>{featuredPost.date}</span>
-                  <span>•</span>
-                  <span>{featuredPost.readTime}</span>
-                </div>
-                <Link href="/blog#" className="btn-primary inline-block w-fit">
-                  Read Article
-                </Link>
-              </div>
+              <h2 className="text-2xl md:text-3xl font-bold text-deep-blue mb-4">
+                New Articles Coming Soon
+              </h2>
+              <p className="text-gray-600 leading-relaxed">
+                We&apos;re working on fresh insights covering enterprise technology, AI, cloud, and digital transformation. Check back shortly.
+              </p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : (
+        <>
+          {/* Featured Post */}
+          <section className="py-20 bg-white">
+            <div className="container-custom">
+              <div className="bg-soft-gray rounded-3xl overflow-hidden card-hover">
+                <div className="grid grid-cols-1 lg:grid-cols-2">
+                  <div className="relative h-64 lg:h-auto">
+                    {featuredPost.image_url && (
+                      <Image
+                        src={featuredPost.image_url}
+                        alt={featuredPost.image_alt || featuredPost.title}
+                        fill
+                        className="object-cover"
+                      />
+                    )}
+                  </div>
+                  <div className="p-8 lg:p-12 flex flex-col justify-center">
+                    <div className="flex items-center space-x-3 mb-4">
+                      <span className="px-3 py-1 bg-vibrant-orange/10 text-vibrant-orange text-xs font-semibold rounded-full">
+                        Featured
+                      </span>
+                      {featuredPost.category && (
+                        <span className="px-3 py-1 bg-light-blue text-deep-blue text-xs font-medium rounded-full">
+                          {featuredPost.category}
+                        </span>
+                      )}
+                    </div>
+                    <h2 className="text-2xl md:text-3xl font-bold text-deep-blue mb-4">
+                      {featuredPost.title}
+                    </h2>
+                    <p className="text-gray-600 leading-relaxed mb-6">
+                      {featuredPost.excerpt}
+                    </p>
+                    <div className="flex items-center space-x-4 text-sm text-gray-500 mb-6">
+                      <span>{formatPostDate(featuredPost.published_at)}</span>
+                      {featuredPost.read_time && (
+                        <>
+                          <span>•</span>
+                          <span>{featuredPost.read_time}</span>
+                        </>
+                      )}
+                    </div>
+                    <Link href={`/blog/${featuredPost.slug}`} className="btn-primary inline-block w-fit">
+                      Read Article
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
 
-      {/* Posts Grid */}
-      <section className="py-20 bg-soft-gray">
-        <div className="container-custom">
-          <h2 className="section-title mb-12">Latest Articles</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts.map((post) => (
-              <Link
-                key={post.title}
-                href="/blog#"
-                className="bg-white rounded-2xl overflow-hidden card-hover group"
-              >
-                <div className="relative h-48">
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-deep-blue text-xs font-medium rounded-full">
-                      {post.category}
-                    </span>
-                  </div>
+          {/* Posts Grid */}
+          {restPosts.length > 0 && (
+            <section className="py-20 bg-soft-gray">
+              <div className="container-custom">
+                <h2 className="section-title mb-12">Latest Articles</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {restPosts.map((post) => (
+                    <Link
+                      key={post.id}
+                      href={`/blog/${post.slug}`}
+                      className="bg-white rounded-2xl overflow-hidden card-hover group"
+                    >
+                      <div className="relative h-48 bg-light-blue">
+                        {post.image_url && (
+                          <Image
+                            src={post.image_url}
+                            alt={post.image_alt || post.title}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        )}
+                        {post.category && (
+                          <div className="absolute top-4 left-4">
+                            <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-deep-blue text-xs font-medium rounded-full">
+                              {post.category}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-6">
+                        <h3 className="text-lg font-bold text-deep-blue mb-2 group-hover:text-vibrant-orange transition-colors line-clamp-2">
+                          {post.title}
+                        </h3>
+                        <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">
+                          {post.excerpt}
+                        </p>
+                        <div className="flex items-center space-x-3 text-xs text-gray-500">
+                          <span>{formatPostDate(post.published_at)}</span>
+                          {post.read_time && (
+                            <>
+                              <span>•</span>
+                              <span>{post.read_time}</span>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
                 </div>
-                <div className="p-6">
-                  <h3 className="text-lg font-bold text-deep-blue mb-2 group-hover:text-vibrant-orange transition-colors line-clamp-2">
-                    {post.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">
-                    {post.excerpt}
-                  </p>
-                  <div className="flex items-center space-x-3 text-xs text-gray-500">
-                    <span>{post.date}</span>
-                    <span>•</span>
-                    <span>{post.readTime}</span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+              </div>
+            </section>
+          )}
+        </>
+      )}
 
       {/* Newsletter CTA */}
       <section className="py-20 bg-deep-blue text-white">
