@@ -4,7 +4,9 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getSupabase, GDP_SITE_ID } from '@/lib/supabase';
+import { TurnstileWidget } from '@/components/security/TurnstileWidget';
+import { HoneypotField, useFormBotFields } from '@/components/security/FormBotFields';
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? '';
 import { 
   ArrowLeft, 
   ArrowRight, 
@@ -137,6 +139,9 @@ export default function GetStartedPage() {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const bot = useFormBotFields();
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [captchaAttempt, setCaptchaAttempt] = useState(0);
   const [error, setError] = useState('');
 
   const totalSteps = 6;
@@ -218,90 +223,43 @@ export default function GetStartedPage() {
   };
 
   const handleSubmit = async () => {
+    if (isSubmitting) return;
+    if (TURNSTILE_SITE_KEY && !turnstileToken) { setError('Please complete the human verification check below.'); return; }
     setIsSubmitting(true);
     setError('');
 
     try {
       const summary = generateProjectSummary(formData);
-
-      // Save to Supabase with GDP site_id
-      try {
-        const supabase = getSupabase();
-        const { error: dbError } = await supabase
-          .from('project_submissions')
-          .insert({
-          site_id: GDP_SITE_ID,
-          project_type: formData.projectType,
-          project_description: formData.projectDescription,
-          website_details: {
-            pages: formData.numberOfPages,
-            ecommerce: formData.needsEcommerce,
-            cms: formData.needsCMS,
-            blog: formData.needsBlog,
-            design: formData.designStyle,
-            existingSite: formData.hasExistingSite,
-            existingUrl: formData.existingSiteUrl,
-          },
-          ai_automation: {
-            chatbot: formData.needsChatbot,
-            aiAssistant: formData.needsAIAssistant,
-            processAutomation: formData.needsProcessAutomation,
-            crm: formData.needsCRM,
-            description: formData.aiFeatureDescription,
-          },
-          social_media: {
-            platforms: formData.socialPlatforms,
-            contentCreation: formData.needsContentCreation,
-            paidAds: formData.needsPaidAds,
-            followers: formData.currentFollowers,
-          },
-          budget_range: formData.budgetRange,
+      // Server-side, bot-guarded submission → GDP inbox + email (2026-09-30).
+      // Replaces the browser-side Supabase insert and the log-only notify route.
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          kind: 'project',
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          projectType: formData.projectType,
+          budget: formData.budgetRange,
           timeline: formData.timeline,
-          urgency: formData.urgency,
-          contact_name: formData.name,
-          contact_email: formData.email,
-          contact_phone: formData.phone,
-          company_name: formData.company,
-          preferred_contact: formData.preferredContact,
-          best_time_to_call: formData.bestTimeToCall,
-          additional_notes: formData.additionalNotes,
-          ai_summary: summary,
-          status: 'new',
-        });
-
-        if (dbError) {
-          console.error('Database error:', dbError);
-        }
-      } catch (supabaseErr) {
-        console.error('Supabase not configured or error:', supabaseErr);
-        // Continue anyway - form submission should still work for notification
-      }
-
-      // Send notification
-      try {
-        await fetch('/api/notify-submission', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contact_name: formData.name,
-            contact_email: formData.email,
-            contact_phone: formData.phone,
-            company_name: formData.company,
-            project_type: formData.projectType,
-            budget_range: formData.budgetRange,
-            timeline: formData.timeline,
-            project_description: formData.projectDescription,
-          }),
-        });
-      } catch (notifyErr) {
-        console.error('Notification error:', notifyErr);
-      }
+          message: [formData.projectDescription, '', summary].filter(Boolean).join('\n'),
+          website: bot.honeypot,
+          form_started_at: bot.formStartedAt ?? undefined,
+          turnstile_token: turnstileToken ?? undefined,
+        }),
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.success) throw new Error(result.error || 'Unable to send your enquiry.');
 
       setIsSubmitted(true);
     } catch (err) {
       console.error('Submit error:', err);
       setError('Something went wrong. Please try again or contact us directly.');
     } finally {
+      setTurnstileToken(null);
+      setCaptchaAttempt((n) => n + 1);
       setIsSubmitting(false);
     }
   };
@@ -881,6 +839,12 @@ export default function GetStartedPage() {
           </AnimatePresence>
 
           {/* Navigation Buttons */}
+          <HoneypotField value={bot.honeypot} onChange={bot.setHoneypot} />
+          {step === totalSteps && TURNSTILE_SITE_KEY && (
+            <div className="mt-6">
+              <TurnstileWidget key={captchaAttempt} siteKey={TURNSTILE_SITE_KEY} onVerify={setTurnstileToken} theme="light" />
+            </div>
+          )}
           <div className="flex justify-between mt-8 pt-6 border-t border-gray-100">
             <button
               onClick={() => setStep(s => s - 1)}
