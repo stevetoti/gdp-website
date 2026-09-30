@@ -3,7 +3,9 @@
 ## 2026-09-30 — [Claude Code] Website forms
 
 - [x] Contact + wizard deliver to the GDP inbox/email through a bot-guarded server route.
-- [ ] **Stephen:** add `globaldigitalprime.com` + `www.globaldigitalprime.com` to the shared Turnstile widget; then deploy + one real enquiry to confirm the inbox email.
+- [x] Hostnames added; production `gdp-website-psfuqzu4y` live; probes pass. — [Claude Code] 2026-10-01
+- [ ] **Codex:** commit the uncommitted chat-inbox work in this tree (admin inbox, `src/app/api/chat`, ChatWidget, permissions, config/, docs/, scripts/, supabase/config.toml); exclude `.DS_Store`, the logo PNGs and `supabase/.temp`. Production already runs it; an uncommitted release source is how the PWD LMS was lost on 21 Sep.
+- [ ] **Stephen:** send one real enquiry from https://www.globaldigitalprime.com/contact and confirm it appears in the GDP inbox and the notification email arrives.
 - [ ] After Rapid Entrepreneurs is migrated off browser inserts, drop the anon `Enable insert for everyone` policy on `project_submissions` (shared project).
 
 ## 2026-09-19 — [Codex] WhatsApp integration

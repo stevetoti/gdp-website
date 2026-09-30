@@ -18,8 +18,13 @@ are appended to the message body. Both forms post there (contact → kind contac
 kind project with the generated summary) and render the Turnstile widget; the wizard shows
 it on the final step. Templates in `src/lib/security` + `src/components/security`.
 Turnstile keys (shared PWD widget) added to Vercel production by stdin pipe.
-Local build/typecheck clean. Deploy + live probes follow once `globaldigitalprime.com` and
-`www.globaldigitalprime.com` are on the shared Turnstile widget.
+Local build/typecheck clean; committed `940fb90`, pushed to main (project is NOT git-connected;
+deploys are CLI uploads). Stephen added the hostnames; production `gdp-website-psfuqzu4y`
+(2026-09-30 23:55 +1100, CLI upload from this working tree, includes `940fb90` plus the
+still-uncommitted chat-inbox files) is live. Live probes on www.globaldigitalprime.com:
+`/contact` renders the widget (challenge responses 200), honeypot → silent 200, digit-only
+message → 400, no CAPTCHA token → 400. **Codex: the chat-inbox work in this tree is still
+uncommitted and is what production runs — commit it** (see todo).
 
 ## 2026-08-30 — [Claude Code] SEO front door: GA4, Search Console verification, dynamic sitemap
 
