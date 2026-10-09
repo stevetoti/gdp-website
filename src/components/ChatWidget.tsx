@@ -163,7 +163,7 @@ export default function ChatWidget() {
       )}
       <div className="flex justify-end gap-2">
         <a
-          href="tel:+16068067748"
+          href="tel:+19599491242"
           aria-label="Call Global Digital Prime"
           className="rounded-full bg-slate-900 p-4 text-white shadow-lg"
         >

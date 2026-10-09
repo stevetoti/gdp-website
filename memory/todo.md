@@ -35,3 +35,12 @@ Earlier discovery items are superseded by the deployed implementation documented
 ## 2026-09-20 — [Codex] Message email notifications
 
 - [x] Configure all new customer-message emails to notifications@pacificwavedigital.com on both channels, including human mode; deploy and verify provider acceptance and deduplication. — [Codex] 2026-09-20
+
+## 2026-10-10 — [Claude Code] Website verification upgrade (branch `website-verification-upgrade`)
+
+- [ ] **Stephen:** review the branch preview, then approve merge to `main` (push to main auto-deploys).
+- [ ] **Stephen — CONFIRM items** (each is one flag in `src/lib/site.ts`): founder LinkedIn (prefilled linkedin.com/in/stevetoti), info@ inbox works, US address (prefilled Dover registered-agent address), Delaware file number, company LinkedIn/X/GitHub URLs, PT legal name, Bali address, +62 phone/WhatsApp, indonesia@ email, whether EduSmartAssist/DigiAssistAI are live, and that VisaReadyPro calls the Claude API directly (the GDP site chat runs Claude via ElevenLabs, which will not show as Claude Console usage).
+- [ ] **Stephen:** Terms say New York governing law; decide if that should be Delaware.
+- [ ] **Stephen:** add DataForSEO login/password to `.env.local` to replace "not measured" in `docs/SEO-KEYWORDS.md`.
+- [ ] After deploy: Search Console Domain property, submit sitemap, request indexing of /, /products/visareadypro, /about, /id; Bing import; Rich Results Test on each template; PageSpeed mobile check.
+- [ ] Link globaldigitalprime.com from visareadypro.com footer (brand SERP currently shows nothing for the domain).

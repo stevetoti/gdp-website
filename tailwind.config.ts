@@ -14,6 +14,7 @@ const config: Config = {
         'light-blue': '#E8EDF5',
         'dark-navy': '#1A2D52',
         'soft-gray': '#F5F7FA',
+        'id-red': '#C8102E',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

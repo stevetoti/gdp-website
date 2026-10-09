@@ -1,5 +1,18 @@
 # Changelog — Global Digital Prime Website
 
+## 2026-10-10 — [Claude Code] Claude Startups verification upgrade + cinematic scroll hero (branch, not deployed)
+
+Applied Stephen's 10 Oct 2026 website brief on branch `website-verification-upgrade`:
+- Committed Codex's already-live chat work first as `88a6f22` so the release maps to commits.
+- Split the app into three root layouts: `(site)` en, `id/` (lang="id", own header/footer/accent), `(admin)` (noindex, no public chrome). Catch-all routes give real per-language 404s.
+- All company facts now live in `src/lib/site.ts`; brief CONFIRM items are `confirmed: false` and never render.
+- Home: Higgsfield scroll-scrubbed hero (4 gpt_image_2_5 keyframes + 3 wan3_0 first/last-frame clips → 150-frame WebP sequences in `public/hero/{d,m}`), products band, Built on Claude band, true facts band, before/after slider, 3D service cards. Removed fake stats, dashboard mockup, Global Network block, offshore positioning.
+- New `/products`, `/products/visareadypro` (real public screenshots + a real assistant answer), rewritten About (removed fake 2015/2021 timeline), Contact, Services. `/careers`, `/solutions`, `/industries` → 301 (fake jobs/claims).
+- Footer: legal line, +1 959 949 1242, no Documentation/API/PWD network/newsletter (newsletter never submitted). Chat call button → business phone.
+- SEO: www canonical + hreflang en/id/x-default on 4 pairs, per-page titles/descriptions/OG per brief (`src/lib/seo.ts`), Organization/WebSite/SoftwareApplication/BreadcrumbList/ItemList JSON-LD, sitemap with hreflang alternates, robots host. Keyword map in `docs/SEO-KEYWORDS.md` (qualitative; DataForSEO creds blank).
+- Fixed pre-existing broken blog cover images (fal.media not in next/image remotePatterns). Removed "Trusted by 2000+ businesses" from /get-started; legal pages name Global Digital Prime, Inc.
+- Verified locally on production build: typecheck, lint (3 pre-existing admin warnings), build OK; all nav/footer links 200; 301s/404s correct; hreflang/canonical/lang/og:locale correct; no mobile horizontal scroll.
+
 ## 2026-09-30 — [Claude Code] Contact form made real + bot defence (form-bot-defence skill)
 
 Findings: the contact page only *simulated* a send (1.5 s timer, nothing delivered) and

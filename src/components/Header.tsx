@@ -4,24 +4,35 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ChevronDown, ArrowRight, Code2, Brain, Cloud, Smartphone, Rocket, Cog } from 'lucide-react'
+import { Menu, X, ChevronDown, ArrowRight, Code2, Brain, Cloud, Smartphone, Rocket, Cog, MessageSquare } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 
-const navigation = [
+interface NavItem {
+  name: string
+  href: string
+  children?: { name: string; href: string; icon: LucideIcon }[]
+}
+
+const navigation: NavItem[] = [
   { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { 
-    name: 'Services', 
+  {
+    name: 'Products',
+    href: '/products',
+    children: [{ name: 'VisaReadyPro', href: '/products/visareadypro', icon: MessageSquare }],
+  },
+  {
+    name: 'Services',
     href: '/services',
     children: [
+      { name: 'AI Assistants & Machine Learning', href: '/services#ai-ml', icon: Brain },
       { name: 'Custom Software Development', href: '/services#custom-software', icon: Code2 },
-      { name: 'AI & Machine Learning', href: '/services#ai-ml', icon: Brain },
       { name: 'Cloud Architecture', href: '/services#cloud', icon: Cloud },
       { name: 'Mobile App Development', href: '/services#mobile', icon: Smartphone },
       { name: 'Digital Transformation', href: '/services#digital-transformation', icon: Rocket },
       { name: 'Enterprise Integration', href: '/services#integration', icon: Cog },
-    ]
+    ],
   },
-  { name: 'Solutions', href: '/solutions' },
+  { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
 ]
 
@@ -127,11 +138,11 @@ export default function Header() {
             {/* CTA Buttons */}
             <div className="hidden lg:flex items-center gap-4">
               <Link 
-                href="/get-started"
+                href="/contact"
                 className="group relative overflow-hidden bg-vibrant-orange text-white px-6 py-2.5 rounded-lg font-semibold transition-all hover:shadow-lg hover:shadow-vibrant-orange/30"
               >
                 <span className="relative z-10 flex items-center">
-                  Get Started
+                  Work with us
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Link>
@@ -141,6 +152,7 @@ export default function Header() {
             <button
               type="button"
               className="lg:hidden p-2 rounded-lg"
+              aria-label="Open menu"
               onClick={() => setMobileMenuOpen(true)}
             >
               <Menu className={`w-6 h-6 ${scrolled ? 'text-deep-blue' : 'text-white'}`} />
@@ -179,6 +191,7 @@ export default function Header() {
                   <span className="font-bold text-deep-blue">GDP</span>
                 </div>
                 <button
+                  aria-label="Close menu"
                   onClick={() => setMobileMenuOpen(false)}
                   className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
                 >
@@ -216,18 +229,18 @@ export default function Header() {
                 
                 <div className="mt-8 pt-6 border-t border-gray-100 space-y-3">
                   <Link 
-                    href="/get-started"
+                    href="/products"
                     className="btn-primary w-full text-center block"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    Get Started
+                    See our products
                   </Link>
                   <Link 
                     href="/contact"
                     className="btn-outline-dark w-full text-center block"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    Contact Us
+                    Work with us
                   </Link>
                 </div>
               </div>

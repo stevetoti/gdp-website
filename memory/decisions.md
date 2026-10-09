@@ -1,5 +1,13 @@
 # Decisions
 
+## 2026-10-10 — [Claude Code] Verification-first site structure
+
+- Context: Claude Startups application declined 9 Oct 2026 for verification; brief requires only checkable facts.
+- Decision: one facts module (`src/lib/site.ts`) with `confirmed` flags; unconfirmed items (US address, info@ inbox, LinkedIn, socials, PT name, Bali contacts) are prefilled but hidden. Flip a flag to publish.
+- Decision: multiple root layouts (`(site)`, `id`, `(admin)`) so `/id` gets `<html lang="id">` and its own chrome without middleware or dynamic rendering.
+- Decision: scroll hero uses canvas + WebP frame sequence (not video seeking) for reliable iOS scrubbing; coarse-to-fine frame loading; first frame is the priority LCP image; reduced-motion users get a static hero. The AI-generated building is never captioned as GDP's office.
+- Decision: removed pages are redirected (301) rather than deleted from git.
+
 ## 2026-09-19 — [Codex] One brain across channels
 
 - Stephen requires WhatsApp to share the website chat brain; do not create an independent knowledge base or prompt.
