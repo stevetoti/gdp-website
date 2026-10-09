@@ -1,5 +1,13 @@
 # Changelog — Global Digital Prime Website
 
+## 2026-10-10 — [Claude Code] Verification upgrade deployed to production
+
+- Stephen approved publishing and Delaware governing law (Terms updated, `7158282`).
+- Preview https://gdp-website-jul0jkmn1-pacificwaveprojects.vercel.app smoke-tested, then `main` fast-forwarded `f8fe18e..7158282` and pushed; Vercel production deployment succeeded (git integration). No migrations or edge functions changed.
+- Live checks on www.globaldigitalprime.com: 14 pages 200, /careers /solutions /industries 301, unknown URLs 404 in en and id, sitemap/robots 200, hreflang + title correct, placeholder phone/fake stats/PWD network line gone, no console errors on /, /blog, /products/visareadypro, /id, /about; scroll hero renders.
+- `.env.local` VERCEL_TOKEN is rejected by the Vercel API (invalidToken); deployment status was read from GitHub instead.
+- Stephen will review the AI-generated building shot in the hero live.
+
 ## 2026-10-10 — [Claude Code] Claude Startups verification upgrade + cinematic scroll hero (branch, not deployed)
 
 Applied Stephen's 10 Oct 2026 website brief on branch `website-verification-upgrade`:
