@@ -23,6 +23,7 @@ const adminNav: NavItem[] = [
   { href: '/admin/seo-hub', label: 'SEO Hub', icon: '🎯', page: 'seo' },
   { href: '/admin/analytics', label: 'Analytics', icon: '📈', page: 'seo' },
   { href: '/admin/media', label: 'Media Library', icon: '🖼️', page: 'media' },
+  { href: '/admin/inbox', label: 'Customer Inbox', icon: '💬', page: 'transcripts' },
   { href: '/admin/transcripts', label: 'Transcripts', icon: '💬', page: 'transcripts' },
   { href: '/admin/users', label: 'User Management', icon: '👥', page: 'users' },
   { href: '/admin/help', label: 'Help Center', icon: '❓', page: 'help' },

@@ -1,0 +1,11 @@
+project_id = "gdp-website"
+[functions.whatsapp-inbound]
+verify_jwt = false
+[functions.whatsapp-status]
+verify_jwt = false
+[functions.whatsapp-send]
+verify_jwt = true
+[functions.gdp-chat-worker]
+verify_jwt = false
+[functions.gdp-web-chat]
+verify_jwt = false

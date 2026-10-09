@@ -1,122 +1,183 @@
-'use client'
-
-import { useState, useEffect, useRef } from 'react'
-import Link from 'next/link'
-
+"use client";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { MessageCircle, X, Send, Phone, ArrowUpRight } from "lucide-react";
+type Message = { id: string; body: string; author: string; status: string };
 export default function ChatWidget() {
-  const [showTooltips, setShowTooltips] = useState(false)
-  const [isElevenLabsOpen, setIsElevenLabsOpen] = useState(false)
-  const elevenLabsRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    // Load ElevenLabs convai widget script
-    const script = document.createElement('script')
-    script.src = 'https://elevenlabs.io/convai-widget/index.js'
-    script.async = true
-    document.body.appendChild(script)
-
-    return () => {
-      const existingScript = document.querySelector('script[src="https://elevenlabs.io/convai-widget/index.js"]')
-      if (existingScript) {
-        existingScript.remove()
-      }
+  const [open, setOpen] = useState(false),
+    [messages, setMessages] = useState<Message[]>([]),
+    [text, setText] = useState(""),
+    [busy, setBusy] = useState(false),
+    [error, setError] = useState(""),
+    [mode, setMode] = useState("ai");
+  const end = useRef<HTMLDivElement>(null);
+  const requestId = useRef<string | null>(null);
+  const refresh = useCallback(async () => {
+    try {
+      const r = await fetch("/api/chat", { cache: "no-store" });
+      const d = await r.json();
+      if (!r.ok) throw new Error(d.error);
+      setMessages(d.messages);
+      setMode(d.mode);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Chat unavailable");
     }
-  }, [])
-
-  const toggleElevenLabs = () => {
-    setIsElevenLabsOpen(!isElevenLabsOpen)
-    
-    // Try to programmatically open/close the ElevenLabs widget
-    const widget = document.querySelector('elevenlabs-convai')
-    if (widget) {
-      // ElevenLabs widget typically has a shadow DOM, try to trigger it
-      const shadowRoot = (widget as HTMLElement).shadowRoot
-      if (shadowRoot) {
-        const button = shadowRoot.querySelector('button')
-        if (button) {
-          button.click()
-        }
-      }
+  }, []);
+  useEffect(() => {
+    if (!open) return;
+    void refresh();
+    const timer = setInterval(() => {
+      if (document.visibilityState === "visible") void refresh();
+    }, 2500);
+    return () => clearInterval(timer);
+  }, [open, refresh]);
+  useEffect(() => {
+    end.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages.length]);
+  async function send() {
+    if (busy || !text.trim()) return;
+    setBusy(true);
+    setError("");
+    requestId.current ||= crypto.randomUUID();
+    try {
+      const r = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text, request_id: requestId.current }),
+      });
+      const d = await r.json();
+      if (!r.ok) throw new Error(d.error);
+      setText("");
+      requestId.current = null;
+      await refresh();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Unable to send");
+    } finally {
+      setBusy(false);
     }
   }
-
+  const waiting = mode === "ai" && messages.at(-1)?.author === "customer";
   return (
-    <>
-      {/* Floating Action Buttons */}
-      <div 
-        className="fixed bottom-6 right-6 z-[60] flex flex-col-reverse gap-3 items-end"
-        onMouseEnter={() => setShowTooltips(true)}
-        onMouseLeave={() => setShowTooltips(false)}
-      >
-        {/* Chat Button - Orange - Triggers ElevenLabs */}
-        <div className="relative flex items-center">
-          {showTooltips && (
-            <span className="absolute right-16 whitespace-nowrap bg-gray-900 text-white text-sm px-3 py-2 rounded-lg shadow-lg animate-fade-in">
-              Chat with us
-              <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 border-8 border-transparent border-l-gray-900"></span>
-            </span>
-          )}
-          <button
-            onClick={toggleElevenLabs}
-            className={`w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-xl ${
-              isElevenLabsOpen 
-                ? 'bg-gray-600' 
-                : 'bg-vibrant-orange hover:bg-orange-500'
-            }`}
-            aria-label={isElevenLabsOpen ? "Close chat" : "Open chat"}
+    <div className="fixed bottom-5 right-4 z-[70] sm:right-6">
+      {open && (
+        <section
+          aria-label="Global Digital Prime chat"
+          className="mb-3 flex h-[min(620px,80dvh)] w-[min(390px,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl"
+        >
+          <header className="flex items-center justify-between bg-slate-950 px-5 py-4 text-white">
+            <div>
+              <p className="font-semibold">Global Digital Prime</p>
+              <p className="mt-1 text-xs text-slate-300">
+                {mode === "human"
+                  ? "Team conversation"
+                  : "AI assistant · here to help"}
+              </p>
+            </div>
+            <button
+              aria-label="Close chat"
+              onClick={() => setOpen(false)}
+              className="rounded-lg p-2 hover:bg-white/10"
+            >
+              <X size={20} />
+            </button>
+          </header>
+          <div
+            className="flex-1 space-y-3 overflow-y-auto bg-slate-50 p-4"
+            aria-live="polite"
           >
-            {isElevenLabsOpen ? (
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-              </svg>
+            {!messages.length && (
+              <div className="rounded-xl border border-slate-200 bg-white p-4 text-sm leading-relaxed text-slate-700">
+                Welcome to Global Digital Prime. Tell us what you’re looking to
+                build or improve, and we’ll help you explore the next step.
+              </div>
             )}
-          </button>
-        </div>
-
-        {/* Phone Button - Blue */}
-        <div className="relative flex items-center">
-          {showTooltips && (
-            <span className="absolute right-16 whitespace-nowrap bg-gray-900 text-white text-sm px-3 py-2 rounded-lg shadow-lg animate-fade-in">
-              Call us now
-              <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 border-8 border-transparent border-l-gray-900"></span>
-            </span>
-          )}
-          <Link
-            href="tel:+16787000000"
-            className="w-14 h-14 bg-deep-blue hover:bg-blue-700 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-xl"
-            aria-label="Call us"
-          >
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-            </svg>
-          </Link>
-        </div>
+            {messages.map((m) => (
+              <div
+                key={m.id}
+                className={`max-w-[90%] whitespace-pre-wrap rounded-2xl px-4 py-3 text-sm leading-relaxed ${m.author === "customer" ? "ml-auto bg-slate-900 text-white" : "border border-slate-200 bg-white text-slate-800"}`}
+              >
+                <span className="mb-1 block text-[10px] uppercase tracking-wider opacity-60">
+                  {m.author === "customer"
+                    ? "You"
+                    : m.author === "human"
+                      ? "GDP team"
+                      : m.author === "system"
+                        ? "Conversation update"
+                        : "GDP assistant"}
+                </span>
+                {m.body}
+              </div>
+            ))}
+            {waiting && (
+              <p className="text-xs text-slate-500">
+                The assistant is preparing a reply…
+              </p>
+            )}
+            <div ref={end} />
+          </div>
+          <div className="border-t border-slate-200 p-3">
+            {error && (
+              <p role="alert" className="mb-2 text-xs text-red-700">
+                {error}
+              </p>
+            )}
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                void send();
+              }}
+              className="flex items-end gap-2"
+            >
+              <textarea
+                aria-label="Your message"
+                rows={2}
+                maxLength={4000}
+                value={text}
+                onChange={(e) => {
+                  setText(e.target.value);
+                  requestId.current = null;
+                }}
+                placeholder="How can we help?"
+                className="min-w-0 flex-1 resize-none rounded-xl border border-slate-200 p-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-400"
+              />
+              <button
+                aria-label="Send message"
+                disabled={busy || !text.trim()}
+                className="rounded-xl bg-orange-500 p-3 text-white disabled:opacity-40"
+              >
+                <Send size={20} />
+              </button>
+            </form>
+            <div className="mt-2 flex justify-between text-[11px] text-slate-500">
+              <span>Type “agent” to request our team.</span>
+              <a
+                href="https://wa.me/16068067748"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-1 text-emerald-700"
+              >
+                WhatsApp <ArrowUpRight size={12} />
+              </a>
+            </div>
+          </div>
+        </section>
+      )}
+      <div className="flex justify-end gap-2">
+        <a
+          href="tel:+16068067748"
+          aria-label="Call Global Digital Prime"
+          className="rounded-full bg-slate-900 p-4 text-white shadow-lg"
+        >
+          <Phone size={22} />
+        </a>
+        <button
+          aria-label={open ? "Close chat" : "Open chat"}
+          onClick={() => setOpen(!open)}
+          className="flex items-center gap-2 rounded-full bg-orange-500 px-5 py-4 font-medium text-white shadow-lg hover:bg-orange-600"
+        >
+          {open ? <X size={22} /> : <MessageCircle size={22} />}
+          <span>{open ? "Close" : "Chat with us"}</span>
+        </button>
       </div>
-
-      {/* Hidden ElevenLabs Widget - positioned behind our buttons */}
-      <div 
-        ref={elevenLabsRef}
-        className={`fixed bottom-24 right-6 z-[55] transition-all duration-300 ${
-          isElevenLabsOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-        }`}
-      >
-        {/* @ts-expect-error - Custom element from ElevenLabs */}
-        <elevenlabs-convai agent-id="agent_4501kgqzyj13fjav2d5yw54fs4m5" />
-      </div>
-
-      <style jsx>{`
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateX(10px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-        .animate-fade-in {
-          animation: fade-in 0.2s ease-out;
-        }
-      `}</style>
-    </>
-  )
+    </div>
+  );
 }

@@ -10,3 +10,8 @@ node_modules/
 *.pem
 *.key
 *.tsbuildinfo
+
+# Private local configuration backups
+.local/
+.DS_Store
+supabase/.temp/

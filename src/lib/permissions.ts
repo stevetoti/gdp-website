@@ -103,6 +103,7 @@ export const pathToPage: Record<string, AdminPage> = {
   '/admin/users': 'users',
   '/admin/media': 'media',
   '/admin/transcripts': 'transcripts',
+  '/admin/inbox': 'transcripts',
   '/admin/help': 'help',
   '/admin/help/manage': 'help',
 };
