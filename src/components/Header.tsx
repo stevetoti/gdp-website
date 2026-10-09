@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ChevronDown, ArrowRight, Code2, Brain, Cloud, Smartphone, Rocket, Cog, MessageSquare } from 'lucide-react'
+import { Menu, X, ChevronDown, ArrowRight, Code2, Brain, Cloud, Smartphone, Rocket, Cog, MessageSquare, LayoutGrid, Briefcase, GraduationCap, Languages, Send } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
 interface NavItem {
@@ -18,18 +18,26 @@ const navigation: NavItem[] = [
   {
     name: 'Products',
     href: '/products',
-    children: [{ name: 'VisaReadyPro', href: '/products/visareadypro', icon: MessageSquare }],
+    children: [
+      { name: 'All products', href: '/products', icon: LayoutGrid },
+      { name: 'VisaReadyPro', href: '/products/visareadypro', icon: MessageSquare },
+      { name: 'DigiAssist AI', href: '/products#digiassistai', icon: Briefcase },
+      { name: 'EduSmartAssist', href: '/products#edusmartassist', icon: GraduationCap },
+      { name: 'Local Language Lab', href: '/products#locallanguagelab', icon: Languages },
+      { name: 'VanuWay', href: '/products#vanuway', icon: Smartphone },
+      { name: 'Vanu Connect', href: '/products#vanuconnect', icon: Send },
+    ],
   },
   {
     name: 'Services',
     href: '/services',
     children: [
-      { name: 'AI Assistants & Machine Learning', href: '/services#ai-ml', icon: Brain },
-      { name: 'Custom Software Development', href: '/services#custom-software', icon: Code2 },
-      { name: 'Cloud Architecture', href: '/services#cloud', icon: Cloud },
+      { name: 'Website Development', href: '/services#web-development', icon: Code2 },
+      { name: 'Web Apps & Custom Software', href: '/services#custom-software', icon: Cog },
       { name: 'Mobile App Development', href: '/services#mobile', icon: Smartphone },
+      { name: 'AI Assistants & Chatbots', href: '/services#ai-ml', icon: Brain },
+      { name: 'Cloud & DevOps', href: '/services#cloud', icon: Cloud },
       { name: 'Digital Transformation', href: '/services#digital-transformation', icon: Rocket },
-      { name: 'Enterprise Integration', href: '/services#integration', icon: Cog },
     ],
   },
   { name: 'About', href: '/about' },
@@ -54,9 +62,9 @@ export default function Header() {
       {/* Main header */}
       <header 
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled 
-            ? 'bg-white/90 backdrop-blur-xl shadow-lg shadow-black/5' 
-            : 'bg-transparent'
+          scrolled
+            ? 'bg-white/95 backdrop-blur-xl shadow-lg shadow-black/5'
+            : 'bg-white/70 backdrop-blur-xl'
         }`}
       >
         <nav className="container-custom">
@@ -76,7 +84,7 @@ export default function Header() {
                   height={44}
                   className="rounded-lg"
                 />
-                <div className={`hidden sm:block ${scrolled ? 'text-deep-blue' : 'text-white'}`}>
+                <div className="hidden sm:block text-deep-blue">
                   <span className="font-bold text-xl">Global Digital</span>
                   <span className="font-bold text-xl text-vibrant-orange"> Prime</span>
                 </div>
@@ -95,9 +103,7 @@ export default function Header() {
                   <Link
                     href={item.href}
                     className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center gap-1 ${
-                      scrolled 
-                        ? 'text-gray-700 hover:text-vibrant-orange hover:bg-orange-50' 
-                        : 'text-white/90 hover:text-white hover:bg-white/10'
+                      'text-gray-700 hover:text-vibrant-orange hover:bg-orange-50'
                     }`}
                   >
                     {item.name}
@@ -155,7 +161,7 @@ export default function Header() {
               aria-label="Open menu"
               onClick={() => setMobileMenuOpen(true)}
             >
-              <Menu className={`w-6 h-6 ${scrolled ? 'text-deep-blue' : 'text-white'}`} />
+              <Menu className="w-6 h-6 text-deep-blue" />
             </button>
           </div>
         </nav>

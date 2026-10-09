@@ -5,12 +5,14 @@ import type { LucideIcon } from 'lucide-react'
 import { company, liveProducts, published, socialLinks } from '@/lib/site'
 
 const footerLinks = {
-  products: [{ name: 'All products', href: '/products' }, ...liveProducts.map((p) => ({ name: p.name, href: p.href }))],
+  products: [{ name: 'All products', href: '/products' }, ...liveProducts.slice(0, 6).map((p) => ({ name: p.name, href: p.href.startsWith('/') ? p.href : `/products#${p.slug}` }))],
   services: [
-    { name: 'AI Assistants & Machine Learning', href: '/services#ai-ml' },
-    { name: 'Custom Software Development', href: '/services#custom-software' },
-    { name: 'Cloud Architecture', href: '/services#cloud' },
+    { name: 'Website Development', href: '/services#web-development' },
+    { name: 'Web Apps & Custom Software', href: '/services#custom-software' },
     { name: 'Mobile App Development', href: '/services#mobile' },
+    { name: 'AI Assistants & Chatbots', href: '/services#ai-ml' },
+    { name: 'UI/UX & Product Design', href: '/services#design' },
+    { name: 'Cloud & DevOps', href: '/services#cloud' },
   ],
   company: [
     { name: 'About', href: '/about' },
@@ -63,8 +65,8 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-gray-400 leading-relaxed mb-6">
-              We build AI assistants that answer customers on websites and WhatsApp, starting with VisaReadyPro, and
-              build custom AI systems for clients.
+              We design and build websites, custom software, mobile apps and AI assistants, and run ten of our own
+              products, from VisaReadyPro to VanuWay.
             </p>
             <div className="space-y-3 text-sm">
               <a href={`tel:${company.phone.tel}`} className="flex items-center gap-2 text-gray-300 hover:text-vibrant-orange transition-colors">

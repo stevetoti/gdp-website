@@ -7,10 +7,10 @@ import { motion, useMotionValueEvent, useScroll, useTransform, useReducedMotion 
 import type { MotionValue } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 
-// Frames are a Higgsfield-generated camera move (aerial → studio → screen → product),
-// exported as WebP sequences in /public/hero/{d,m}/NNN.webp.
+// Frames are a Higgsfield-generated daylight camera move (aerial → studio → devices → 3D),
+// exported as WebP sequences in /public/hero/v2/{d,m}/NNN.webp (new folder per version: /hero is cached immutable).
 const FRAME_COUNT = 150
-const frameUrl = (set: 'd' | 'm', i: number) => `/hero/${set}/${String(i + 1).padStart(3, '0')}.webp`
+const frameUrl = (set: 'd' | 'm', i: number) => `/hero/v2/${set}/${String(i + 1).padStart(3, '0')}.webp`
 
 // Load coarse frames first so scrubbing works early, then fill in the gaps.
 function loadOrder(count: number): number[] {
@@ -132,24 +132,24 @@ export default function ScrollHero() {
   })
 
   const intro = (
-    <div className="max-w-3xl">
-      <p className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white/90 backdrop-blur-md mb-6">
-        <span className="h-2 w-2 rounded-full bg-emerald-400" aria-hidden />
+    <div className="max-w-2xl rounded-3xl bg-white/80 p-6 sm:p-10 shadow-2xl shadow-deep-blue/10 ring-1 ring-white/60 backdrop-blur-xl">
+      <p className="inline-flex items-center gap-2 rounded-full bg-orange-50 px-4 py-1.5 text-sm font-semibold text-vibrant-orange mb-5">
+        <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden />
         Global Digital Prime · Founded 2025 · Delaware C-Corp
       </p>
-      <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.05] tracking-tight text-white">
-        AI assistants that handle real conversations for{' '}
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-vibrant-orange to-amber-300">growing businesses.</span>
+      <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.05] tracking-tight text-deep-blue">
+        Websites, software, mobile apps and AI for{' '}
+        <span className="text-vibrant-orange">growing businesses.</span>
       </h1>
-      <p className="mt-6 text-lg sm:text-xl text-white/85 leading-relaxed max-w-2xl">
-        Global Digital Prime builds AI products that answer customers on websites and WhatsApp, powered by Claude. Founded in
-        2025 and incorporated in Delaware, we also build custom AI systems for clients.
+      <p className="mt-5 text-lg sm:text-xl text-gray-700 leading-relaxed">
+        Global Digital Prime designs and builds websites, custom software and mobile apps, and creates AI assistants that
+        answer customers on websites and WhatsApp, powered by Claude. Founded in 2025 and incorporated in Delaware.
       </p>
       <div className="mt-8 flex flex-col sm:flex-row gap-4 pointer-events-auto">
         <Link href="/products" className="btn-primary inline-flex items-center justify-center text-lg">
           See our products <ArrowRight className="ml-2 h-5 w-5" />
         </Link>
-        <Link href="/contact" className="btn-outline inline-flex items-center justify-center text-lg">
+        <Link href="/contact" className="btn-outline-dark inline-flex items-center justify-center text-lg">
           Work with us
         </Link>
       </div>
@@ -158,20 +158,19 @@ export default function ScrollHero() {
 
   if (reduceMotion) {
     return (
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0a1628] pt-24 pb-16">
-        <Image src="/images/gdp/hero-poster.webp" alt="" fill priority sizes="100vw" className="object-cover opacity-60" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628] via-[#0a1628]/70 to-transparent" />
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-sky-50 pt-24 pb-16">
+        <Image src="/images/gdp/hero-poster-bright.webp" alt="" fill priority sizes="100vw" className="object-cover" />
         <div className="relative container-custom">{intro}</div>
       </section>
     )
   }
 
   return (
-    <section ref={sectionRef} className="relative h-[300vh] md:h-[400vh] bg-[#0a1628]" aria-label="Introduction">
+    <section ref={sectionRef} className="relative h-[300vh] md:h-[400vh] bg-sky-50" aria-label="Introduction">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {/* First frame doubles as the LCP image until the canvas is ready */}
         <Image
-          src="/images/gdp/hero-poster.webp"
+          src="/images/gdp/hero-poster-bright.webp"
           alt=""
           fill
           priority
@@ -179,42 +178,52 @@ export default function ScrollHero() {
           className={`object-cover transition-opacity duration-700 ${ready ? 'opacity-0' : 'opacity-100'}`}
         />
         <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" aria-hidden />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628]/90 via-[#0a1628]/45 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0a1628] to-transparent" />
+        {/* Light veil only behind the text side; the footage stays bright */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/35 via-white/5 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" />
 
-        <motion.div style={{ opacity: introOpacity, y: introY, visibility: introVisibility }} className="absolute inset-0 flex items-center pt-20">
+        <motion.div style={{ opacity: introOpacity, y: introY, visibility: introVisibility }} className="absolute inset-0 flex items-center pt-24">
           <div className="container-custom w-full">{intro}</div>
         </motion.div>
 
         <Chapter progress={scrollYProgress} range={[0.22, 0.3, 0.42, 0.5]}>
-          <p className="text-vibrant-orange font-semibold uppercase tracking-widest text-sm mb-3">Design · Code · AI</p>
-          <h2 className="text-3xl sm:text-5xl font-bold text-white max-w-2xl leading-tight">
-            Web development, software and AI engineering, built end to end.
-          </h2>
+          <div className="max-w-xl rounded-3xl bg-white/80 p-6 sm:p-8 shadow-xl backdrop-blur-xl">
+            <p className="text-vibrant-orange font-semibold uppercase tracking-widest text-sm mb-3">Web · Software · Mobile · AI</p>
+            <h2 className="text-3xl sm:text-5xl font-bold text-deep-blue leading-tight">
+              Design and engineering, built end to end.
+            </h2>
+            <p className="mt-3 text-gray-700">Websites, web apps, mobile apps and AI, from first sketch to launch.</p>
+          </div>
         </Chapter>
 
         <Chapter progress={scrollYProgress} range={[0.52, 0.6, 0.7, 0.78]}>
-          <p className="text-vibrant-orange font-semibold uppercase tracking-widest text-sm mb-3">Website chat + WhatsApp</p>
-          <h2 className="text-3xl sm:text-5xl font-bold text-white max-w-2xl leading-tight">
-            Every customer question answered, at any hour.
-          </h2>
+          <div className="max-w-xl rounded-3xl bg-white/80 p-6 sm:p-8 shadow-xl backdrop-blur-xl">
+            <p className="text-vibrant-orange font-semibold uppercase tracking-widest text-sm mb-3">Every screen</p>
+            <h2 className="text-3xl sm:text-5xl font-bold text-deep-blue leading-tight">
+              One product, on the web, on phones and in chat.
+            </h2>
+            <p className="mt-3 text-gray-700">Responsive websites, native-feel apps and dashboards that work together.</p>
+          </div>
         </Chapter>
 
         <Chapter progress={scrollYProgress} range={[0.8, 0.88, 1, 1.01]}>
-          <p className="text-vibrant-orange font-semibold uppercase tracking-widest text-sm mb-3">Powered by Claude</p>
-          <h2 className="text-3xl sm:text-5xl font-bold text-white max-w-xl leading-tight">
-            The AI replies first. A person can step in at any time.
-          </h2>
-          <div className="mt-8 pointer-events-auto">
-            <Link href="/products/visareadypro" className="btn-primary inline-flex items-center">
-              Meet VisaReadyPro <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
+          <div className="max-w-xl rounded-3xl bg-white/80 p-6 sm:p-8 shadow-xl backdrop-blur-xl">
+            <p className="text-vibrant-orange font-semibold uppercase tracking-widest text-sm mb-3">10 products live</p>
+            <h2 className="text-3xl sm:text-5xl font-bold text-deep-blue leading-tight">
+              We build our own products, and yours.
+            </h2>
+            <p className="mt-3 text-gray-700">From VisaReadyPro to VanuWay, see what we have shipped.</p>
+            <div className="mt-6 pointer-events-auto">
+              <Link href="/products" className="btn-primary inline-flex items-center">
+                Explore our products <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </div>
           </div>
         </Chapter>
 
         <motion.div
           style={{ opacity: cueOpacity }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center text-white/70 text-xs tracking-widest uppercase"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center text-deep-blue/70 text-xs font-semibold tracking-widest uppercase"
           aria-hidden
         >
           Scroll

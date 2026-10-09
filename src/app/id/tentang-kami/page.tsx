@@ -30,7 +30,7 @@ export default function TentangKamiPage() {
         eyebrow="Tentang Kami"
         title="Tentang Global Digital Prime Indonesia"
         intro={`${legalName ?? 'Global Digital Prime Indonesia'} membantu bisnis di Indonesia melayani pelanggan lebih cepat dengan asisten AI, website, aplikasi dan software custom.`}
-        image="/images/gdp/software-studio.webp"
+        image="/images/gdp/studio-bright.webp"
       />
       <section className="bg-white py-20">
         <div className="container-custom">

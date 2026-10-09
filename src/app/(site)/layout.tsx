@@ -7,9 +7,9 @@ import GoogleAnalytics from '@/components/GoogleAnalytics'
 import JsonLd from '@/components/JsonLd'
 import { SITE_URL, company, published, socialLinks } from '@/lib/site'
 
-const title = 'Global Digital Prime | AI Assistants for Web and WhatsApp'
+const title = 'Global Digital Prime | Web, Software, Mobile Apps and AI'
 const description =
-  'Global Digital Prime builds AI assistants powered by Claude that answer customers on websites and WhatsApp. Delaware C-Corp, founded 2025.'
+  'Global Digital Prime builds websites, custom software, mobile apps and AI assistants powered by Claude. Delaware C-Corp, founded 2025, 10 products live.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -53,7 +53,7 @@ const organizationLd = {
   telephone: company.phone.tel,
   email: company.email,
   description:
-    'Global Digital Prime, Inc. builds AI assistants powered by Claude that answer customers on websites and WhatsApp, starting with VisaReadyPro.',
+    'Global Digital Prime, Inc. builds websites, custom software, mobile apps and AI assistants powered by Claude, and runs products including VisaReadyPro, DigiAssist AI, EduSmartAssist and VanuWay.',
   ...(address ? { address: { '@type': 'PostalAddress', streetAddress: address, addressCountry: 'US' } } : {}),
   contactPoint: [
     {

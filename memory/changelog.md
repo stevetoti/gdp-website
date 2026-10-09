@@ -1,5 +1,14 @@
 # Changelog — Global Digital Prime Website
 
+## 2026-10-10 — [Claude Code] Brighter redesign, 10 products, broader services
+
+Stephen: interface too dark; hero should open bright; GDP is web/software/mobile, not only AI; add all products with images and backlinks; more homepage content.
+- New daylight Higgsfield hero (4 gpt_image_2_5 high-quality keyframes + 3 wan3_0 clips) in `public/hero/v2/` (new folder because /hero is cached immutable); old dark frames removed. Frosted white text panels, light veil only, header always light. H1 now "Websites, software, mobile apps and AI for growing businesses."
+- Products: all 10 confirmed by Stephen (VisaReadyPro, DigiAssist AI, EduSmartAssist, Local Language Lab, Storian AI, Onukpa AI, Sena AI, Akwaaba AI, VanuWay, Vanu Connect). Each site visited live; descriptions/features from their own pages; showcase images generated from real screenshots with feature labels (spelling checked). `ProductCard` with "Visit <domain>" backlinks; /products has ItemList of SoftwareApplication JSON-LD.
+- Services expanded to 9 (added website development, UI/UX, e-commerce; integrations now include SMS/WhatsApp) with bright 3D art, features and stack. Homepage adds sectors, process + tech stack, FAQ (FAQPage JSON-LD). Page heroes, /id heroes and CTA bands are now light.
+- Removed AVIF from next/image formats (slow first encode). Home title/description broadened to web, software, mobile and AI.
+- Verified on local production build: typecheck/build OK, all internal links 200, 10 product backlinks + WhatsApp external, no console errors, no mobile horizontal scroll.
+
 ## 2026-10-10 — [Claude Code] Verification upgrade deployed to production
 
 - Stephen approved publishing and Delaware governing law (Terms updated, `7158282`).

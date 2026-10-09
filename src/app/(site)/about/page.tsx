@@ -34,8 +34,8 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About"
         title="About Global Digital Prime"
-        intro={`${company.legalName} is a Delaware C-Corporation founded in December 2025 by Stephen Totimeh. We build AI assistants that help businesses answer customers instantly, starting with VisaReadyPro for visa applicants. Our products run on the Claude API and work across website chat and WhatsApp.`}
-        image="/images/gdp/software-studio.webp"
+        intro={`${company.legalName} is a Delaware C-Corporation founded in December 2025 by Stephen Totimeh. We design and build websites, custom software, mobile apps and AI assistants, and we run ten of our own products, from VisaReadyPro for visa applicants to EduSmartAssist for schools and VanuWay for Vanuatu.`}
+        image="/images/gdp/studio-bright.webp"
       />
 
       {/* Company facts */}
@@ -44,8 +44,8 @@ export default function AboutPage() {
           <div>
             <h2 id="facts-heading" className="section-title">Company facts</h2>
             <p className="text-lg text-gray-600 leading-relaxed">
-              We are a young product company. We build and run our own AI products, and we also build custom AI assistants and
-              software for clients.
+              We are a young product company. We build and run our own products, and we build websites, software, mobile apps
+              and AI assistants for clients.
             </p>
             <Link href="/products" className="mt-6 inline-flex items-center font-semibold text-vibrant-orange">
               See our products <ArrowRight className="ml-2 h-4 w-4" />
@@ -110,10 +110,10 @@ export default function AboutPage() {
         </section>
       )}
 
-      <section className="bg-[#0a1628] py-20 text-white">
+      <section className="bg-gradient-to-br from-orange-50 via-white to-sky-50 py-20">
         <div className="container-custom text-center max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-bold">Talk to the founder</h2>
-          <p className="mt-4 text-lg text-white/80">
+          <h2 className="text-3xl md:text-4xl font-bold text-deep-blue">Talk to the founder</h2>
+          <p className="mt-4 text-lg text-gray-700">
             Call {company.phone.display} or email {company.email}.
           </p>
           <Link href="/contact" className="btn-primary mt-8 inline-flex items-center">

@@ -24,7 +24,7 @@ export default function LayananPage() {
         eyebrow="Layanan"
         title="Layanan Pengembangan AI dan Software"
         intro="Jasa pembuatan chatbot AI, website, aplikasi dan software custom untuk bisnis yang ingin melayani pelanggan lebih cepat."
-        image="/images/gdp/software-studio.webp"
+        image="/images/gdp/studio-bright.webp"
       />
       <section className="bg-white py-20">
         <div className="container-custom space-y-20">
@@ -42,14 +42,14 @@ export default function LayananPage() {
                   ))}
                 </ul>
               </div>
-              <Image src={l.image} alt={l.imageAlt} width={800} height={603} sizes="(min-width: 1024px) 50vw, 100vw" className={`w-full rounded-3xl shadow-xl ${i % 2 === 1 ? 'lg:order-1' : ''}`} />
+              <Image src={l.image} alt={l.imageAlt} width={800} height={600} sizes="(min-width: 1024px) 50vw, 100vw" className={`w-full rounded-3xl shadow-xl ${i % 2 === 1 ? 'lg:order-1' : ''}`} />
             </article>
           ))}
         </div>
       </section>
-      <section className="bg-[#1a0f12] py-20 text-white text-center">
+      <section className="bg-gradient-to-br from-red-50 via-white to-orange-50 py-20 text-center">
         <div className="container-custom max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-bold">Ceritakan kebutuhan bisnis Anda</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-deep-blue">Ceritakan kebutuhan bisnis Anda</h2>
           <Link href="/id/kontak" className="mt-8 inline-flex items-center rounded-lg bg-id-red px-8 py-3 font-semibold text-white hover:bg-red-700">
             Hubungi kami <ArrowRight className="ml-2 h-5 w-5" />
           </Link>

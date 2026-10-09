@@ -34,7 +34,7 @@ export default function KontakPage() {
         eyebrow="Kontak"
         title="Hubungi Kami"
         intro="Ceritakan kebutuhan chatbot WhatsApp, asisten AI, website atau aplikasi Anda. Kami akan membalas melalui email."
-        image="/images/gdp/developer-ai-chat.webp"
+        image="/images/gdp/devices-desk-bright.webp"
       />
       <section className="bg-white py-20">
         <div className={`container-custom grid gap-14 ${details.length ? 'lg:grid-cols-[1fr_1.2fr]' : 'max-w-3xl'}`}>

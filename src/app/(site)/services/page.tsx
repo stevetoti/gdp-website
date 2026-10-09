@@ -10,8 +10,8 @@ import { pageMetadata } from '@/lib/seo'
 
 export const metadata: Metadata = pageMetadata({
   path: '/services',
-  title: 'AI and Software Development Services | Global Digital Prime',
-  description: 'Custom AI assistants, software, cloud and mobile development for growing businesses.',
+  title: 'Web, Software, Mobile & AI Services | Global Digital Prime',
+  description: 'Website development, custom software, iOS and Android apps, UI/UX, e-commerce, cloud and AI assistants for growing businesses.',
 })
 
 const servicesLd = {
@@ -44,9 +44,9 @@ export default function ServicesPage() {
       <JsonLd data={servicesLd} />
       <PageHero
         eyebrow="Services"
-        title="AI and software development services"
-        intro="We build AI assistants for website chat and WhatsApp, custom software, cloud systems and mobile apps for growing businesses, using the same stack we use for our own products."
-        image="/images/gdp/developer-ai-chat.webp"
+        title="Web, software, mobile and AI development services"
+        intro="Website development, web apps and custom software, iOS and Android apps, UI/UX design, e-commerce, cloud and AI assistants for growing businesses, built with the same stack behind our own ten products."
+        image="/images/gdp/devices-desk-bright.webp"
       />
 
       <section className="bg-white py-20">
@@ -64,12 +64,15 @@ export default function ServicesPage() {
                     </li>
                   ))}
                 </ul>
+                <p className="mt-5 text-sm text-gray-500">
+                  <span className="font-semibold text-deep-blue">Built with:</span> {service.stack.join(' · ')}
+                </p>
               </div>
               <Image
                 src={service.image}
                 alt={service.imageAlt}
                 width={800}
-                height={603}
+                height={600}
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 className={`w-full rounded-3xl shadow-xl ${index % 2 === 1 ? 'lg:order-1' : ''}`}
               />
@@ -93,15 +96,15 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="bg-[#0a1628] py-20 text-white">
+      <section className="bg-gradient-to-br from-orange-50 via-white to-sky-50 py-20">
         <div className="container-custom text-center max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-bold">See what we have built</h2>
-          <p className="mt-4 text-lg text-white/80">VisaReadyPro is our own AI assistant, live on web chat and WhatsApp.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-deep-blue">See what we have built</h2>
+          <p className="mt-4 text-lg text-gray-700">Ten live products, from VisaReadyPro to VanuWay, built by the same team.</p>
           <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-            <Link href="/products/visareadypro" className="btn-primary inline-flex items-center justify-center">
-              See VisaReadyPro <ArrowRight className="ml-2 h-5 w-5" />
+            <Link href="/products" className="btn-primary inline-flex items-center justify-center">
+              See our products <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
-            <Link href="/contact" className="btn-outline inline-flex items-center justify-center">
+            <Link href="/contact" className="btn-outline-dark inline-flex items-center justify-center">
               Work with us
             </Link>
           </div>

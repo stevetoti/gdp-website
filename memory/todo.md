@@ -39,8 +39,11 @@ Earlier discovery items are superseded by the deployed implementation documented
 ## 2026-10-10 — [Claude Code] Website verification upgrade (branch `website-verification-upgrade`)
 
 - [ ] **Stephen:** review the branch preview, then approve merge to `main` (push to main auto-deploys).
-- [ ] **Stephen — CONFIRM items** (each is one flag in `src/lib/site.ts`): founder LinkedIn (prefilled linkedin.com/in/stevetoti), info@ inbox works, US address (prefilled Dover registered-agent address), Delaware file number, company LinkedIn/X/GitHub URLs, PT legal name, Bali address, +62 phone/WhatsApp, indonesia@ email, whether EduSmartAssist/DigiAssistAI are live, and that VisaReadyPro calls the Claude API directly (the GDP site chat runs Claude via ElevenLabs, which will not show as Claude Console usage).
+- [ ] **Stephen — CONFIRM items** (each is one flag in `src/lib/site.ts`): founder LinkedIn (prefilled linkedin.com/in/stevetoti), info@ inbox works, US address (prefilled Dover registered-agent address), Delaware file number, company LinkedIn/X/GitHub URLs, PT legal name, Bali address, +62 phone/WhatsApp, indonesia@ email, and that VisaReadyPro calls the Claude API directly (the GDP site chat runs Claude via ElevenLabs, which will not show as Claude Console usage).
 - [x] Terms governing law changed to Delaware. — [Claude Code] 2026-10-10 (Stephen approved)
 - [ ] **Stephen:** add DataForSEO login/password to `.env.local` to replace "not measured" in `docs/SEO-KEYWORDS.md`.
 - [ ] After deploy: Search Console Domain property, submit sitemap, request indexing of /, /products/visareadypro, /about, /id; Bing import; Rich Results Test on each template; PageSpeed mobile check.
 - [ ] Link globaldigitalprime.com from visareadypro.com footer (brand SERP currently shows nothing for the domain).
+
+- [ ] **Stephen:** Storian, Onukpa, Sena and Akwaaba sites say "By Pacific Wave Digital" while GDP lists them as its products; align the footer credit on those sites (e.g. "A Global Digital Prime, Inc. product") before the Claude Startups reapplication. — [Claude Code] 2026-10-10
+- [ ] Add a "globaldigitalprime.com" backlink in each product site's footer (reciprocal links help the brand SERP). — [Claude Code] 2026-10-10

@@ -71,7 +71,7 @@ export default function VisaReadyProPage() {
           <a href={visaReadyPro.url} target="_blank" rel="noopener" className="btn-primary inline-flex items-center justify-center">
             Visit VisaReadyPro <ArrowRight className="ml-2 h-5 w-5" />
           </a>
-          <a href={visaReadyPro.whatsappLink} target="_blank" rel="noopener" className="btn-outline inline-flex items-center justify-center">
+          <a href={visaReadyPro.whatsappLink} target="_blank" rel="noopener" className="btn-outline-dark inline-flex items-center justify-center">
             WhatsApp {visaReadyPro.whatsappDisplay}
           </a>
         </div>
@@ -175,10 +175,10 @@ export default function VisaReadyProPage() {
       </section>
 
       {/* Contact */}
-      <section className="bg-[#0a1628] py-20 text-white">
+      <section className="bg-gradient-to-br from-orange-50 via-white to-sky-50 py-20">
         <div className="container-custom text-center max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-bold">Try VisaReadyPro</h2>
-          <p className="mt-4 text-lg text-white/80">
+          <h2 className="text-3xl md:text-4xl font-bold text-deep-blue">Try VisaReadyPro</h2>
+          <p className="mt-4 text-lg text-gray-700">
             Ask a question on the website, message {visaReadyPro.whatsappDisplay} on WhatsApp, or contact{' '}
             {company.legalName} about the product.
           </p>
@@ -186,10 +186,10 @@ export default function VisaReadyProPage() {
             <a href={visaReadyPro.url} target="_blank" rel="noopener" className="btn-primary inline-flex items-center justify-center">
               Open visareadypro.com
             </a>
-            <a href={visaReadyPro.whatsappLink} target="_blank" rel="noopener" className="btn-outline inline-flex items-center justify-center">
+            <a href={visaReadyPro.whatsappLink} target="_blank" rel="noopener" className="btn-outline-dark inline-flex items-center justify-center">
               Message on WhatsApp
             </a>
-            <Link href="/contact" className="btn-outline inline-flex items-center justify-center">
+            <Link href="/contact" className="btn-outline-dark inline-flex items-center justify-center">
               Contact us
             </Link>
           </div>
