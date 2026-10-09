@@ -95,7 +95,7 @@ export default function TermsPage() {
             <div>
               <h2 className="text-2xl font-bold text-deep-blue mb-4">10. Governing Law</h2>
               <p className="leading-relaxed">
-                These Terms of Service are governed by and construed in accordance with the laws of the State of New York, United States, without regard to its conflict of law principles. Any legal disputes shall be resolved in the courts located in New York, New York.
+                These Terms of Service are governed by and construed in accordance with the laws of the State of Delaware, United States, without regard to its conflict of law principles. Any legal disputes shall be resolved in the state or federal courts located in the State of Delaware.
               </p>
             </div>
 
