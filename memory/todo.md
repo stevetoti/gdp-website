@@ -47,3 +47,17 @@ Earlier discovery items are superseded by the deployed implementation documented
 
 - [ ] **Stephen:** Storian, Onukpa, Sena and Akwaaba sites say "By Pacific Wave Digital" while GDP lists them as its products; align the footer credit on those sites (e.g. "A Global Digital Prime, Inc. product") before the Claude Startups reapplication. — [Claude Code] 2026-10-10
 - [ ] Add a "globaldigitalprime.com" backlink in each product site's footer (reciprocal links help the brand SERP). — [Claude Code] 2026-10-10
+
+## 2026-10-10 — [Claude Code] Group footer credits across product sites
+
+- [x] GDP site: "Our group" on /about + footer Group column (live).
+- [x] Pacific Wave Digital + Rapid Entrepreneurs footers: "A Global Digital Prime group company" (live; RE "Vanuatu (HQ)" label removed).
+- [x] EduSmartAssist: GDP credit on all country sites (live, dpl_6zDbRr7Q4TBHPFpcwCDdtFbET4jE; rollback dpl_CJkRF28BQRhpzdnVHGxwG6wuRUTQ).
+- [x] VanuWay: "Built by Global Digital Prime" (live). DigiAssist already credited GDP.
+- [ ] **Stephen approval:** language-hub production deploys (Storian, Akwaaba/Onukpa/Sena, Local Language Lab) — branches claude/gdp-credit-{storian,ghana,lab}; Claude Code permission system blocked the deploy.
+- [ ] **Stephen approval:** VisaReadyPro — commit Codex's 233 uncommitted live files, then release branch chore/gdp-footer-credit (c3defed). VisaReadyPro calls Claude directly (Haiku 4.5 concierge/WhatsApp, Sonnet 4.6 document checks).
+- [ ] **Stephen:** Vanu Connect footer is WordPress on Hostinger (needs WP edit/login); fix "0 M+ / 0 B+" counters.
+- [ ] **Stephen decision:** which entity legal pages name (VanuWay Terms say Pacific Wave Digital Ltd; language-hub Privacy/Terms; EduSmartAssist Privacy §1; DigiAssist payout email footer).
+- [ ] www.vanuway.com SSL certificate expired 30 Apr 2026.
+- [ ] EduSmartAssist share image (og-image) still shows Pacific Wave Digital.
+- [ ] Repos whose CLAUDE.md deploy commands use --token (VanuWay, VisaReadyPro) should be updated to VERCEL_TOKEN env.
