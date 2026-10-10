@@ -55,7 +55,7 @@ Earlier discovery items are superseded by the deployed implementation documented
 - [x] EduSmartAssist: GDP credit on all country sites (live, dpl_6zDbRr7Q4TBHPFpcwCDdtFbET4jE; rollback dpl_CJkRF28BQRhpzdnVHGxwG6wuRUTQ).
 - [x] VanuWay: "Built by Global Digital Prime" (live). DigiAssist already credited GDP.
 - [ ] **Stephen approval:** language-hub production deploys (Storian, Akwaaba/Onukpa/Sena, Local Language Lab) — branches claude/gdp-credit-{storian,ghana,lab}; Claude Code permission system blocked the deploy.
-- [ ] **Stephen approval:** VisaReadyPro — commit Codex's 233 uncommitted live files, then release branch chore/gdp-footer-credit (c3defed). VisaReadyPro calls Claude directly (Haiku 4.5 concierge/WhatsApp, Sonnet 4.6 document checks).
+- [x] VisaReadyPro: live code committed (71d3f16), GDP footer credit live (dpl_DaUCq59NhTBe2cXEGq55zARQZbUr; rollback dpl_8bmY1axCtuLrK8KGFyQ6t8X4fLrJ). — [Claude Code] 2026-10-10
 - [ ] **Stephen:** Vanu Connect footer is WordPress on Hostinger (needs WP edit/login); fix "0 M+ / 0 B+" counters.
 - [ ] **Stephen decision:** which entity legal pages name (VanuWay Terms say Pacific Wave Digital Ltd; language-hub Privacy/Terms; EduSmartAssist Privacy §1; DigiAssist payout email footer).
 - [ ] www.vanuway.com SSL certificate expired 30 Apr 2026.
