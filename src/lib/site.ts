@@ -39,6 +39,21 @@ export const company = {
   },
 }
 
+// Group structure (Stephen, 10 Oct 2026): Global Digital Prime, Inc. (USA) is the
+// main company; these are other companies in the same group. Legal ownership
+// between the entities is not stated, so no parentOrganization schema is used.
+export interface GroupCompany {
+  name: string
+  country: string
+  url: string
+  focus: string
+}
+
+export const groupCompanies: GroupCompany[] = [
+  { name: 'Pacific Wave Digital', country: 'Vanuatu', url: 'https://pacificwavedigital.com', focus: 'Digital services and training for the Pacific' },
+  { name: 'Rapid Entrepreneurs', country: 'Ghana', url: 'https://rapidentrepreneurs.com', focus: 'Business and digital services for West Africa' },
+]
+
 export const indonesia = {
   brand: 'Global Digital Prime Indonesia',
   // Exact name on the PT registration — CONFIRM.

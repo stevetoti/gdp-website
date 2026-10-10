@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { ArrowRight, Linkedin } from 'lucide-react'
 import PageHero from '@/components/site/PageHero'
 import JsonLd, { breadcrumbLd } from '@/components/JsonLd'
-import { company, published, indonesia } from '@/lib/site'
+import { company, published, indonesia, groupCompanies } from '@/lib/site'
 import { pageMetadata } from '@/lib/seo'
 
 export const metadata: Metadata = pageMetadata({
@@ -91,6 +91,39 @@ export default function AboutPage() {
                 <Linkedin className="h-5 w-5" /> Stephen on LinkedIn
               </a>
             )}
+          </div>
+        </div>
+      </section>
+
+      {/* Group */}
+      <section className="bg-white py-20" aria-labelledby="group-heading">
+        <div className="container-custom">
+          <p className="text-vibrant-orange font-semibold uppercase tracking-widest text-sm mb-3">Our group</p>
+          <h2 id="group-heading" className="section-title">Global Digital Prime and its group companies</h2>
+          <p className="max-w-3xl text-lg text-gray-600 leading-relaxed">
+            {company.legalName}, incorporated in Delaware, USA, is our main company and the company behind our products.
+            Two other companies in our group work closely with it in their regions.
+          </p>
+          <div className="mt-10 grid md:grid-cols-3 gap-6">
+            <div className="rounded-2xl bg-gradient-to-br from-orange-50 to-white p-6 ring-2 ring-vibrant-orange/30">
+              <p className="text-sm font-semibold text-vibrant-orange">Main company · United States</p>
+              <h3 className="mt-2 text-xl font-bold text-deep-blue">{company.legalName}</h3>
+              <p className="mt-2 text-gray-600">Products, software, mobile and AI development. Delaware C-Corporation.</p>
+            </div>
+            {groupCompanies.map((g) => (
+              <a
+                key={g.name}
+                href={g.url}
+                target="_blank"
+                rel="noopener"
+                className="rounded-2xl bg-soft-gray p-6 ring-1 ring-gray-100 hover:ring-vibrant-orange/40 transition"
+              >
+                <p className="text-sm font-semibold text-gray-500">Group company · {g.country}</p>
+                <h3 className="mt-2 text-xl font-bold text-deep-blue">{g.name}</h3>
+                <p className="mt-2 text-gray-600">{g.focus}</p>
+                <p className="mt-3 text-sm font-semibold text-vibrant-orange">{new URL(g.url).hostname} ↗</p>
+              </a>
+            ))}
           </div>
         </div>
       </section>

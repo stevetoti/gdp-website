@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Phone, Mail, ArrowRight, Linkedin, Github, Twitter } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import { company, liveProducts, published, socialLinks } from '@/lib/site'
+import { company, groupCompanies, liveProducts, published, socialLinks } from '@/lib/site'
 
 const footerLinks = {
   products: [{ name: 'All products', href: '/products' }, ...liveProducts.slice(0, 6).map((p) => ({ name: p.name, href: p.href.startsWith('/') ? p.href : `/products#${p.slug}` }))],
@@ -110,6 +110,16 @@ export default function Footer() {
           <LinkColumn title="Company" links={footerLinks.company} />
 
           <div>
+            <h2 className="font-bold text-lg mb-5">Group</h2>
+            <ul className="space-y-3 text-sm mb-8">
+              {groupCompanies.map((g) => (
+                <li key={g.name}>
+                  <a href={g.url} target="_blank" rel="noopener" className="text-gray-400 hover:text-vibrant-orange transition-colors">
+                    {g.name} <span className="text-gray-600">· {g.country}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
             <h2 className="font-bold text-lg mb-5">Region</h2>
             <p className="text-sm text-gray-400">
               <span className="text-white font-medium">Global</span>

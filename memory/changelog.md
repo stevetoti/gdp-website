@@ -1,5 +1,9 @@
 # Changelog — Global Digital Prime Website
 
+## 2026-10-10 — [Claude Code] Group structure on GDP site
+
+Stephen: Global Digital Prime, Inc. (USA) is the main company; Pacific Wave Digital (Vanuatu) and Rapid Entrepreneurs (Ghana) are group companies. Added `groupCompanies` in `src/lib/site.ts`, an "Our group" section on /about (GDP marked main company) and a footer "Group" column. No parentOrganization/subOrganization schema until legal ownership between the entities is confirmed. Product-site footer links are being added per repo (see that repo's changelog).
+
 ## 2026-10-10 — [Claude Code] Brighter redesign, 10 products, broader services
 
 Stephen: interface too dark; hero should open bright; GDP is web/software/mobile, not only AI; add all products with images and backlinks; more homepage content.
