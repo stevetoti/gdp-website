@@ -33,6 +33,8 @@ export async function POST(request: Request) {
       );
     }
 
+    if (['keyword_data','keyword_suggestions'].includes(action)&&!Array.isArray(params.keywords)||['serp_overview','rank_tracker','content_ideas'].includes(action)&&!term(params.keyword)||['domain_overview','competitor_keywords'].includes(action)&&(typeof params.domain!=='string'||!/^([a-z0-9-]+\.)+[a-z]{2,}$/i.test(params.domain)))return NextResponse.json({error:'Required keyword or hostname is missing or invalid.'},{status:400});
+    if(params.location_code!==undefined&&(!Number.isInteger(params.location_code)||params.location_code<1||params.location_code>9999))return NextResponse.json({error:'Use an explicit valid location code.'},{status:400});
     let endpoint = '';
     let requestBody: any[] = [];
 
@@ -112,7 +114,7 @@ export async function POST(request: Request) {
           location_code: params.location_code || 2840,
           language_code: 'en',
           include_seed_keyword: false,
-          limit: 100,
+          limit: 20,
         }];
         break;
 
@@ -133,7 +135,7 @@ export async function POST(request: Request) {
 
     const response = await fetch(`${API_BASE}${endpoint}`, {
       signal: AbortSignal.timeout(40000),
-      method: 'POST',
+      method: endpoint === '/appendix/user_data' ? 'GET' : 'POST',
       headers: {
         'Authorization': getAuthHeader(),
         'Content-Type': 'application/json',

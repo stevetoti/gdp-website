@@ -1,3 +1,4 @@
+import { serviceDetails } from '@/lib/service-detail'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -116,6 +117,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </div>
       </section>
 
+      <section className="py-14 bg-soft-gray" aria-labelledby="article-services"><div className="container-custom"><h2 id="article-services" className="section-title">Explore the services behind your project</h2><div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">{serviceDetails.map(service=><Link key={service.slug} href={`/services/${service.slug}`} className="bg-white rounded-2xl border border-gray-100 p-6 hover:border-vibrant-orange"><h3 className="text-lg font-semibold text-deep-blue">{service.title} →</h3></Link>)}</div></div></section>
       {/* CTA */}
       <section className="py-20 bg-deep-blue text-white">
         <div className="container-custom text-center">
