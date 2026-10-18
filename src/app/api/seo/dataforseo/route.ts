@@ -1,3 +1,4 @@
+import { seoAdminDenied } from '@/lib/security/seo-admin';
 import { NextResponse } from 'next/server';
 
 // DataForSEO API credentials
@@ -13,9 +14,17 @@ const getAuthHeader = () => {
 const API_BASE = 'https://api.dataforseo.com/v3';
 
 export async function POST(request: Request) {
+  const denied=await seoAdminDenied(request); if(denied)return denied;
   try {
-    const body = await request.json();
+    const text=await request.text();
+    if(text.length>16384)return NextResponse.json({error:'Request too large'},{status:413});
+    const body = JSON.parse(text);
     const { action, ...params } = body;
+    const term=(v:unknown)=>typeof v==='string'&&v.trim().length>=2&&v.length<=120&&!/\b(?:site|inurl|intitle|intext|filetype|link):/i.test(v);
+    if(params.keyword!==undefined&&!term(params.keyword)||params.keywords!==undefined&&(!Array.isArray(params.keywords)||params.keywords.length<1||params.keywords.length>10||!params.keywords.every(term)))return NextResponse.json({error:'Use one to ten ordinary keywords, at most120characters each.'},{status:400});
+    params.limit=Math.min(Math.max(Number(params.limit)||10,1),20);
+    params.depth=Math.min(Math.max(Number(params.depth)||10,1),100);
+
 
     if (!DATAFORSEO_LOGIN || !DATAFORSEO_PASSWORD) {
       return NextResponse.json(
@@ -33,7 +42,7 @@ export async function POST(request: Request) {
         endpoint = '/keywords_data/google_ads/search_volume/live';
         requestBody = [{
           keywords: params.keywords,
-          location_code: params.location_code || 2548, // Vanuatu
+          location_code: params.location_code || 2840, // US default for GDP; named markets remain explicit
           language_code: params.language_code || 'en',
         }];
         break;
@@ -43,7 +52,7 @@ export async function POST(request: Request) {
         endpoint = '/keywords_data/google_ads/keywords_for_keywords/live';
         requestBody = [{
           keywords: params.keywords,
-          location_code: params.location_code || 2548,
+          location_code: params.location_code || 2840,
           language_code: params.language_code || 'en',
           include_seed_keyword: true,
           limit: params.limit || 50,
@@ -55,7 +64,7 @@ export async function POST(request: Request) {
         endpoint = '/serp/google/organic/live/regular';
         requestBody = [{
           keyword: params.keyword,
-          location_code: params.location_code || 2548,
+          location_code: params.location_code || 2840,
           language_code: params.language_code || 'en',
           device: params.device || 'desktop',
           depth: params.depth || 10,
@@ -67,7 +76,7 @@ export async function POST(request: Request) {
         endpoint = '/serp/google/organic/live/regular';
         requestBody = [{
           keyword: params.keyword,
-          location_code: params.location_code || 2548,
+          location_code: params.location_code || 2840,
           language_code: params.language_code || 'en',
           device: 'desktop',
           depth: 100, // Check top 100 results
@@ -100,7 +109,7 @@ export async function POST(request: Request) {
         endpoint = '/keywords_data/google_ads/keywords_for_keywords/live';
         requestBody = [{
           keywords: [params.keyword],
-          location_code: params.location_code || 2548,
+          location_code: params.location_code || 2840,
           language_code: 'en',
           include_seed_keyword: false,
           limit: 100,
@@ -123,6 +132,7 @@ export async function POST(request: Request) {
     console.log(`[DataForSEO] Calling ${endpoint}`);
 
     const response = await fetch(`${API_BASE}${endpoint}`, {
+      signal: AbortSignal.timeout(40000),
       method: 'POST',
       headers: {
         'Authorization': getAuthHeader(),
@@ -242,7 +252,8 @@ export async function POST(request: Request) {
 }
 
 // GET endpoint for simple tests
-export async function GET() {
+export async function GET(request: Request) {
+  const denied=await seoAdminDenied(request); if(denied)return denied;
   if (!DATAFORSEO_LOGIN || !DATAFORSEO_PASSWORD) {
     return NextResponse.json({ 
       configured: false, 

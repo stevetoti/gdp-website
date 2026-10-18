@@ -18,7 +18,7 @@ export const services: Service[] = [
     title: 'Website Development',
     short: 'Fast, search-friendly websites that turn visitors into customers.',
     description:
-      'Company websites, landing pages and content-managed sites built to load fast, rank on Google and be easy for your team to update. Every site is responsive, accessible and ready for analytics from day one.',
+      'Company websites, landing pages and content-managed sites built to load fast, support search discovery and be practical for your team to update. Responsive layouts, accessibility checks and measurement requirements are agreed in your project scope.',
     image: '/images/gdp/service-web-development.webp',
     imageAlt: '3D illustration of a website layout in a browser window',
     features: ['Business & company websites', 'Landing pages', 'Blog & CMS', 'SEO-ready structure', 'Analytics & Search Console setup', 'Hosting & maintenance'],
@@ -51,7 +51,7 @@ export const services: Service[] = [
     title: 'AI Assistants & Chatbots',
     short: 'AI that answers your customers on your website and WhatsApp.',
     description:
-      'AI chat and voice assistants built on large language models like Claude, trained on your own business information. They reply in seconds, in your customers’ languages, and hand conversations to your team when a person is needed.',
+      'AI chat and voice assistants built on large language models like Claude, grounded in approved business information, with supported languages, response limits and human handover agreed and tested for your workflow.',
     image: '/images/gdp/service-ai-ml.webp',
     imageAlt: '3D illustration of an AI assistant connected to chat bubbles and a phone',
     features: ['Website AI chatbots', 'WhatsApp AI assistants', 'Voice assistants', 'Local-language AI', 'Human takeover inbox', 'Claude API integration'],

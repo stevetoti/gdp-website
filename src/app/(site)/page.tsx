@@ -1,3 +1,4 @@
+import { serviceHref } from '@/lib/service-detail'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -45,7 +46,7 @@ const faqs = [
   },
   {
     q: 'Can you build an AI chatbot for my website and WhatsApp?',
-    a: 'Yes. We build AI assistants on large language models like Claude, trained on your own business information. They answer in seconds, in your customers’ languages, and hand the conversation to your team when a person is needed.',
+    a: 'Yes. We build AI assistants on large language models like Claude, grounded in approved business information. We scope supported languages, response limits and handover to your team, and test the workflow before launch.',
   },
   {
     q: 'Do you build mobile apps for iOS and Android?',
@@ -80,7 +81,7 @@ const facts = [
 
 const aiSteps = [
   { icon: MessageSquare, title: 'Understands the question', text: 'Customers write the way they talk, in their own language, on your website or WhatsApp.' },
-  { icon: Sparkles, title: 'Drafts an accurate reply', text: 'Claude answers from your approved business information, in seconds, at any hour.' },
+  { icon: Sparkles, title: 'Drafts a supported reply', text: 'The assistant uses approved business information, with limits and review paths for uncertain answers.' },
   { icon: UserCheck, title: 'Hands over to a person', text: 'When a case needs judgement, your team takes over the same conversation.' },
 ]
 
@@ -141,7 +142,7 @@ export default function HomePage() {
             {services.map((service) => (
               <Link
                 key={service.id}
-                href={`/services#${service.id}`}
+                href={serviceHref(service.id)}
                 className="group flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-gray-100 card-hover"
               >
                 <Image src={service.image} alt={service.imageAlt} width={800} height={600} sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw" className="w-full" />
@@ -271,8 +272,8 @@ export default function HomePage() {
             <h2 id="before-after-heading" className="section-title">From missed messages to answered customers</h2>
             <p className="text-lg text-gray-600 leading-relaxed">
               Without an assistant, questions wait until someone is free, and some customers never get a reply. With an AI
-              chatbot on your website and a WhatsApp AI assistant, every message gets an answer straight away, and your team
-              only steps in where a person adds value.
+              chatbot on your website and a WhatsApp AI assistant, routine questions can receive an automated response, while your team
+              handles exceptions and reviews the information the assistant uses.
             </p>
             <Link href="/contact" className="btn-secondary mt-8 inline-flex items-center">
               Talk to us about your business <ArrowRight className="ml-2 h-5 w-5" />

@@ -178,3 +178,8 @@ User requested fixed timetable orientation, natural 3–5 pm speech, role guidan
 User's training-centre request was implemented in `/Users/stephentotimeh/Projects/Pacific Wave Digital/PWD Home/pacific-wave-website/.deployment/training-recovery`, not GDP application code. PWD application `1bc7246`, recovery migration `c6e86f2`, handoff `004318c`; verified deployment `dpl_AEkNSt6dUMawBjWqAaD7wiBJDZXu` promoted. Saved approval, voice/video-only meetings, live research, private renamed session reports/PDFs/student emails, visual course navigation/twelve thumbnails and secure cohort video uploads. Fifty-five tests, real Anam voice/research/report flow, production private PDF checks and eight live browser checks pass. Zero synthetic users/courses remain. Continue in that PWD checkout and its CLAUDE/memory; GDP app/keys unchanged.
 
 Final PWD main build `dpl_BhLf8nvf1Z1CekSAkAtfjsTNx4Lj` (`004318c`) is READY and owns pacificwavedigital.com — [Codex] 2026-09-27.
+
+
+## 2026-10-19 — [Codex] GDP SEO foundation prepared under overnight preapproval
+
+Isolatedcodex/gdp-seo-20261019from0fc2fc3 in GBP.deployment; originalEstuarylogosuntouched.4newSSRservicepages, crawlablelinks/sitemapdates, success-only/privateAnalyticsclicks, verifiedfallbackemailandboundedAI/SEOclaims. SecuredlegacypublicDataForSEOproxywithGDPadminJWT/site/rolechecksandbearerfrontend,correctUSdefault;no paidcalls.11tests(type3+auth2+chat6),type/lint3existingwarnings/build44pages/local11routes/APIboundarypass. GSCcurrentaccountonlyPWDaccess. Phase1releasepending; GDPweeklydraft/ranking/deliveryauditstillrequired. See docs/seo/gdp-foundation-2026-10-19.md.

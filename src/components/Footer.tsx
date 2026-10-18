@@ -7,10 +7,10 @@ import { company, groupCompanies, liveProducts, published, socialLinks } from '@
 const footerLinks = {
   products: [{ name: 'All products', href: '/products' }, ...liveProducts.slice(0, 6).map((p) => ({ name: p.name, href: p.href.startsWith('/') ? p.href : `/products#${p.slug}` }))],
   services: [
-    { name: 'Website Development', href: '/services#web-development' },
-    { name: 'Web Apps & Custom Software', href: '/services#custom-software' },
-    { name: 'Mobile App Development', href: '/services#mobile' },
-    { name: 'AI Assistants & Chatbots', href: '/services#ai-ml' },
+    { name: 'Website Development', href: '/services/web-development' },
+    { name: 'Web Apps & Custom Software', href: '/services/custom-software-development' },
+    { name: 'Mobile App Development', href: '/services/mobile-app-development' },
+    { name: 'AI Assistants & Chatbots', href: '/services/ai-chatbot-development' },
     { name: 'UI/UX & Product Design', href: '/services#design' },
     { name: 'Cloud & DevOps', href: '/services#cloud' },
   ],

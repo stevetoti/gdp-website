@@ -61,3 +61,11 @@ Earlier discovery items are superseded by the deployed implementation documented
 - [ ] www.vanuway.com SSL certificate expired 30 Apr 2026.
 - [ ] EduSmartAssist share image (og-image) still shows Pacific Wave Digital.
 - [ ] Repos whose CLAUDE.md deploy commands use --token (VanuWay, VisaReadyPro) should be updated to VERCEL_TOKEN env.
+
+
+## 2026-10-19 — [Codex] GDP overnight follow-up
+
+- [ ] Stage/promote/verifyGDPphase1 andTotiGDPtenantlabelguard.
+- [ ] RegisterGDPworkspaceandmappedkeywordswithunmeasuredpositions;noPWDVanuatumarketorscheduleclaims.
+- [ ] ContinueGDPweeklydraft/approvalandrankcollector audit;actualGoogle/GA/deliveryaccessrecordedblockeduntilavailable.
+- [ ] ThenorderedDigiAssistAI→VisaReadyPro→VanuConnect→EduSmartAssist.

@@ -1,3 +1,4 @@
+import { serviceHref } from '@/lib/service-detail'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -24,7 +25,7 @@ const servicesLd = {
       '@type': 'Service',
       name: s.title,
       description: s.description,
-      url: `${SITE_URL}/services#${s.id}`,
+      url: `${SITE_URL}${serviceHref(s.id)}`,
       provider: { '@id': `${SITE_URL}/#organization` },
     },
   })),
@@ -67,6 +68,7 @@ export default function ServicesPage() {
                 <p className="mt-5 text-sm text-gray-500">
                   <span className="font-semibold text-deep-blue">Built with:</span> {service.stack.join(' · ')}
                 </p>
+                <Link href={serviceHref(service.id).includes("#") ? "/contact" : serviceHref(service.id)} className="mt-6 inline-flex text-deep-blue font-semibold underline underline-offset-4">{serviceHref(service.id).includes("#") ? "Discuss this service" : "Explore this service"} →</Link>
               </div>
               <Image
                 src={service.image}

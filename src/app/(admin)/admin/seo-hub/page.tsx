@@ -4,6 +4,13 @@ import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/lib/supabase';
 import { HelpTooltip } from '@/components/admin/HelpTooltip';
 
+async function seoFetch(input:string,init:RequestInit={}) {
+  const {data:{session},error}=await supabase.auth.getSession();
+  if(error||!session)throw new Error('Sign in to use GDP SEO tools.');
+  const headers=new Headers(init.headers);headers.set('Authorization',`Bearer ${session.access_token}`);
+  return fetch(input,{...init,headers});
+}
+
 interface Competitor {
   position: number;
   domain: string;
@@ -336,7 +343,7 @@ export default function SEOHubPage() {
 
   const checkApiStatus = async () => {
     try {
-      const response = await fetch('/api/seo/dataforseo');
+      const response = await seoFetch('/api/seo/dataforseo');
       const data = await response.json();
       setApiStatus(data);
     } catch {
@@ -349,7 +356,7 @@ export default function SEOHubPage() {
     try {
       console.log('[SEO Hub] Researching keyword:', keyword);
       
-      const response = await fetch('/api/seo/dataforseo', {
+      const response = await seoFetch('/api/seo/dataforseo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -405,7 +412,7 @@ export default function SEOHubPage() {
     
     setIsResearching(true);
     try {
-      const response = await fetch('/api/seo/dataforseo', {
+      const response = await seoFetch('/api/seo/dataforseo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -474,14 +481,14 @@ export default function SEOHubPage() {
     
     try {
       for (const kw of keywords.slice(0, 10)) {
-        const response = await fetch('/api/seo/dataforseo', {
+        const response = await seoFetch('/api/seo/dataforseo', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             action: 'rank_tracker',
             keyword: kw.keyword,
             target_domain: 'globaldigitalprime.com',
-            location_code: 2548,
+            location_code: 2840,
           }),
         });
         

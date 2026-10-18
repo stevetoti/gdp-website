@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { trackEnquiryEvent } from '@/lib/analytics'
 import { CheckCircle2, Send } from 'lucide-react'
 import { TurnstileWidget } from '@/components/security/TurnstileWidget'
 import { HoneypotField, useFormBotFields } from '@/components/security/FormBotFields'
@@ -15,7 +16,7 @@ const copy = {
     company: 'Company',
     service: 'What do you need?',
     selectService: 'Select an option',
-    services: ['AI assistant for website or WhatsApp', 'VisaReadyPro', 'Custom software development', 'Cloud architecture', 'Mobile app development', 'Other'],
+    services: ['Website development', 'Custom software development', 'Mobile app development', 'AI assistant for website or WhatsApp', 'E-commerce and payments', 'Cloud architecture', 'VisaReadyPro', 'Other'],
     message: 'Tell us about your project',
     messagePlaceholder: 'What should the assistant or software do? Any timeline?',
     send: 'Send message',
@@ -91,6 +92,7 @@ export default function ContactForm({ locale = 'en' }: { locale?: 'en' | 'id' })
       })
       const data = await response.json().catch(() => ({}))
       if (!response.ok || !data.success) throw new Error(data.error || t.failed)
+      if (typeof data.id === 'string' && data.id) trackEnquiryEvent('generate_lead', { method: 'contact_form', language: locale })
       setIsSubmitted(true)
     } catch (err) {
       setError(err instanceof Error ? err.message : t.failed)

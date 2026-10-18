@@ -26,7 +26,7 @@ type Payload = {
 export async function POST(req: NextRequest) {
   const url = process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) return NextResponse.json({ error: 'Messages are temporarily unavailable. Please email info@globaldigitalprime.com.' }, { status: 503 });
+  if (!url || !key) return NextResponse.json({ error: 'Messages are temporarily unavailable. Please email steve@globaldigitalprime.com.' }, { status: 503 });
   if (req.headers.get('origin') && req.headers.get('origin') !== req.nextUrl.origin) return NextResponse.json({ error: 'Invalid origin' }, { status: 403 });
 
   let body: Payload;
@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
   const { data, error } = await db.rpc('gdp_form_ingest', { p_name: name, p_email: email, p_body: lines.join('\n'), p_request_id: `form:${randomUUID()}`, p_flags: guard.flags });
   if (error) {
     console.error('[gdp/contact] ingest failed', error.message);
-    return NextResponse.json({ error: 'We could not save your message. Please email info@globaldigitalprime.com.' }, { status: 503 });
+    return NextResponse.json({ error: 'We could not save your message. Please email steve@globaldigitalprime.com.' }, { status: 503 });
   }
   return NextResponse.json({ success: true, id: (data as { message_id?: string } | null)?.message_id ?? null });
 }
