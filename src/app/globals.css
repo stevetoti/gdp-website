@@ -252,3 +252,10 @@
 .heading-responsive {
   font-size: clamp(2rem, 5vw, 3.5rem);
 }
+
+/* /quote prints as a clean document: keep only the page content. */
+@media print {
+  body:has(.gdp-quote) :not(main):not(main *):not(:has(main)) { display: none !important; }
+  body:has(.gdp-quote) main { zoom: 0.68; }
+  body:has(.gdp-quote) { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
