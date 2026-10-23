@@ -15,12 +15,27 @@ export const metadata: Metadata = {
   description: 'Global Digital Prime website and digital system packages, payment schedule and running costs.',
   robots: { index: false, follow: false, nocache: true, googleBot: { index: false, follow: false } },
   alternates: { canonical: null },
+  // Link previews (WhatsApp, email) must not inherit the site-wide text that names our AI vendor.
+  openGraph: {
+    type: 'website',
+    url: '/quote',
+    siteName: 'Global Digital Prime',
+    title: 'Packages & Pricing | Global Digital Prime',
+    description: 'Website and digital system packages, payment schedule and running costs.',
+    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Global Digital Prime' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Packages & Pricing | Global Digital Prime',
+    description: 'Website and digital system packages, payment schedule and running costs.',
+    images: ['/images/og-image.jpg'],
+  },
 };
 
 const EMAIL = company.email;
 const PHONE = company.phone.display;
 const TEL = `tel:${company.phone.tel}`;
-const QUOTE_MAIL = `mailto:${EMAIL}?subject=${encodeURIComponent('Quotation request')}&body=${encodeURIComponent('Organisation:\nPackage of interest:\nWhat you need:\n')}`;
+const QUOTE_MAIL = `mailto:${EMAIL}?subject=${encodeURIComponent('Quotation request')}&body=${encodeURIComponent('Organization:\nPackage of interest:\nWhat you need:\n')}`;
 
 const assistantModes = [
   {
